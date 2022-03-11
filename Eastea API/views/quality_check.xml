@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_quality_check_tree" model="ir.ui.view">
+            <field name="name">quality.check.tree</field>
+            <field name="model">quality.check</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Quality Analysis">
+                    <field name="name"/>
+                    <field name="team"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_quality_check_form" model="ir.ui.view">
+            <field name="name">quality.check.form</field>
+            <field name="model">quality.check</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Quality Analysis">
+                    <sheet>
+                        <h1>
+                            Quality Check.
+                        </h1>
+                        <br></br>
+                        <br></br>
+                        <div class="team">
+                            <group col="4" colspan="4" name="details">
+                                <field name="name" required="1"/>
+                                <field name="team"/>
+                            </group>
+                        </div>
+
+
+
+
+
+                        <notebook colspan="6">
+                            <page name="sales_info" string="Sales info">
+                                <field name="data1">
+                                    <tree editable="bottom">
+                                        <field name="attribute"/>
+                                        <field name="good"/>
+                                        <field name="avg"/>
+
+
+                                        <field name="data" invisible='1'/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="attribute"/>
+                                            <field name="good"/>
+                                            <field name="avg"/>
+
+
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+
+
+
+
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_quality">
+            <field name="name">Quality Analysis</field>
+            <field name="res_model">quality.check</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create new Analysis</p>
+            </field>
+        </record>
+
+        <menuitem id="check_menu" name="Quality" parent="test_menu" sequence="-20"/>
+        <menuitem id="check_menu1" name="Quality Analysis" parent="check_menu" action="action_view_quality"/>
+    </data>
+</odoo>
+
