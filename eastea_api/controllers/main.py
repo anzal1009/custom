@@ -29,7 +29,7 @@ class Purchase(http.Controller):
         data = {'status': 200, 'response': patients, 'message': 'Done All Products Returned'}
         return data
 
-    # *******************************************************************************
+    # **************************2234234*****************************************************
 
 
     #
