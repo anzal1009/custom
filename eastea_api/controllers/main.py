@@ -84,7 +84,7 @@ class Purchase(http.Controller):
 
 # ******************Purchase*****************
 class PurchaseOrder(models.Model):
-    name = "purchase.order"
+
 
 
 
@@ -216,6 +216,53 @@ class PurchaseOrder(models.Model):
 
                         self.env.cr.commit()
 
+
+# ****************************Payment**********
+
+@api.multi
+class DistributorAccounting(models.Model):
+    _name = 'distributor.acc'
+
+    def paymentSync(self):
+       
+        if not row_customerPayments:
+            raise UserError(_('There is an error Please check your server'))
+        for row in row_customerPayments:
+            SaleInvoice = self.env['account.move'].search([('type', '=', 'out_invoice'), ('name', '=', row[4])])
+            print(SaleInvoice.id)
+            if SaleInvoice:
+                SaleInvoice.action_post()
+                if row[7] == 'cash':
+                    journal_domain = [
+                        ('type', '=', 'cash'),
+                        ('company_id', '=', SaleInvoice.company_id.id),
+                    ]
+                else:
+                    journal_domain = [
+                        ('type', '=', 'bank'),
+                        ('company_id', '=', SaleInvoice.company_id.id),
+                    ]
+
+                default_journal_id = self.env['account.journal'].search(journal_domain, limit=1)
+
+                val = {
+                     'payment_type': 'inbound',
+                     'payment_method_id': self.env.ref('account.account_payment_method_manual_in').id or False,
+                     'partner_type': 'customer',
+                     'partner_id': SaleInvoice.partner_id.id or False,
+                     'amount': row[9],
+                     'currency_id': self.env.company and self.env.company.currency_id and self.env.company.currency_id.id,
+                     'payment_date': row[6] or False,
+                     'payment_difference_handling': 'open',
+                     'company_id': SaleInvoice.company_id.id or False,
+                     'journal_id': default_journal_id.id or False,
+                     'invoice_ids': SaleInvoice and [(6,0, SaleInvoice.ids)] or [],
+                     }
+
+                payment = self.env['account.payment'].sudo().create(val)
+                self.env.cr.commit()
+
+    # **********************************
 
 
 
