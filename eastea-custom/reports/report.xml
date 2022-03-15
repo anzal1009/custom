@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report
+            id="report_enquiry_receipt"
+            string="Purchase Invoice"
+            model="purchase.order"
+            report_type="qweb-pdf"
+            name="eastea-custom.report_apartment"
+            file="eastea-custom.report_apartment"/>
+</odoo>
