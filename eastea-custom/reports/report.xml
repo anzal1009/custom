@@ -1,10 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    <!--    PurchaseOrderFormat-->
+    <record id="purchase_order_report_qweb_paperform" model="report.paperformat">
+        <field name="name">Purchase Report format report qweb paperformat</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">110</field>
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">100</field>
+        <field name="dpi">115</field>
+    </record>
+
         <report
-            id="report_enquiry_receipt"
+            id="purchase_order_report_qweb_paperform"
             string="Purchase Invoice"
             model="purchase.order"
             report_type="qweb-pdf"
-            name="eastea-custom.report_apartment"
-            file="eastea-custom.report_apartment"/>
+            name="eastea-custom.purchase_order_report_custom"
+            file="eastea-custom.purchase_order_report_custom"
+            paperformat="eastea-custom.purchase_order_report_qweb_paperform"
+            menu="True"/>
+
+    <!--    SaleOrderFormat-->
+    <record id="sale_order_report_qweb_paperform" model="report.paperformat">
+        <field name="name">Sale Order Format Custom</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">110</field>
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">100</field>
+        <field name="dpi">115</field>
+    </record>
+
+        <report
+            id="sale_order_report_receipt"
+            string="Sales Order"
+            model="sale.order"
+            report_type="qweb-pdf"
+            name="eastea-custom.sale_order_report_custom"
+            file= "eastea-custom.sale_order_report_custom"
+            paperformat="eastea-custom.sale_order_report_qweb_paperform"
+            menu="True"/>
+
 </odoo>

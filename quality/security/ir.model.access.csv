@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_quality_team,access.quality.team,model_quality_team,,1,1,1,1
-access_quality_product,access.quality.product,model_quality_product,,1,1,1,1
-access_quality_check,access.quality.check,model_quality_check,,1,1,1,1
-access_quality_check_lines1,access.quality.check.lines1,model_quality_check_lines1,,1,1,1,1

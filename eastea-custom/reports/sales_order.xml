@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<odoo>
+    <template id="sale_order_report_custom">
+        <t t-call="web.html_container">
+            <body>
+                <style>
+                    td {
+                    padding: 5px;
+                    }
+                </style>
+                <template id="sale_template_internal_layout_header_inherited" inherit_id="web.external_layout_standard">
+                    <xpath expr="//div[@class='header']" position="replace">
+                        <t t-foreach="docs" t-as="o">
+                        </t>
+                    </xpath>
+                    <xpath expr="//div[@class='row zero_min_height']" position="replace">
+                        <div t-if="report_type == 'pdf'" class="text-muted" style="text-align: right;">
+                            Page:
+                            <span class="page"/>
+                            /
+                            <span class="topage"/>
+                        </div>
+                    </xpath>
+                    <xpath expr="//div[@name='company_address']" position="replace">
+                        <div class="header">
+                            <table style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white; width:100%; "
+                                   cellspacing="0">
+                                <tr>
+                                    <td style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
+                                        colspan="8" align="center">
+                                        <h1>Tax Invoice
+                                            <br></br>
+                                        </h1>
+                                        <h3>FSSAI-10017041001212</h3>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                    </td>
+                                    <td style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
+                                        rowspan="4" colspan="1" align="right">
+                                        <b>e-invoice</b>
+                                        <br></br>
+                                        <img t-if="res_company.logo"
+                                             t-att-src="'data:image/jpg;base64,%s' % to_text(res_company.logo)"
+                                             style="max-height: 60px;"/>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                    </td>
+                                </tr>
+
+                                <tr>
+
+                                    <td align="left"
+                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
+                                        colspan="2">IRN :
+                                    </td>
+                                    <td align="left"
+                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
+                                        colspan="2">
+                                        <b>65d5bafe019f96c1011b0d633e59a2b4722990654-<br></br>ec0da502126dd9977c6770
+                                        </b>
+                                    </td>
+                                    <td align="left"
+                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
+                                        colspan="2"></td>
+                                    <td align="left"
+                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
+                                        colspan="2"></td>
+
+                                </tr>
+                                <tr>
+                                    <td align="left"
+                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
+                                        colspan="2">Ack No :
+                                    </td>
+                                    <td align="left"
+                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
+                                        colspan="7">
+                                        <b>152211578293534</b>
+                                    </td>
+                                    <td align="left"
+                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
+                                        colspan="2"></td>
+                                    <td align="left"
+                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
+                                        colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td align="left"
+                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
+                                        colspan="2">Ack Date :
+                                    </td>
+                                    <td align="left"
+                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
+                                        colspan="7">
+                                        <b>17-Jan-22</b>
+                                    </td>
+                                    <td align="left"
+                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
+                                        colspan="2"></td>
+                                    <td align="left"
+                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
+                                        colspan="2"></td>
+                                </tr>
+                            </table>
+                            <table align="center" style="width:100%;" border="1px solid black" cellspacing="0">
+                                <tr>
+                                    <td rowspan="4" colspan="1">
+                                        <img t-if="res_company.logo"
+                                             t-att-src="'data:image/jpg;base64,%s' % to_text(res_company.logo)"
+                                             style="max-height: 160px;"/>
+                                    </td>
+                                    <td style="border-top:1px solid black; border-left:1px solid white; border-bottom:1px solid white;border-right:1px solid black;"
+                                        colspan="3">Invoice To
+                                        <br/>
+                                        <b>Eastea Chai Pvt Ltd</b>
+                                    </td>
+
+                                    <td padding="100px;" colspan="3">Invoice No. e-way Bill No
+                                        <br></br>
+                                        <b>E/B2B/663/21-22</b>
+                                    </td>
+                                    <td colspan="4">Dated 18-Jan-22
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid white; "
+                                        colspan="3">Building No. 47/A, Nellimattam P.O,<br/>Kavalangadu,
+                                        Kothamangalam,
+                                    </td>
+                                    <td colspan="3">Delivery Note</td>
+                                    <td colspan="4">Mode/Terms of Payment
+                                        <br></br>
+                                        <b>15 Days</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid white; "
+                                        colspan="3">Ernakulam, Kerala - 686693<br/>GSTIN/UIN: 32AACCE3723D1ZB
+                                    </td>
+                                    <td colspan="3">Reference No. &amp; Date.
+                                        <br/>
+                                        <b>PM2122/160</b>
+                                    </td>
+                                    <td colspan="3">Other References
+                                        <br></br>
+                                        <b>Indent No:078</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px solid black; border-bottom:1px solid black; border-top:1px solid white; border-left:1px solid white; "
+                                        colspan="3">State Name : Kerala, Code : 32<br/>CIN:
+                                        U15491KL2010PTC025741<br></br> E-Mail :
+                                        eastea@eastern.in
+                                    </td>
+                                    <td colspan="3">Buyer's Order No</td>
+                                    <td colspan="4">Dated</td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black; "
+                                        colspan="4">Consignee(Ship to)
+                                        <br></br>
+                                        <b>Eastea Condiments Pvt.Ltd.</b>
+                                    </td>
+                                    <td colspan="3">Dispatch Doc No
+                                        <br></br>
+                                        <b>LS4141</b>
+                                    </td>
+                                    <td colspan="4">Delivery Note Date
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black; "
+                                        colspan="4">KKO-10/126A, Chemanchery, Vengalam P-O-<br></br>Korapuzha,
+                                        KOZHIKODU-673303
+                                        <BR></BR>
+                                    </td>
+                                    <td colspan="3">Dispatched through
+                                        <br></br>
+                                        <b>BY ROAD</b>
+                                    </td>
+                                    <td colspan="4">Destination
+                                        <br></br>
+                                        <b>KOZHIKODU</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black; "
+                                        colspan="4">GSTIN/UIN:32AAACE5276F1ZX<br></br>State Name:Kerala, Code 32
+                                        Kothamangalam,
+                                    </td>
+                                    <td colspan="3">Bill of Ladding/LR-RR No</td>
+                                    <td colspan="4">MOtoe Vehicle No
+                                        <br></br>
+                                        <b>KL06E9668</b>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="4" style="border-top:1px solid black;">Buyers (Bill to)
+                                        <br></br>
+                                        <b>Eastea Condiments Pvt.Ltd.</b>
+                                        <br></br>
+                                        Eastea Valley,Adimali P O, PB No
+                                        15<br></br>Kerala,Ph:0487-2215138,9645082138 <br></br>GSTIN/UIN
+                                        :32AAEFD9126A1Z1<br></br> State Name :Kerala Code:32
+                                    </td>
+                                    <td colspan="4">Terms of Delivery</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </xpath>
+
+                    <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div[1]//ul[@class='list-inline mb4']"
+                           position="replace">
+                        <div class="footer">
+
+                            <table class="" width="100%" cellpadding="5" cellspacing="5"
+                                   style="margin-top: 0%; border-collapse: collapse; border: 1px solid black;">
+
+                                <tr>
+                                    <td style="border-top:1px solid black;" colspan="3">
+                                        <u>Declaration</u>
+                                        <br></br>We declare that this invoice shows the actual price of<br></br>the
+                                        goods
+                                        described and that
+                                        all particulars
+                                        are true<br></br> and correct
+                                    </td>
+                                    <td colspan="6"
+                                        style="text-align:right;padding-left:100px; border-top:1px solid black; border-right:1px solid black;">
+                                        for
+                                        <b>Eastea Chai Pvt.Ltd</b>
+                                        <br></br>
+                                        <br></br>Authorised Signature
+                                    </td>
+                                </tr>
+                            </table>
+                            <table style="width:100%">
+                                <tr>
+
+                                    <td align="center" colspan="9">This is a Computer Generated Document</td>
+
+                                </tr>
+                            </table>
+                        </div>
+                    </xpath>
+                    <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div[1]//div[@class='text-muted']"
+                           position="replace">
+                    </xpath>
+                </template>
+
+                <template id="sale_order_report">
+                    <t t-call="web.external_layout">
+
+                        <t t-foreach="docs" t-as="o">
+
+                            <!--                    <t t-set="o" t-value="o.with_context({'lang':o.user_id.lang})" />-->
+                            <div class="page" style="font-size: 15px !important;">
+                                <div class="line">
+
+                                    <table align="center" style="width:100%; margin-top:200px;" border="1px solid black"
+                                           cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <td>Sl No.</td>
+                                                <td>Description of Goods</td>
+                                                <td>HSN/SAC</td>
+                                                <td>Due on</td>
+                                                <td>Quantity</td>
+                                                <td>Rate</td>
+                                                <td>per</td>
+                                                <td>Disc. %</td>
+                                                <td>Amount</td>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            <tr>
+                                                <td style="text-align: center">2</td>
+                                                <td>250gm Harmony Leaf Sleeve<br/>Bottle(PM)
+                                                </td>
+                                                <td style="text-align: center">392330</td>
+                                                <td>18-Jan-22</td>
+                                                <td>25,000 No.</td>
+                                                <td style="text-align: right">6.94</td>
+                                                <td>No.</td>
+                                                <td></td>
+                                                <td style="text-align: right">1,73,500.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">3</td>
+                                                <td>500gm Harmony Leaf Sleeve<br/>Bottle(PM)
+                                                </td>
+                                                <td style="text-align: center">392330</td>
+                                                <td>18-Jan-22</td>
+                                                <td>25,000 No.</td>
+                                                <td style="text-align: right">9.61</td>
+                                                <td>No.</td>
+                                                <td></td>
+                                                <td style="text-align: right">2,40,250.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">4</td>
+                                                <td>500gm Harmony Leaf Sleeve<br/>Bottle Cap(PM)
+                                                </td>
+                                                <td style="text-align: center">392330</td>
+                                                <td>18-Jan-22</td>
+                                                <td>25,000 No.</td>
+                                                <td style="text-align: right">2.32</td>
+                                                <td>No.</td>
+                                                <td></td>
+                                                <td style="text-align: right">58,000.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="text-align: right">5,23,000.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border: 1px solid white;">CGST</td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="text-align: right">47,070.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border: 1px solid white;">SGST</td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
+                                                <td style="text-align: right">47,070.00</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>Total</td>
+                                                <td></td>
+                                                <td>1,00,000 No.</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>₹ 6,17,140.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="9">Amount Chargeable (in words)
+                                                    <br/>
+                                                    <b>Rupees Six Lakh Seventeen Thousand One Hundred
+                                                        Forty Only
+                                                    </b>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="border-bottom:1px solid white;" colspan="2">HSN/SAC</td>
+                                                <td style="border-bottom:1px solid white;" colspan="1">Taxable Value
+                                                </td>
+                                                <td colspan="2">Central Tax</td>
+                                                <td colspan="2">State Tax</td>
+                                                <td style="border-bottom:1px solid white;" colspan="2">Total</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td colspan="1"
+                                                    style="border-top:1px solid white; border-right:1px solid white"></td>
+                                                <td style="border-top:1px solid white; border-left:1px solid white"></td>
+                                                <td style="border-top:1px solid white;"></td>
+                                                <td>Rate</td>
+                                                <td>Amount</td>
+                                                <td>Rate</td>
+                                                <td style="border-right:1px solid black;">Amount</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td colspan="2">09023020
+                                                    <br>09024010</br>
+                                                </td>
+                                                <td>4.91.712.16
+                                                    <br>1.400786.25</br>
+                                                </td>
+                                                <td>2.50%
+                                                    <br>2.50%</br>
+                                                </td>
+                                                <td>12.292.80
+                                                    <br>3.519.66</br>
+                                                </td>
+                                                <td>2.50%
+                                                    <br>2.50%</br>
+                                                </td>
+                                                <td>12.292.80
+                                                    <br>3.519.68</br>
+                                                </td>
+                                                <td colspan="2">24.585.60
+                                                    <br>7.039.32</br>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <b>Total</b>
+                                                </td>
+                                                <td>
+                                                    <b>6,32,498.41</b>
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    <b>15,812.46</b>
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    <b>15,821.46</b>
+                                                </td>
+                                                <td colspan="2">
+                                                    <b>31,624.92</b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border-bottom:1px solid white;" colspan="9">Tax Amount(in
+                                                    words)
+                                                    <br></br>
+                                                    <b>Rupees THirty One Thousand Six Hundred Twenty Three and Ninty Two
+                                                        Paisa Only
+                                                    </b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border-top:1px solid white; border-bottom:1px solid white;"
+                                                    colspan="9">Company's
+                                                    PAN
+                                                    :
+                                                    <b>AACCE3723D</b>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                </template>
+            </body>
+        </t>
+    </template>
+</odoo>

@@ -12,7 +12,8 @@
  'license': 'AGPL-3',
  'data': [
   'reports/report.xml',
-  'reports/eastea.xml',
+  'reports/sales_order.xml',
+  'reports/purchase_order.xml',
 
 
           ],
