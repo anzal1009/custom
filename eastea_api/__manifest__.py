@@ -8,9 +8,10 @@
  'company': 'Ideenkreise Tech Pvt Ltd',
  'website': 'https://www.ideenkreisetech.com',
  'category': 'Tools',
-#  'depends': ['stock'],
+ 'depends': ['sale_management', 'purchase'],
  'license': 'AGPL-3',
- 'data': ['security/ir.model.access.csv',
+ 'data': [
+ # 'security/ir.model.access.csv',
 #  'views/test_team.xml',
 #  'views/product_qc.xml',
 #  'views/quality_check.xml',
