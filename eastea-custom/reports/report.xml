@@ -2,6 +2,7 @@
 <odoo>
 
     <!--    PurchaseOrderFormat-->
+    <data noupdate="True">
     <record id="purchase_order_report_qweb_paperform" model="report.paperformat">
         <field name="name">Purchase Report format report qweb paperformat</field>
         <field name="default" eval="True"/>
@@ -18,6 +19,8 @@
         <field name="dpi">115</field>
     </record>
 
+
+
         <report
             id="purchase_order_report_qweb_paperform"
             string="Purchase Invoice"
@@ -29,6 +32,7 @@
             menu="True"/>
 
     <!--    SaleOrderFormat-->
+
     <record id="sale_order_report_qweb_paperform" model="report.paperformat">
         <field name="name">Sale Order Format Custom</field>
         <field name="default" eval="True"/>
@@ -54,5 +58,19 @@
             file= "eastea-custom.sale_order_report_custom"
             paperformat="eastea-custom.sale_order_report_qweb_paperform"
             menu="True"/>
+    </data>
+
+
+    <record id="product_print_button_hide" model="ir.ui.view">
+        <field name="name">product.supplierinfo.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='print_quotation']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
 
 </odoo>

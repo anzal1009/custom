@@ -5,12 +5,6 @@ from datetime import datetime
 from odoo import api, models, fields, _
 
 
-#
-# class MyController(odoo.http.Controller):
-#     @route('/some_url', auth='public')
-#     def handler(self):
-#         print("boom")
-#         return stuff()
 
 
 class Purchase(http.Controller):
