@@ -47,7 +47,7 @@ class Purchase(http.Controller):
                     }
                     vendor = request.env['res.partner'].sudo().create(vendor_details)
                     request.env.cr.commit()
-
+            order_line = []
             for product_line in row["child"]:
                 product_item = product_line["name"]
                 if product_item:
@@ -75,23 +75,23 @@ class Purchase(http.Controller):
 
                         product = request.env['product.template'].sudo().create(product_details)
                         request.env.cr.commit()
-                    order_line = []
-                    if product:
-                        order_line.append((0, 0, {
-                            'display_type': False,
-                            # 'sequence': 10,
-                            'product_id': product.id,
-                            'name': product.name or '',
-                            # 'date_planned': row.TRANSACTION_DATE or False,
-                            'account_analytic_id': False,
-                            'product_qty': product_line["product_qty"] or 0,
-                            'qty_received_manual': 0,
-                            # 'discount': discount or 0,
-                            'product_uom': product.uom_id.id or request.env.ref(
-                                'uom.product_uom_unit') and request.env.ref('uom.product_uom_unit').id or False,
-                            'price_unit': product_line["price_unit"] or 0,
-                            # 'taxes_id': tax_variant and [(6, 0, [tax_variant.id])] or [],
-                        }))
+
+                if product:
+                    order_line.append((0, 0, {
+                        'display_type': False,
+                        # 'sequence': 10,
+                        'product_id': product.id,
+                        'name': product.name or '',
+                        # 'date_planned': row.TRANSACTION_DATE or False,
+                        'account_analytic_id': False,
+                        'product_qty': product_line["product_qty"] or 0,
+                        'qty_received_manual': 0,
+                        # 'discount': discount or 0,
+                        'product_uom': product.uom_id.id or request.env.ref(
+                            'uom.product_uom_unit') and request.env.ref('uom.product_uom_unit').id or False,
+                        'price_unit': product_line["price_unit"] or 0,
+                        # 'taxes_id': tax_variant and [(6, 0, [tax_variant.id])] or [],
+                    }))
 
 
 
