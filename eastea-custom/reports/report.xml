@@ -3,64 +3,108 @@
 
     <!--    PurchaseOrderFormat-->
     <data noupdate="True">
-    <record id="purchase_order_report_qweb_paperform" model="report.paperformat">
-        <field name="name">Purchase Report format report qweb paperformat</field>
-        <field name="default" eval="True"/>
-        <field name="format">custom</field>
-        <field name="page_height">297</field>
-        <field name="page_width">210</field>
-        <field name="orientation">Portrait</field>
-        <field name="margin_top">110</field>
-        <field name="margin_bottom">25</field>
-        <field name="margin_left">5</field>
-        <field name="margin_right">5</field>
-        <field name="header_line" eval="False"/>
-        <field name="header_spacing">100</field>
-        <field name="dpi">115</field>
-    </record>
-
+        <record id="purchase_order_report_qweb_paperform" model="report.paperformat">
+            <field name="name">Purchase Report format report qweb paperformat</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">110</field>
+            <field name="margin_bottom">25</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">100</field>
+            <field name="dpi">115</field>
+        </record>
 
 
         <report
-            id="purchase_order_report_qweb_paperform"
-            string="Purchase Invoice"
-            model="purchase.order"
-            report_type="qweb-pdf"
-            name="eastea-custom.purchase_order_report_custom"
-            file="eastea-custom.purchase_order_report_custom"
-            paperformat="eastea-custom.purchase_order_report_qweb_paperform"
-            menu="True"/>
+                id="purchase_order_report_qweb_paperform"
+                string="Purchase Invoice"
+                model="purchase.order"
+                report_type="qweb-pdf"
+                name="eastea-custom.purchase_order_report_custom"
+                file="eastea-custom.purchase_order_report_custom"
+                paperformat="eastea-custom.purchase_order_report_qweb_paperform"
+                menu="True"/>
 
-    <!--    SaleOrderFormat-->
+        <!--*************************** Vendor Bill************************        -->
 
-    <record id="sale_order_report_qweb_paperform" model="report.paperformat">
-        <field name="name">Sale Order Format Custom</field>
-        <field name="default" eval="True"/>
-        <field name="format">custom</field>
-        <field name="page_height">297</field>
-        <field name="page_width">210</field>
-        <field name="orientation">Portrait</field>
-        <field name="margin_top">110</field>
-        <field name="margin_bottom">25</field>
-        <field name="margin_left">5</field>
-        <field name="margin_right">5</field>
-        <field name="header_line" eval="False"/>
-        <field name="header_spacing">100</field>
-        <field name="dpi">115</field>
-    </record>
+
+        <record id="purchase_order_report_qweb_paperform1" model="report.paperformat">
+            <field name="name">Purchase Report format report qweb paperformat</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">110</field>
+            <field name="margin_bottom">25</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">100</field>
+            <field name="dpi">115</field>
+        </record>
+
 
         <report
-            id="sale_order_report_receipt"
-            string="Sales Order"
-            model="sale.order"
-            report_type="qweb-pdf"
-            name="eastea-custom.sale_order_report_custom"
-            file= "eastea-custom.sale_order_report_custom"
-            paperformat="eastea-custom.sale_order_report_qweb_paperform"
-            menu="True"/>
+                id="purchase_order_report_qweb_paperform1"
+                string="Vendor Invoice"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="eastea-custom.purchase_order_report_custom1"
+                file="eastea-custom.purchase_order_report_custom1"
+                paperformat="eastea-custom.purchase_order_report_qweb_paperform1"
+                menu="True"/>
+
+
+        <!--    SaleOrderFormat-->
+
+        <record id="sale_order_report_qweb_paperform" model="report.paperformat">
+            <field name="name">Sale Order Format Custom</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">110</field>
+            <field name="margin_bottom">25</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">100</field>
+            <field name="dpi">115</field>
+        </record>
+
+        <report
+                id="sale_order_report_receipt"
+                string="Sales Order"
+                model="sale.order"
+                report_type="qweb-pdf"
+                name="eastea-custom.sale_order_report_custom"
+                file="eastea-custom.sale_order_report_custom"
+                paperformat="eastea-custom.sale_order_report_qweb_paperform"
+                menu="True"/>
+
+        <!--**********************Customer Invoice *************        -->
+
+        <report
+                id="sale_order_report_receipt"
+                string="Customer Invoice"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="eastea-custom.sale_order_report_custom"
+                file="eastea-custom.sale_order_report_custom"
+                paperformat="eastea-custom.sale_order_report_qweb_paperform"
+                menu="True"/>
+
+
     </data>
 
-<!--********************* Hiding print PO button ************************     -->
+    <!--********************* Hiding print PO button ************************     -->
 
     <record id="product_print_button_hide" model="ir.ui.view">
         <field name="name">product.supplierinfo.form.inherit</field>
@@ -73,14 +117,26 @@
         </field>
     </record>
 
-<!--***************************** Hiding the purchase reports *************************    -->
+    <!--***************************** Hiding the purchase reports *************************    -->
 
     <record id="purchase.report_purchase_quotation" model="ir.actions.report">
         <field name="binding_model_id" eval="False"/>
     </record>
 
     <record id="purchase.action_report_purchase_order" model="ir.actions.report">
-         <field name="binding_model_id" eval="False"/>
+        <field name="binding_model_id" eval="False"/>
+    </record>
+
+    <!--     <record id="sale.action_report_saleorder" model="ir.actions.report">-->
+    <!--          <field name="binding_model_id" eval="False"/>-->
+    <!--     </record>-->
+
+    <record id="account.account_invoices_without_payment" model="ir.actions.report">
+        <field name="binding_model_id" eval="False"/>
+    </record>
+
+    <record id="account.account_invoices" model="ir.actions.report">
+        <field name="binding_model_id" eval="False"/>
     </record>
 
 </odoo>

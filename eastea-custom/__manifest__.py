@@ -8,12 +8,13 @@
  'company': 'Ideenkreise Tech Pvt Ltd',
  'website': 'https://www.ideenkreisetech.com',
  'category': 'Tools',
-  'depends': ['sale_management','purchase'],
+  'depends': ['sale_management','purchase','account'],
  'license': 'AGPL-3',
  'data': [
   'reports/report.xml',
   'reports/sales_order.xml',
   'reports/purchase_order.xml',
+  'reports/vendor_bill.xml',
 
 
           ],
