@@ -19,6 +19,7 @@ class Purchase(http.Controller):
 
     @http.route('/data/create_rm_purchase', type='json', auth='user')
     def create_rm_purchase(self, **rec):
+        po_numbers = []
         for row in rec["data"]:
             vendor_gst = row["master"]["partner_id"]["gst_no"]
             if vendor_gst:
@@ -101,8 +102,17 @@ class Purchase(http.Controller):
                     # 'name': row.INVOICE_NUM or '',
                     'order_line': order_line,
                 })
-
                 request.env.cr.commit()
+
+                if purchase_order_1:
+                    po_numbers.append({
+                        'poNumber' : purchase_order_1.name,
+                        'orderID' : row["master"]["orderID"]
+                    })
+        return po_numbers
+
+
+
 
         
 
