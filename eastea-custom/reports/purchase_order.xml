@@ -23,14 +23,9 @@
                         </div>
                     </xpath>
                     <xpath expr="//div[@name='company_address']" position="replace">
-
-                        <!--                        <table class="table" width="100%" border="1px solid black">-->
-
-
                         <div class="header">
                             <h2 align="center">PURCHASE ORDER</h2>
                             <table align="center" style="width:100%;" border="1px solid black" cellspacing="0">
-
                                 <tr>
                                     <td rowspan="4" colspan="1">
                                         <img t-if="res_company.logo"
@@ -42,9 +37,8 @@
                                         <br/>
                                         <b>Eastea Chai Pvt Ltd</b>
                                     </td>
-
-                                    <td padding="100px;" colspan="3">Voucher No.PM2122/160</td>
-                                    <td colspan="4">Dated 18-Jan-22
+                                    <td style="text-align:center;" padding="100px;" colspan="3">Purchase No.<p style="text-align:center;" t-field="o.name"/></td>
+                                    <td style="text-align:center;" colspan="4" >Dated:<p style="text-align:center;" t-field="o.date_order"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -52,9 +46,11 @@
                                         colspan="3">Building No. 47/A, Nellimattam P.O,<br/>Kavalangadu,
                                         Kothamangalam,
                                     </td>
-                                    <td colspan="3"></td>
-                                    <td colspan="4">Mode/Terms of Payment30 Days
+                                    <td></td>
+                                    <td style="text-align:center;">Mode/Terms of Payment:
+                                        <b><p style="text-align:center;" t-field="o.payment_term_id"/></b>
                                     </td>
+
                                 </tr>
                                 <tr>
                                     <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid white; "
@@ -99,25 +95,17 @@
                                 </tr>
                                 <tr>
                                     <td colspan="4">Supplier (Bill from)
-                                        <br></br>
-                                        <b>Durooack Industries</b>
-                                        <br></br>
-                                        8/74/A,Near Radioi Station, Avanur P.O, THRISSUR,<br></br>Kerala,Ph:0487-2215138,9645082138 <br></br>GSTIN/UIN
-                                        :32AAEFD9126A1Z1<br></br> State Name :Kerala Code:32
+                                        <b><p t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/></b>
                                     </td>
                                 </tr>
                             </table>
                         </div>
                     </xpath>
-
-
                     <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div[1]//ul[@class='list-inline mb4']"
                            position="replace">
                         <div class="footer">
-
                             <table align="center" style="width:100%;" border="1px solid black"
                                    cellspacing="0">
-
                                 <tr>
                                     <td style="text-align: right" height="60px" colspan="9">
                                         <b>for Eastea Chai Pvt Ltd</b>
@@ -128,35 +116,23 @@
                             <table align="center" style="width:100%;" border="1px solid white"
                                    cellspacing="0">
                                 <tr>
-
                                     <td style="border: 1px solid white;"
                                         align="center" colspan="9">This is a Computer Generated Document
                                     </td>
-
                                 </tr>
                             </table>
                         </div>
                     </xpath>
-
-
                     <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div[1]//div[@class='text-muted']"
                            position="replace">
                     </xpath>
-
-
                 </template>
-
 
                 <template id="purchase_order_report">
                     <t t-call="web.external_layout">
-
                         <t t-foreach="docs" t-as="o">
-
-                            <!--                    <t t-set="o" t-value="o.with_context({'lang':o.user_id.lang})" />-->
                             <div class="page" style="font-size: 15px !important;">
                                 <div class="line">
-
-
                                     <table align="center" style="width:100%;" border="1px solid black"
                                            cellspacing="0">
                                         <thead>
@@ -168,7 +144,7 @@
                                                 <td style="text-align: center">Per</td>
                                                 <td style="text-align: center">Rate</td>
                                                 <td style="text-align: center">Tax</td>
-                                                <td style="text-align: center">Disc. %</td>
+<!--                                                <td style="text-align: center">Disc. %</td>-->
                                                 <td style="text-align: center">Amount</td>
                                             </tr>
                                         </thead>
@@ -178,8 +154,10 @@
                                                 <t t-set="slno" t-value="slno + 1"/>
                                                 <tr t-att-class="'bg-200 font-weight-bold o_line_section' if order_line.display_type == 'line_section' else 'font-italic o_line_note' if order_line.display_type == 'line_note' else ''">
                                                     <t t-if="not order_line.display_type">
-                                                        <td><span class="text-nowrap"
-                                                                      t-esc="slno"/></td>
+                                                        <td>
+                                                            <span class="text-nowrap"
+                                                                  t-esc="slno"/>
+                                                        </td>
                                                         <td id="product">
                                                             <span t-field="order_line.name"/>
                                                         </td>
@@ -196,9 +174,8 @@
                                                         <td>
                                                             <span t-field="order_line.taxes_id"/>
                                                         </td>
-                                                        <td>0%</td>
-
-                                                        <td>
+<!--                                                        <td>0%</td>-->
+                                                        <td style="text-align: right">
                                                             <span t-field="order_line.price_subtotal"/>
                                                         </td>
 
@@ -206,66 +183,28 @@
                                                 </tr>
                                             </t>
 
-                                            <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
 
-                                            <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
-                                                <tr>
-                                                    <td colspan="7" style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid black; border-left:1px solid black;"></td>
-<!--                                                    <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid black; border-left:1px solid black;"></td>-->
-                                                    <td style="border: 1px solid black;" >
-                                                        <strong t-esc="subtotal['name']"/>
-                                                    </td>
-<!--                                                    <td style="border-right: 1px solid black; border-bottom:1px solid black; border-top:1px solid black; border-left:1px solid white;"></td>-->
-<!--                                                    <td style="border-right: 1px solid black; border-bottom:1px solid black; border-top:1px solid black; border-left:1px solid black;"></td>-->
-<!--                                                    <td style="border-right: 1px solid black; border-bottom:1px solid black; border-top:1px solid black; border-left:1px solid black;"></td>-->
-<!--                                                    <td style="border-right: 1px solid black; border-bottom:1px solid black; border-top:1px solid black; border-left:1px solid black;"></td>-->
-<!--                                                    <td style="border-right: 1px solid black; border-bottom:1px solid black; border-top:1px solid black; border-left:1px solid black;"></td>-->
-                                                    <td style="border-right: 1px solid black; border-bottom:1px solid black; border-top:1px solid black; border-left:1px solid black;text-align: right;">
-                                                        <span t-esc="subtotal['formatted_amount']"/>
-                                                    </td>
-                                                </tr>
-                                            </t>
-
-                                                <t t-foreach="tax_totals['groups_by_subtotal']['Untaxed Amount']"
-                                                   t-as="amount_by_group">
-<!--                                                    <t t-if="len(tax_totals['groups_by_subtotal'][subtotal_to_show]) > 1">-->
-                                                        <tr>
-                                                            <td colspan="7" style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>
-<!--                                                            <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid black;"></td>-->
-                                                            <td style="border: 1px solid black;">
-                                                                <span t-esc="amount_by_group['tax_group_name']"/>
-                                                            </td>
-<!--                                                            <td style="border-right: 1px solid black; border-bottom:1px solid black; border-top:1px solid white; border-left:1px solid white;"></td>-->
-<!--                                                            <td style="border-right: 1px solid black; border-bottom:1px solid black; border-top:1px solid white; border-left:1px solid black;"></td>-->
-<!--                                                            <td style="border-right: 1px solid black; border-bottom:1px solid black; border-top:1px solid white; border-left:1px solid black;"></td>-->
-<!--                                                            <td style="border-right: 1px solid black; border-bottom:1px solid black; border-top:1px solid white; border-left:1px solid black;"></td>-->
-<!--                                                            <td style="border-right: 1px solid black; border-bottom:1px solid black; border-top:1px solid white; border-left:1px solid black;"></td>-->
-                                                            <td style="border: 1px solid black;text-align: right;">
-                                                                <span class="text-nowrap"
-                                                                      t-esc="amount_by_group['formatted_tax_group_amount']"/>
-                                                            </td>
-                                                        </tr>
-<!--                                                    </t>-->
-                                                </t>
+<!--                                    <table align="center" style="width:100%;" border="1px solid black" cellspacing="0">-->
 
 
                                             <tr>
+                                                <td colspan="6"></td>
+<!--                                                <td colspan="3"></td>-->
+                                                <td colspan="3">
+                                                    <table align="center" style="width:100%;"  cellspacing="0">
 
-                                                <td colspan="7"></td>
-<!--                                                <td></td>-->
-                                                <td>Total</td>
-<!--                                               >-->
+                                                                 <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
 
-                                                <!--                                                <t t-foreach="o.tax_totals_json" t-as="tax_totals"/>-->
-                                                <td style="text-align: right;">
-                                                    <span t-esc="tax_totals['formatted_amount_total']"/>
-                                                    <!--                                                                                                                <span t-field="o.tax_totals_json"/>-->
+                                                                 <t t-call="account.document_tax_totals"/>
+
+
+
+
+                                                    </table>
                                                 </td>
-                                                <!--                                                </t>-->
+
+
                                             </tr>
-
-
-
                                             <tr>
                                                 <td colspan="9">Amount Chargeable (in words)
                                                     <br/>
@@ -276,15 +215,12 @@
                                             </tr>
                                         </tbody>
                                     </table>
-
+<!--                                    </table>-->
                                 </div>
                             </div>
                         </t>
                     </t>
-
-
                 </template>
-
 
             </body>
         </t>

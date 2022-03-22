@@ -91,14 +91,30 @@
 
         <!--**********************Customer Invoice *************        -->
 
+        <record id="sale_order_report_qweb_paperform1" model="report.paperformat">
+            <field name="name">Sale Order Format Custom</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">110</field>
+            <field name="margin_bottom">25</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">100</field>
+            <field name="dpi">115</field>
+        </record>
+
         <report
-                id="sale_order_report_receipt"
+                id="sale_order_report_receipt1"
                 string="Customer Invoice"
                 model="account.move"
                 report_type="qweb-pdf"
-                name="eastea-custom.sale_order_report_custom"
-                file="eastea-custom.sale_order_report_custom"
-                paperformat="eastea-custom.sale_order_report_qweb_paperform"
+                name="eastea-custom.sale_order_report_custom1"
+                file="eastea-custom.sale_order_report_custom1"
+                paperformat="eastea-custom.sale_order_report_qweb_paperform1"
                 menu="True"/>
 
 
@@ -117,7 +133,7 @@
         </field>
     </record>
 
-    <!--***************************** Hiding the purchase reports *************************    -->
+    <!--***************************** Hiding the existing reports *************************    -->
 
     <record id="purchase.report_purchase_quotation" model="ir.actions.report">
         <field name="binding_model_id" eval="False"/>
@@ -127,9 +143,9 @@
         <field name="binding_model_id" eval="False"/>
     </record>
 
-    <!--     <record id="sale.action_report_saleorder" model="ir.actions.report">-->
-    <!--          <field name="binding_model_id" eval="False"/>-->
-    <!--     </record>-->
+    <record id="sale.action_report_saleorder" model="ir.actions.report">
+        <field name="binding_model_id" eval="False"/>
+    </record>
 
     <record id="account.account_invoices_without_payment" model="ir.actions.report">
         <field name="binding_model_id" eval="False"/>
