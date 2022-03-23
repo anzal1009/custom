@@ -122,11 +122,15 @@
                                         Building No. 47/A, Nellimattam P.O,
                                     </td>
 
-                                    <td padding="100px;" colspan="3" style="text-align:center;">Invoice No. e-way Bill No
+                                    <td padding="100px;" colspan="3" style="text-align:center;">Invoice No. e-way Bill
+                                        No
                                         <br></br>
                                         <b></b>
                                     </td>
-                                    <td style="text-align:center;" colspan="4">Order Date:<strong><p style="text-align:center;" t-field="o.date_order"/></strong>
+                                    <td style="text-align:center;" colspan="4">Order Date:
+                                        <strong>
+                                            <p style="text-align:center;" t-field="o.date_order"/>
+                                        </strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -136,7 +140,9 @@
                                     </td>
                                     <td colspan="3" style="text-align:center;">Delivery Note</td>
                                     <td style="text-align:center;" colspan="4">Mode/Terms of Payment
-                                        <strong><p style="text-align:center;" t-field="o.payment_term_id"/></strong>
+                                        <strong>
+                                            <p style="text-align:center;" t-field="o.payment_term_id"/>
+                                        </strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -144,10 +150,14 @@
                                         colspan="3">GSTIN/UIN: 32AACCE3723D1ZB<br></br>State Name : Kerala, Code : 32
                                     </td>
                                     <td colspan="3" style="text-align:center;">Customer Reference.
-                                        <strong><p style="text-align:center;" t-field="o.client_order_ref"/></strong>
+                                        <strong>
+                                            <p style="text-align:center;" t-field="o.client_order_ref"/>
+                                        </strong>
                                     </td>
-                                    <td style="text-align:center;"  colspan="3">Other References
-                                        <strong><p style="text-align:center;" t-field="o.name"/></strong>
+                                    <td style="text-align:center;" colspan="3">Other References
+                                        <strong>
+                                            <p style="text-align:center;" t-field="o.name"/>
+                                        </strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -169,7 +179,10 @@
                                         <br></br>
                                         <b>LS4141</b>
                                     </td>
-                                    <td colspan="4" style="text-align:center;">Delivery Date:<strong><p style="text-align:center;" t-field="o.commitment_date"/></strong>
+                                    <td colspan="4" style="text-align:center;">Delivery Date:
+                                        <strong>
+                                            <p style="text-align:center;" t-field="o.commitment_date"/>
+                                        </strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -201,8 +214,12 @@
 
                                 <tr>
                                     <td colspan="4" style="border-top:1px solid black;">Buyers (Bill to)
-                                        <strong><span t-field="o.partner_id" t-options='{"widget": "contact", "fields": [ "name"], "no_marker": True}'/></strong>
-                                        <span t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                                        <strong>
+                                            <span t-field="o.partner_id"
+                                                  t-options='{"widget": "contact", "fields": [ "name"], "no_marker": True}'/>
+                                        </strong>
+                                        <span t-field="o.partner_id"
+                                              t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
                                     </td>
                                     <td colspan="4">Terms of Delivery</td>
                                 </tr>
@@ -266,14 +283,30 @@
                                            cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <td><strong>Sl No.</strong></td>
-                                                <td colspan="2"><strong>Description of Goods</strong></td>
-                                                <td><strong>HSN/SAC</strong></td>
-                                                <td><strong>Quantity</strong></td>
-                                                <td><strong>Disc</strong></td>
-                                                <td><strong>Rate</strong></td>
-                                                <td><strong>Tax</strong></td>
-                                                <td><strong>Amount</strong></td>
+                                                <td>
+                                                    <strong>Sl No.</strong>
+                                                </td>
+                                                <td colspan="2">
+                                                    <strong>Description of Goods</strong>
+                                                </td>
+                                                <td>
+                                                    <strong>HSN/SAC</strong>
+                                                </td>
+                                                <td>
+                                                    <strong>Quantity</strong>
+                                                </td>
+                                                <td>
+                                                    <strong>Disc</strong>
+                                                </td>
+                                                <td>
+                                                    <strong>Rate</strong>
+                                                </td>
+                                                <td>
+                                                    <strong>Tax</strong>
+                                                </td>
+                                                <td>
+                                                    <strong>Amount</strong>
+                                                </td>
                                             </tr>
                                         </thead>
                                         <t t-set="slno" t-value="0"/>
