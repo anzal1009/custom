@@ -37,8 +37,8 @@
                                         <br/>
                                         <b>Eastea Chai Pvt Ltd</b>
                                     </td>
-                                    <td style="text-align:center;" padding="100px;" colspan="3">Purchase No.<p style="text-align:center;" t-field="o.name"/></td>
-                                    <td style="text-align:center;" colspan="4" >Dated:<p style="text-align:center;" t-field="o.date_order"/>
+                                    <td style="text-align:center;" padding="100px;" colspan="3">Purchase No.<strong><p style="text-align:center;" t-field="o.name"/></strong></td>
+                                    <td style="text-align:center;" colspan="4" >Dated:<strong><p style="text-align:center;" t-field="o.date_order"/></strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -46,9 +46,10 @@
                                         colspan="3">Building No. 47/A, Nellimattam P.O,<br/>Kavalangadu,
                                         Kothamangalam,
                                     </td>
-                                    <td></td>
+                                    <td colspan="3" style="text-align:center;">Vendor reference:
+                                        <strong><p style="text-align:center;" t-field="o.partner_ref"/></strong></td>
                                     <td style="text-align:center;">Mode/Terms of Payment:
-                                        <b><p style="text-align:center;" t-field="o.payment_term_id"/></b>
+                                        <strong><p style="text-align:center;" t-field="o.payment_term_id"/></strong>
                                     </td>
 
                                 </tr>
@@ -95,7 +96,8 @@
                                 </tr>
                                 <tr>
                                     <td colspan="4">Supplier (Bill from)
-                                        <b><p t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/></b>
+                                        <strong><span t-field="o.partner_id"  t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}'/></strong>
+                                        <span t-field="o.partner_id"  t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
                                     </td>
                                 </tr>
                             </table>

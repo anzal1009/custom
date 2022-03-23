@@ -16,6 +16,7 @@
   'reports/purchase_order.xml',
   'reports/vendor_bill.xml',
   'reports/customer_invoice.xml',
+  'views/butt.xml',
 
 
           ],

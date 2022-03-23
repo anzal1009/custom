@@ -108,7 +108,7 @@
                                         colspan="2"></td>
                                 </tr>
                             </table>
-                            <table align="center" style="width:100%;" border="1px solid black" cellspacing="0">
+                            <table align="center" style="width:100%;" border="2px solid black" cellspacing="0">
                                 <tr>
                                     <td rowspan="4" colspan="1">
                                         <img t-if="res_company.logo"
@@ -122,11 +122,11 @@
                                         Building No. 47/A, Nellimattam P.O,
                                     </td>
 
-                                    <td padding="100px;" colspan="3">Invoice No. e-way Bill No
+                                    <td padding="100px;" colspan="3" style="text-align:center;">Invoice No. e-way Bill No
                                         <br></br>
-                                        <b>E/B2B/663/21-22</b>
+                                        <b></b>
                                     </td>
-                                    <td style="text-align:center;" colspan="4">Dated:<p style="text-align:center;" t-field="o.date_order"/>
+                                    <td style="text-align:center;" colspan="4">Order Date:<strong><p style="text-align:center;" t-field="o.date_order"/></strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -134,23 +134,20 @@
                                         colspan="3">Kavalangadu,
                                         Kothamangalam,<br></br>Ernakulam, Kerala - 686693
                                     </td>
-                                    <td colspan="3">Delivery Note</td>
+                                    <td colspan="3" style="text-align:center;">Delivery Note</td>
                                     <td style="text-align:center;" colspan="4">Mode/Terms of Payment
-                                        <br></br>
-                                        <b><p style="text-align:center;" t-field="o.payment_term_id"/></b>
+                                        <strong><p style="text-align:center;" t-field="o.payment_term_id"/></strong>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid white; "
                                         colspan="3">GSTIN/UIN: 32AACCE3723D1ZB<br></br>State Name : Kerala, Code : 32
                                     </td>
-                                    <td colspan="3">Reference No. &amp; Date.
-                                        <br/>
-                                        <b>PM2122/160</b>
+                                    <td colspan="3" style="text-align:center;">Customer Reference.
+                                        <strong><p style="text-align:center;" t-field="o.client_order_ref"/></strong>
                                     </td>
                                     <td style="text-align:center;"  colspan="3">Other References
-                                        <br></br>
-                                        <b><p style="text-align:center;" t-field="o.name"/></b>
+                                        <strong><p style="text-align:center;" t-field="o.name"/></strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -159,8 +156,8 @@
                                         U15491KL2010PTC025741<br></br> E-Mail :
                                         eastea@eastern.in
                                     </td>
-                                    <td colspan="3">Buyer's Order No</td>
-                                    <td colspan="4">Dated</td>
+                                    <td colspan="3" style="text-align:center;">Buyer's Order No</td>
+                                    <td colspan="4" style="text-align:center;">Dated</td>
                                 </tr>
                                 <tr>
                                     <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid black; border-left:1px solid black; "
@@ -168,11 +165,11 @@
                                         <br></br>
                                         <b>Eastea Condiments Pvt.Ltd.</b>
                                     </td>
-                                    <td colspan="3">Dispatch Doc No
+                                    <td colspan="3" style="text-align:center;">Dispatch Doc No
                                         <br></br>
                                         <b>LS4141</b>
                                     </td>
-                                    <td colspan="4">Delivery Note Date
+                                    <td colspan="4" style="text-align:center;">Delivery Date:<strong><p style="text-align:center;" t-field="o.commitment_date"/></strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -181,13 +178,13 @@
                                         KOZHIKODU-673303
                                         <BR></BR>
                                     </td>
-                                    <td colspan="3">Dispatched through
+                                    <td colspan="3" style="text-align:center;">Dispatched through
                                         <br></br>
                                         <b>BY ROAD</b>
                                     </td>
-                                    <td colspan="4">Destination
+                                    <td colspan="4" style="text-align:center;">Destination
                                         <br></br>
-                                        <b>KOZHIKODU</b>
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -195,8 +192,8 @@
                                         colspan="4">GSTIN/UIN:32AAACE5276F1ZX<br></br>State Name:Kerala, Code 32
                                         Kothamangalam,
                                     </td>
-                                    <td colspan="3">Bill of Ladding/LR-RR No</td>
-                                    <td colspan="4">Moter Vehicle No
+                                    <td colspan="3" style="text-align:center;">Bill of Ladding/LR-RR No</td>
+                                    <td colspan="4" style="text-align:center;">Moter Vehicle No
                                         <br></br>
                                         <b>KL06E9668</b>
                                     </td>
@@ -204,7 +201,8 @@
 
                                 <tr>
                                     <td colspan="4" style="border-top:1px solid black;">Buyers (Bill to)
-                                        <b><p t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/></b>
+                                        <strong><span t-field="o.partner_id" t-options='{"widget": "contact", "fields": [ "name"], "no_marker": True}'/></strong>
+                                        <span t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
                                     </td>
                                     <td colspan="4">Terms of Delivery</td>
                                 </tr>
@@ -268,14 +266,14 @@
                                            cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <td>Sl No.</td>
-                                                <td colspan="2">Description of Goods</td>
-                                                <td>HSN/SAC</td>
-                                                <td>Quantity</td>
-                                                <td>Disc</td>
-                                                <td>Rate</td>
-                                                <td>Tax</td>
-                                                <td>Amount</td>
+                                                <td><strong>Sl No.</strong></td>
+                                                <td colspan="2"><strong>Description of Goods</strong></td>
+                                                <td><strong>HSN/SAC</strong></td>
+                                                <td><strong>Quantity</strong></td>
+                                                <td><strong>Disc</strong></td>
+                                                <td><strong>Rate</strong></td>
+                                                <td><strong>Tax</strong></td>
+                                                <td><strong>Amount</strong></td>
                                             </tr>
                                         </thead>
                                         <t t-set="slno" t-value="0"/>
