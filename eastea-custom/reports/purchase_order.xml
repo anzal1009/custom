@@ -57,11 +57,11 @@
                                     <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid white; "
                                         colspan="3">Ernakulam, Kerala - 686693<br/>GSTIN/UIN: 32AACCE3723D1ZB
                                     </td>
-                                    <td colspan="3">Reference No. &amp; Date.
+                                    <td style="text-align: center" colspan="3">Reference No. &amp; Date.
                                         <br/>
                                         <b>PM2122/160</b>
                                     </td>
-                                    <td colspan="3">Other References
+                                    <td style="text-align: center" colspan="3">Other References
                                         <br/>
                                         <b>Indent No:078</b>
                                     </td>
@@ -72,8 +72,8 @@
                                         U15491KL2010PTC025741<br/>E-Mail :
                                         eastea@eastern.in
                                     </td>
-                                    <td colspan="3">Dispatched through</td>
-                                    <td colspan="4">Destination</td>
+                                    <td style="text-align: center" colspan="3">Dispatched through</td>
+                                    <td style="text-align: center" colspan="4">Destination</td>
                                 </tr>
                                 <tr>
                                     <td colspan="4">Consignee (Ship to)
@@ -207,14 +207,14 @@
 
 
                                             </tr>
-                                            <tr>
-                                                <td colspan="9">Amount Chargeable (in words)
-                                                    <br/>
-                                                    <b>Rupees Six Lakh Seventeen Thousand One Hundred
-                                                        Forty Only
-                                                    </b>
-                                                </td>
-                                            </tr>
+<!--                                            <tr>-->
+<!--                                                <td colspan="9">Amount Chargeable (in words)-->
+<!--                                                    <br/>-->
+<!--                                                    <b>Rupees Six Lakh Seventeen Thousand One Hundred-->
+<!--                                                        Forty Only-->
+<!--                                                    </b>-->
+<!--                                                </td>-->
+<!--                                            </tr>-->
                                         </tbody>
                                     </table>
 <!--                                    </table>-->

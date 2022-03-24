@@ -350,9 +350,8 @@
                                             <tr>
                                                 <td colspan="10">Amount Chargeable (in words)
                                                     <br/>
-                                                    <b>Rupees Six Lakh Seventeen Thousand One Hundred
-                                                        Forty Only
-                                                    </b>
+                                                    <strong> <span t-field="o.amount_total_words"/>
+                                                    </strong>
                                                 </td>
                                             </tr>
 

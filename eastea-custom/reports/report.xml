@@ -21,7 +21,7 @@
 
         <report
                 id="purchase_order_report_qweb_paperform"
-                string="Purchase Invoice"
+                string="Purchase Order"
                 model="purchase.order"
                 report_type="qweb-pdf"
                 name="eastea-custom.purchase_order_report_custom"
@@ -108,7 +108,7 @@
 
 
         <report
-                id="sale_order_report_receipt1"
+                id="sale_order_report_qweb_paperform1"
                 string="Customer Invoice"
                 model="account.move"
                 report_type="qweb-pdf"
@@ -139,6 +139,9 @@
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_invoice_sent']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='preview_invoice']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
         </field>
