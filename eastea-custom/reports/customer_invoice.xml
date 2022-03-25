@@ -310,10 +310,8 @@
                                                         <td>
                                                             <span t-field="order_line.quantity"/>
                                                         </td>
-
                                                         <td>
                                                             <!--                                                            <span t-field="order_line.discount"/>-->
-
                                                         </td>
                                                         <td>
                                                             <span t-field="order_line.price_unit"/>
@@ -324,11 +322,9 @@
                                                         <td>
                                                             <span t-field="order_line.price_subtotal"/>
                                                         </td>
-
                                                     </t>
                                                 </tr>
                                             </t>
-
                                             <tr>
                                                 <td colspan="6"></td>
                                                 <!--                                                <td colspan="3"></td>-->
@@ -339,14 +335,9 @@
                                                            t-value="json.loads(o.tax_totals_json)"/>
 
                                                         <t t-call="account.document_tax_totals"/>
-
-
                                                     </table>
                                                 </td>
-
-
                                             </tr>
-
                                             <tr>
                                                 <td colspan="10">Amount Chargeable (in words)
                                                     <br/>
@@ -354,7 +345,6 @@
                                                     </strong>
                                                 </td>
                                             </tr>
-
                                             <tr>
                                                 <td style="border-bottom:1px solid white;" colspan="2">HSN/SAC</td>
                                                 <td style="border-bottom:1px solid white;" colspan="1">Taxable Value
@@ -365,7 +355,6 @@
                                                     colspan="2">
                                                     Total
                                                 </td>
-
                                             </tr>
                                             <tr>
                                                 <td colspan="1"

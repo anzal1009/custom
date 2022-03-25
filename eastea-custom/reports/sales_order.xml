@@ -8,10 +8,7 @@
                     padding: 5px;
                     }
                 </style>
-
                 <!--                Hearder-->
-
-
                 <template id="sale_template_internal_layout_header_inherited" inherit_id="web.external_layout_standard">
                     <xpath expr="//div[@class='header']" position="replace">
                         <t t-foreach="docs" t-as="o">
@@ -52,9 +49,7 @@
                                         <br></br>
                                     </td>
                                 </tr>
-
                                 <tr>
-
                                     <td align="left"
                                         style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
                                         colspan="2">IRN :
@@ -71,7 +66,6 @@
                                     <td align="left"
                                         style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
                                         colspan="2"></td>
-
                                 </tr>
                                 <tr>
                                     <td align="left"
@@ -211,7 +205,6 @@
                                         <b>KL06E9668</b>
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <td colspan="4" style="border-top:1px solid black;">Buyers (Bill to)
                                         <strong>
@@ -256,9 +249,7 @@
                             </table>
                             <table style="width:100%">
                                 <tr>
-
                                     <td align="center" colspan="9">This is a Computer Generated Document</td>
-
                                 </tr>
                             </table>
                         </div>
@@ -272,9 +263,7 @@
 
                 <template id="sale_order_report">
                     <t t-call="web.external_layout">
-
                         <t t-foreach="docs" t-as="o">
-
                             <!--                    <t t-set="o" t-value="o.with_context({'lang':o.user_id.lang})" />-->
                             <div class="page" style="font-size: 15px !important;">
                                 <div class="line">
@@ -346,7 +335,6 @@
                                                     </t>
                                                 </tr>
                                             </t>
-
                                             <tr>
                                                 <td colspan="6"></td>
                                                 <!--                                                <td colspan="3"></td>-->
@@ -360,8 +348,6 @@
 
                                                     </table>
                                                 </td>
-
-
                                             </tr>
 
 <!--                                            <tr>-->
@@ -378,7 +364,6 @@
                                             <br></br>
                                             <br></br>
                                             <tr></tr>
-
                                             <tr>
                                                 <td style="border-bottom:1px solid white;" colspan="2">HSN/SAC</td>
                                                 <td style="border-bottom:1px solid white;" colspan="1">Taxable Value
@@ -470,7 +455,6 @@
                                                     <b>AACCE3723D</b>
                                                 </td>
                                             </tr>
-
                                         </tbody>
                                     </table>
                                 </div>

@@ -25,8 +25,6 @@
                     <xpath expr="//div[@name='company_address']" position="replace">
 
                         <!--                        <table class="table" width="100%" border="1px solid black">-->
-
-
                         <div class="header">
                             <h2 align="center">VENDOR BILL</h2>
                             <table align="center" style="width:100%;" border="1px solid black" cellspacing="0">
@@ -126,8 +124,6 @@
                             </table>
                         </div>
                     </xpath>
-
-
                     <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div[1]//ul[@class='list-inline mb4']"
                            position="replace">
                         <div class="footer">
@@ -154,26 +150,16 @@
                             </table>
                         </div>
                     </xpath>
-
-
                     <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div[1]//div[@class='text-muted']"
                            position="replace">
                     </xpath>
-
-
                 </template>
-
-
                 <template id="purchase_order_report">
                     <t t-call="web.external_layout">
-
                         <t t-foreach="docs" t-as="o">
-
                             <!--                    <t t-set="o" t-value="o.with_context({'lang':o.user_id.lang})" />-->
                             <div class="page" style="font-size: 15px !important;">
                                 <div class="line">
-
-
                                     <table align="center" style="width:100%;" border="1px solid black"
                                            cellspacing="0">
                                         <thead>
@@ -224,7 +210,6 @@
                                                     </t>
                                                 </tr>
                                             </t>
-
                                             <tr>
                                                 <td colspan="6"></td>
                                                 <!--                                                <td colspan="3"></td>-->
@@ -234,12 +219,9 @@
                                                         <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
 
                                                         <t t-call="account.document_tax_totals"/>
-
-
                                                     </table>
                                                 </td>
                                             </tr>
-
                                             <tr>
                                                 <td colspan="9">Amount Chargeable (in words)
                                                     <br/>
@@ -249,7 +231,6 @@
                                             </tr>
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
                         </t>

@@ -184,28 +184,16 @@
                                                     </t>
                                                 </tr>
                                             </t>
-
-
 <!--                                    <table align="center" style="width:100%;" border="1px solid black" cellspacing="0">-->
-
-
                                             <tr>
                                                 <td colspan="6"></td>
 <!--                                                <td colspan="3"></td>-->
                                                 <td colspan="3">
                                                     <table align="center" style="width:100%;"  cellspacing="0">
-
-                                                                 <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
-
-                                                                 <t t-call="account.document_tax_totals"/>
-
-
-
-
+                                                        <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
+                                                        <t t-call="account.document_tax_totals"/>
                                                     </table>
                                                 </td>
-
-
                                             </tr>
 <!--                                            <tr>-->
 <!--                                                <td colspan="9">Amount Chargeable (in words)-->
@@ -223,7 +211,6 @@
                         </t>
                     </t>
                 </template>
-
             </body>
         </t>
     </template>
