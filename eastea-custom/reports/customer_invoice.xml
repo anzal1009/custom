@@ -194,7 +194,7 @@
                                     </td>
                                     <td colspan="4" style="text-align:center;">Destination
                                         <br></br>
-                                        <b>KOZHIKODU</b>
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -205,7 +205,7 @@
                                     <td colspan="3" style="text-align:center;">Bill of Ladding/LR-RR No</td>
                                     <td colspan="4" style="text-align:center;">Moter Vehicle No
                                         <br></br>
-                                        <b>KL06E9668</b>
+
                                     </td>
                                 </tr>
 
@@ -345,98 +345,98 @@
                                                     </strong>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td style="border-bottom:1px solid white;" colspan="2">HSN/SAC</td>
-                                                <td style="border-bottom:1px solid white;" colspan="1">Taxable Value
-                                                </td>
-                                                <td colspan="2">Central Tax</td>
-                                                <td colspan="2">State Tax</td>
-                                                <td align="center" style="border-bottom:1px solid white;"
-                                                    colspan="2">
-                                                    Total
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="1"
-                                                    style="border-top:1px solid white; border-right:1px solid white"></td>
-                                                <td style="border-top:1px solid white; border-left:1px solid white"></td>
-                                                <td style="border-top:1px solid white;"></td>
-                                                <td>Rate</td>
-                                                <td>Amount</td>
-                                                <td>Rate</td>
-                                                <td align="center" style="border-right:1px solid black;">Amount</td>
-                                                <td align="center"
-                                                    style="border-top:1px solid white; border-left:1px solid white; border-bottom:1px solid black; border-right:1px solid black ;"
-                                                    colspan="2">
-                                                    Tax Amount
-                                                </td>
-                                            </tr>
-                                            <tr>
+<!--                                            <tr>-->
+<!--                                                <td style="border-bottom:1px solid white;" colspan="2">HSN/SAC</td>-->
+<!--                                                <td style="border-bottom:1px solid white;" colspan="1">Taxable Value-->
+<!--                                                </td>-->
+<!--                                                <td colspan="2">Central Tax</td>-->
+<!--                                                <td colspan="2">State Tax</td>-->
+<!--                                                <td align="center" style="border-bottom:1px solid white;"-->
+<!--                                                    colspan="2">-->
+<!--                                                    Total-->
+<!--                                                </td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td colspan="1"-->
+<!--                                                    style="border-top:1px solid white; border-right:1px solid white"></td>-->
+<!--                                                <td style="border-top:1px solid white; border-left:1px solid white"></td>-->
+<!--                                                <td style="border-top:1px solid white;"></td>-->
+<!--                                                <td>Rate</td>-->
+<!--                                                <td>Amount</td>-->
+<!--                                                <td>Rate</td>-->
+<!--                                                <td align="center" style="border-right:1px solid black;">Amount</td>-->
+<!--                                                <td align="center"-->
+<!--                                                    style="border-top:1px solid white; border-left:1px solid white; border-bottom:1px solid black; border-right:1px solid black ;"-->
+<!--                                                    colspan="2">-->
+<!--                                                    Tax Amount-->
+<!--                                                </td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
 
-                                                <td colspan="2">09023020
-                                                    <br>09024010</br>
-                                                </td>
-                                                <td>4.91.712.16
-                                                    <br>1.400786.25</br>
-                                                </td>
-                                                <td>2.50%
-                                                    <br>2.50%</br>
-                                                </td>
-                                                <td>12.292.80
-                                                    <br>3.519.66</br>
-                                                </td>
-                                                <td>2.50%
-                                                    <br>2.50%</br>
-                                                </td>
-                                                <td>12.292.80
-                                                    <br>3.519.68</br>
-                                                </td>
-                                                <td colspan="2">24.585.60
-                                                    <br>7.039.32</br>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <b>Total</b>
-                                                </td>
-                                                <td>
-                                                    <b>6,32,498.41</b>
-                                                </td>
-                                                <td>
+<!--                                                <td colspan="2">09023020-->
+<!--                                                    <br>09024010</br>-->
+<!--                                                </td>-->
+<!--                                                <td>4.91.712.16-->
+<!--                                                    <br>1.400786.25</br>-->
+<!--                                                </td>-->
+<!--                                                <td>2.50%-->
+<!--                                                    <br>2.50%</br>-->
+<!--                                                </td>-->
+<!--                                                <td>12.292.80-->
+<!--                                                    <br>3.519.66</br>-->
+<!--                                                </td>-->
+<!--                                                <td>2.50%-->
+<!--                                                    <br>2.50%</br>-->
+<!--                                                </td>-->
+<!--                                                <td>12.292.80-->
+<!--                                                    <br>3.519.68</br>-->
+<!--                                                </td>-->
+<!--                                                <td colspan="2">24.585.60-->
+<!--                                                    <br>7.039.32</br>-->
+<!--                                                </td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td colspan="2">-->
+<!--                                                    <b>Total</b>-->
+<!--                                                </td>-->
+<!--                                                <td>-->
+<!--                                                    <b>6,32,498.41</b>-->
+<!--                                                </td>-->
+<!--                                                <td>-->
 
-                                                </td>
-                                                <td>
-                                                    <b>15,812.46</b>
-                                                </td>
-                                                <td>
+<!--                                                </td>-->
+<!--                                                <td>-->
+<!--                                                    <b>15,812.46</b>-->
+<!--                                                </td>-->
+<!--                                                <td>-->
 
-                                                </td>
+<!--                                                </td>-->
 
-                                                <td>
-                                                    <b>15,821.46</b>
-                                                </td>
-                                                <td colspan="2">
-                                                    <b>31,624.92</b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="border-bottom:1px solid white;" colspan="9">Tax Amount(in
-                                                    words)
-                                                    <br></br>
-                                                    <b>Rupees Thirty One Thousand Six Hundred Twenty Three and Ninty
-                                                        Two
-                                                        Paisa Only
-                                                    </b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="border-top:1px solid white; border-bottom:1px solid black;"
-                                                    colspan="9">Company's
-                                                    PAN
-                                                    :
-                                                    <b>AACCE3723D</b>
-                                                </td>
-                                            </tr>
+<!--                                                <td>-->
+<!--                                                    <b>15,821.46</b>-->
+<!--                                                </td>-->
+<!--                                                <td colspan="2">-->
+<!--                                                    <b>31,624.92</b>-->
+<!--                                                </td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td style="border-bottom:1px solid white;" colspan="9">Tax Amount(in-->
+<!--                                                    words)-->
+<!--                                                    <br></br>-->
+<!--                                                    <b>Rupees Thirty One Thousand Six Hundred Twenty Three and Ninty-->
+<!--                                                        Two-->
+<!--                                                        Paisa Only-->
+<!--                                                    </b>-->
+<!--                                                </td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td style="border-top:1px solid white; border-bottom:1px solid black;"-->
+<!--                                                    colspan="9">Company's-->
+<!--                                                    PAN-->
+<!--                                                    :-->
+<!--                                                    <b>AACCE3723D</b>-->
+<!--                                                </td>-->
+<!--                                            </tr>-->
 
                                         </tbody>
                                     </table>

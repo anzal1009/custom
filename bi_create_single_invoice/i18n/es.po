@@ -1,0 +1,182 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bi_create_single_invoice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-20 06:10+0000\n"
+"PO-Revision-Date: 2021-09-20 06:10+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bi_create_single_invoice
+#: code:addons/bi_create_single_invoice/wizard/multiple_purchase_one_invoice_wizard.py:0
+#, python-format
+msgid "All Purchase Order should be confirmed"
+msgstr "Toda orden de compra debe ser confirmada"
+
+#. module: bi_create_single_invoice
+#: code:addons/bi_create_single_invoice/wizard/multiple_purchase_one_invoice_wizard.py:0
+#, python-format
+msgid "All Purchase Order should have same Payment Terms"
+msgstr "Todas las órdenes de compra deben tener las mismas condiciones de pago"
+
+#. module: bi_create_single_invoice
+#: code:addons/bi_create_single_invoice/wizard/multiple_purchase_one_invoice_wizard.py:0
+#, python-format
+msgid "All Purchase Order should have same Supplier"
+msgstr "Todas las órdenes de compra deben tener el mismo proveedor"
+
+#. module: bi_create_single_invoice
+#: code:addons/bi_create_single_invoice/wizard/multiple_purchase_one_invoice_wizard.py:0
+#, python-format
+msgid "All Purchase Order should have same currency"
+msgstr "Todas las órdenes de compra deben tener la misma moneda"
+
+#. module: bi_create_single_invoice
+#: code:addons/bi_create_single_invoice/wizard/multiple_sale_one_invoice_wizard.py:0
+#, python-format
+msgid "All Sale Order should be confirmed"
+msgstr "Toda orden de venta debe ser confirmada"
+
+#. module: bi_create_single_invoice
+#: code:addons/bi_create_single_invoice/wizard/multiple_sale_one_invoice_wizard.py:0
+#, python-format
+msgid "All Sale Order should have same Payment Term"
+msgstr "Todos los pedidos de venta deben tener el mismo plazo de pago"
+
+#. module: bi_create_single_invoice
+#: code:addons/bi_create_single_invoice/wizard/multiple_sale_one_invoice_wizard.py:0
+#, python-format
+msgid "All Sale Order should have same customer"
+msgstr "Todos los pedidos de venta deben tener el mismo cliente"
+
+#. module: bi_create_single_invoice
+#: model_terms:ir.ui.view,arch_db:bi_create_single_invoice.view_multiple_invoice_purchase_wizard_form
+#: model_terms:ir.ui.view,arch_db:bi_create_single_invoice.view_multiple_invoice_sale_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: bi_create_single_invoice
+#: model:ir.actions.act_window,name:bi_create_single_invoice.action_view_multiple_purchase_one_invoice_wizard
+#: model:ir.actions.act_window,name:bi_create_single_invoice.action_view_multiple_sale_one_invoice_wizard
+msgid "Create Single Invoice"
+msgstr "Crear factura única"
+
+#. module: bi_create_single_invoice
+#: model:ir.model.fields,field_description:bi_create_single_invoice.field_multiple_purchase_one_invoice_wizard__create_uid
+#: model:ir.model.fields,field_description:bi_create_single_invoice.field_multiple_sale_one_invoice_wizard__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: bi_create_single_invoice
+#: model:ir.model.fields,field_description:bi_create_single_invoice.field_multiple_purchase_one_invoice_wizard__create_date
+#: model:ir.model.fields,field_description:bi_create_single_invoice.field_multiple_sale_one_invoice_wizard__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: bi_create_single_invoice
+#: code:addons/bi_create_single_invoice/wizard/multiple_sale_one_invoice_wizard.py:0
+#, python-format
+msgid "Customer Invoice"
+msgstr "Factura del cliente"
+
+#. module: bi_create_single_invoice
+#: model:ir.model.fields,field_description:bi_create_single_invoice.field_multiple_purchase_one_invoice_wizard__display_name
+#: model:ir.model.fields,field_description:bi_create_single_invoice.field_multiple_sale_one_invoice_wizard__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: bi_create_single_invoice
+#: model_terms:ir.ui.view,arch_db:bi_create_single_invoice.view_multiple_invoice_purchase_wizard_form
+#: model_terms:ir.ui.view,arch_db:bi_create_single_invoice.view_multiple_invoice_sale_wizard_form
+msgid "Do you want to create single invoice ?"
+msgstr "¿Quieres crear una factura única?"
+
+#. module: bi_create_single_invoice
+#: model:ir.model.fields,field_description:bi_create_single_invoice.field_multiple_purchase_one_invoice_wizard__id
+#: model:ir.model.fields,field_description:bi_create_single_invoice.field_multiple_sale_one_invoice_wizard__id
+msgid "ID"
+msgstr "IDENTIFICACIÓN"
+
+#. module: bi_create_single_invoice
+#: model:ir.model.fields,field_description:bi_create_single_invoice.field_multiple_purchase_one_invoice_wizard____last_update
+#: model:ir.model.fields,field_description:bi_create_single_invoice.field_multiple_sale_one_invoice_wizard____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: bi_create_single_invoice
+#: model:ir.model.fields,field_description:bi_create_single_invoice.field_multiple_purchase_one_invoice_wizard__write_uid
+#: model:ir.model.fields,field_description:bi_create_single_invoice.field_multiple_sale_one_invoice_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por última vez por"
+
+#. module: bi_create_single_invoice
+#: model:ir.model.fields,field_description:bi_create_single_invoice.field_multiple_purchase_one_invoice_wizard__write_date
+#: model:ir.model.fields,field_description:bi_create_single_invoice.field_multiple_sale_one_invoice_wizard__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: bi_create_single_invoice
+#: model_terms:ir.ui.view,arch_db:bi_create_single_invoice.view_multiple_invoice_purchase_wizard_form
+msgid ""
+"Make sure all the purchase order have same Supplier and purchase order "
+"should be fully uninvoiced and confirmed."
+msgstr ""
+
+#. module: bi_create_single_invoice
+#: model_terms:ir.ui.view,arch_db:bi_create_single_invoice.view_multiple_invoice_sale_wizard_form
+msgid ""
+"Make sure all the sale order have same customer and sale order should\n"
+"                                be fully uninvoiced and confirmed."
+msgstr ""
+
+#. module: bi_create_single_invoice
+#: code:addons/bi_create_single_invoice/wizard/multiple_purchase_one_invoice_wizard.py:0
+#, python-format
+msgid ""
+"There is no expense account defined for this product: \"%s\". You may have "
+"to install a chart of account from Accounting app, settings menu."
+msgstr ""
+
+#. module: bi_create_single_invoice
+#: code:addons/bi_create_single_invoice/wizard/multiple_sale_one_invoice_wizard.py:0
+#, python-format
+msgid ""
+"There is no income account defined for this product: \"%s\". You may have to"
+" install a chart of account from Accounting app, settings menu."
+msgstr ""
+
+#. module: bi_create_single_invoice
+#: code:addons/bi_create_single_invoice/wizard/multiple_purchase_one_invoice_wizard.py:0
+#, python-format
+msgid "Vendor Invoice"
+msgstr "Factura del proveedor"
+
+#. module: bi_create_single_invoice
+#: model_terms:ir.ui.view,arch_db:bi_create_single_invoice.view_multiple_invoice_purchase_wizard_form
+#: model_terms:ir.ui.view,arch_db:bi_create_single_invoice.view_multiple_invoice_sale_wizard_form
+msgid "Yes"
+msgstr "sí"
+
+#. module: bi_create_single_invoice
+#: model:ir.model,name:bi_create_single_invoice.model_multiple_purchase_one_invoice_wizard
+msgid "multiple.purchase.one.invoice.wizard"
+msgstr ""
+
+#. module: bi_create_single_invoice
+#: model:ir.model,name:bi_create_single_invoice.model_multiple_sale_one_invoice_wizard
+msgid "multiple.sale.one.invoice.wizard"
+msgstr ""
+
+#. module: bi_create_single_invoice
+#: model_terms:ir.ui.view,arch_db:bi_create_single_invoice.view_multiple_invoice_purchase_wizard_form
+#: model_terms:ir.ui.view,arch_db:bi_create_single_invoice.view_multiple_invoice_sale_wizard_form
+msgid "or"
+msgstr "o"
