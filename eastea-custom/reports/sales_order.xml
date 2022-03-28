@@ -37,69 +37,69 @@
                                         <br></br>
                                         <br></br>
                                     </td>
-                                    <td style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
-                                        rowspan="4" colspan="1" align="right">
-                                        <b>e-invoice</b>
-                                        <br></br>
-                                        <img t-if="res_company.logo"
-                                             t-att-src="'data:image/jpg;base64,%s' % to_text(res_company.logo)"
-                                             style="max-height: 60px;"/>
-                                        <br></br>
-                                        <br></br>
-                                        <br></br>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="left"
-                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
-                                        colspan="2">IRN :
-                                    </td>
-                                    <td align="left"
-                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
-                                        colspan="2">
-                                        <b>65d5bafe019f96c1011b0d633e59a2b4722990654-<br></br>ec0da502126dd9977c6770
-                                        </b>
-                                    </td>
-                                    <td align="left"
-                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
-                                        colspan="2"></td>
-                                    <td align="left"
-                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
-                                        colspan="2"></td>
-                                </tr>
-                                <tr>
-                                    <td align="left"
-                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
-                                        colspan="2">Ack No :
-                                    </td>
-                                    <td align="left"
-                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
-                                        colspan="7">
-                                        <b>152211578293534</b>
-                                    </td>
-                                    <td align="left"
-                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
-                                        colspan="2"></td>
-                                    <td align="left"
-                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
-                                        colspan="2"></td>
-                                </tr>
-                                <tr>
-                                    <td align="left"
-                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
-                                        colspan="2">Ack Date :
-                                    </td>
-                                    <td align="left"
-                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
-                                        colspan="7">
-                                        <b>17-Jan-22</b>
-                                    </td>
-                                    <td align="left"
-                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
-                                        colspan="2"></td>
-                                    <td align="left"
-                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"
-                                        colspan="2"></td>
+<!--                                    <td style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"-->
+<!--                                        rowspan="4" colspan="1" align="right">-->
+<!--                                        <b>e-invoice</b>-->
+<!--                                        <br></br>-->
+<!--                                        <img t-if="res_company.logo"-->
+<!--                                             t-att-src="'data:image/jpg;base64,%s' % to_text(res_company.logo)"-->
+<!--                                             style="max-height: 60px;"/>-->
+<!--                                        <br></br>-->
+<!--                                        <br></br>-->
+<!--                                        <br></br>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td align="left"-->
+<!--                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"-->
+<!--                                        colspan="2">IRN :-->
+<!--                                    </td>-->
+<!--                                    <td align="left"-->
+<!--                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"-->
+<!--                                        colspan="2">-->
+<!--                                        <b>65d5bafe019f96c1011b0d633e59a2b4722990654-<br></br>ec0da502126dd9977c6770-->
+<!--                                        </b>-->
+<!--                                    </td>-->
+<!--                                    <td align="left"-->
+<!--                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"-->
+<!--                                        colspan="2"></td>-->
+<!--                                    <td align="left"-->
+<!--                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"-->
+<!--                                        colspan="2"></td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td align="left"-->
+<!--                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"-->
+<!--                                        colspan="2">Ack No :-->
+<!--                                    </td>-->
+<!--                                    <td align="left"-->
+<!--                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"-->
+<!--                                        colspan="7">-->
+<!--                                        <b>152211578293534</b>-->
+<!--                                    </td>-->
+<!--                                    <td align="left"-->
+<!--                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"-->
+<!--                                        colspan="2"></td>-->
+<!--                                    <td align="left"-->
+<!--                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"-->
+<!--                                        colspan="2"></td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td align="left"-->
+<!--                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"-->
+<!--                                        colspan="2">Ack Date :-->
+<!--                                    </td>-->
+<!--                                    <td align="left"-->
+<!--                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"-->
+<!--                                        colspan="7">-->
+<!--                                        <b>17-Jan-22</b>-->
+<!--                                    </td>-->
+<!--                                    <td align="left"-->
+<!--                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"-->
+<!--                                        colspan="2"></td>-->
+<!--                                    <td align="left"-->
+<!--                                        style="border-bottom:1px solid white; border-right:1px solid white;border-left:1px solid white;border-top:1px solid white;"-->
+<!--                                        colspan="2"></td>-->
                                 </tr>
                             </table>
                             <table align="center" style="width:100%;" border="2px solid black" cellspacing="0">
@@ -187,7 +187,7 @@
                                     </td>
                                     <td colspan="3" style="text-align:center;">Dispatched through
                                         <br></br>
-                                        <b>BY ROAD</b>
+
                                     </td>
                                     <td colspan="4" style="text-align:center;">Destination
                                         <br></br>

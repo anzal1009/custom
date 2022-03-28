@@ -93,25 +93,6 @@
                                     <td colspan="4" style="text-align:center;">Destination</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4">Consignee (Ship to)
-                                        <b>Eastea Chai Pvt Ltd</b>
-                                        <br></br>
-                                        Building No47/A, Nelimattom
-                                        P.O,Kavalangadu,<br></br>Kothamangalam, Ernakulam, Kerala -686693, e-mail:
-                                        <br></br>
-                                        eastea@eastern.in<br></br>GSTIN/UIN :32AACCE3723D1ZB<br></br>State Name :Kerala,
-                                        Code :32
-                                    </td>
-                                    <td rowspan="2" colspan="6">Terms and Conditions<br></br>1.Feight :
-                                        Included<br></br>2.Dspatch
-                                        Details:Door Delivery<br></br> 3.Certificate of Analysis for each batch should
-                                        be
-                                        accompanied in all deliveries
-                                        <br></br>
-                                        4.Required Food Grade certoficate and Allergen free Declaration
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td colspan="4">Supplier (Bill from)
                                         <strong>
                                             <span t-field="o.partner_id"
@@ -120,7 +101,16 @@
                                         <span t-field="o.partner_id"
                                               t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
                                     </td>
+                                    <td colspan="4">Terms and Conditions<br></br>1.Feight :
+                                        Included<br></br>2.Dspatch
+                                        Details:Door Delivery<br></br> 3.Certificate of Analysis for each batch should
+                                        be
+                                        accompanied in all deliveries
+                                        <br></br>
+                                        4.Required Food Grade certoficate and Allergen free Declaration
+                                    </td>
                                 </tr>
+
                             </table>
                         </div>
                     </xpath>

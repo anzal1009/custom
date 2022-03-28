@@ -59,11 +59,9 @@
                                     </td>
                                     <td style="text-align: center" colspan="3">Reference No. &amp; Date.
                                         <br/>
-                                        <b>PM2122/160</b>
                                     </td>
                                     <td style="text-align: center" colspan="3">Other References
                                         <br/>
-                                        <b>Indent No:078</b>
                                     </td>
                                 </tr>
                                 <tr>
@@ -76,16 +74,11 @@
                                     <td style="text-align: center" colspan="4">Destination</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4">Consignee (Ship to)
-                                        <b>Eastea Chai Pvt Ltd</b>
-                                        <br></br>
-                                        Building No47/A, Nelimattom
-                                        P.O,Kavalangadu,<br></br>Kothamangalam, Ernakulam, Kerala -686693, e-mail:
-                                        <br></br>
-                                        eastea@eastern.in<br></br>GSTIN/UIN :32AACCE3723D1ZB<br></br>State Name :Kerala,
-                                        Code :32
+                                    <td colspan="4">Supplier (Bill from)
+                                        <strong><span t-field="o.partner_id"  t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}'/></strong>
+                                        <span t-field="o.partner_id"  t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
                                     </td>
-                                    <td rowspan="2" colspan="6">Terms and Conditions<br></br>1.Feight :
+                                    <td colspan="4">Terms and Conditions<br></br>1.Feight :
                                         Included<br></br>2.Dspatch
                                         Details:Door Delivery<br></br> 3.Certificate of Analysis for each batch should
                                         be
@@ -94,12 +87,7 @@
                                         4.Required Food Grade certoficate and Allergen free Declaration
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td colspan="4">Supplier (Bill from)
-                                        <strong><span t-field="o.partner_id"  t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}'/></strong>
-                                        <span t-field="o.partner_id"  t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
-                                    </td>
-                                </tr>
+
                             </table>
                         </div>
                     </xpath>
