@@ -14,11 +14,14 @@ class SaleOrderInherit(models.Model):
         return self.env.ref('eastea-custom.purchase_order_report_qweb_paperform1').report_action(self)
 
 
+    # def action_generate_irn(self):
+    #     print('hello')
+    #     # return self.env.ref('eastea-custom.purchase_order_report_qweb_paperform1').report_action(self)
 
 
-#
-class SaleOrderInherit1(models.Model):
-    _inherit = 'sale.order'
+
+# class SaleOrderInherit1(models.Model):
+#     _inherit = 'sale.order'
 
 #     def action_quotation_send(self):
 #         print('yyy')

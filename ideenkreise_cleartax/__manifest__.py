@@ -1,5 +1,5 @@
 {''
- 'name': 'Eastea Custom',
+ 'name': 'Ideenkreise Cleartax',
  'summary': """Custom for ERP""",
  'version': '0.1',
  'sequence':'-60',
@@ -8,14 +8,14 @@
  'company': 'Ideenkreise Tech Pvt Ltd',
  'website': 'https://www.ideenkreisetech.com',
  'category': 'Tools',
-  'depends': ['sale_management','purchase','account','laxicon_tds','purchase_order_automation_lot_import','bi_create_single_invoice'],
+  'depends': ['sale_management','purchase','account',],
  'license': 'AGPL-3',
  'data': [
-  'reports/report.xml',
-  'reports/sales_order.xml',
-  'reports/purchase_order.xml',
-  'reports/vendor_bill.xml',
-  'reports/customer_invoice.xml',
+  # 'reports/report.xml',
+  # 'reports/sales_order.xml',
+  # 'reports/purchase_order.xml',
+  # 'reports/vendor_bill.xml',
+  # 'reports/customer_invoice.xml',
   'views/button_inherit.xml',
 
 

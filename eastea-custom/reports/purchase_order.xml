@@ -32,46 +32,53 @@
                                              t-att-src="'data:image/jpg;base64,%s' % to_text(res_company.logo)"
                                              style="max-height: 160px;"/>
                                     </td>
-                                    <td style="border-top:1px solid black; border-left:1px solid white; border-bottom:1px solid white;border-right:1px solid black;"
-                                        colspan="3">
+                                    <td style="border-top:1px solid black; border-left:1px solid white; border-bottom:1px solid black;border-right:1px solid black;"
+                                        colspan="3" rowspan="4">
                                         <br/>
                                         <b>Eastea Chai Pvt Ltd</b>
+                                        <br></br>Building No. 47/A, Nellimattam P.O,<br></br>Kavalangadu,
+                                        Kothamangalam,<br></br>Ernakulam, Kerala - 686693<br/>GSTIN/UIN: 32AACCE3723D1ZB<br></br>
+                                        State Name : Kerala, Code : 32<br/>CIN:
+                                        U15491KL2010PTC025741<br/>E-Mail :
+                                        eastea@eastern.in
                                     </td>
                                     <td style="text-align:center;" padding="100px;" colspan="3">Purchase No.<strong><p style="text-align:center;" t-field="o.name"/></strong></td>
                                     <td style="text-align:center;" colspan="4" >Dated:<strong><p style="text-align:center;" t-field="o.date_order"/></strong>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid white; "
-                                        colspan="3">Building No. 47/A, Nellimattam P.O,<br/>Kavalangadu,
-                                        Kothamangalam,
-                                    </td>
+<!--                                    <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid white; "-->
+<!--                                        colspan="3">Building No. 47/A, Nellimattam P.O,<br/>Kavalangadu,-->
+<!--                                        Kothamangalam,-->
+<!--                                    </td>-->
                                     <td colspan="3" style="text-align:center;">Vendor reference:
                                         <strong><p style="text-align:center;" t-field="o.partner_ref"/></strong></td>
-                                    <td style="text-align:center;">Mode/Terms of Payment:
-                                        <strong><p style="text-align:center;" t-field="o.payment_term_id"/></strong>
+                                    <td style="text-align:center;">Reference No. &amp; Date.
+
                                     </td>
 
                                 </tr>
                                 <tr>
-                                    <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid white; "
-                                        colspan="3">Ernakulam, Kerala - 686693<br/>GSTIN/UIN: 32AACCE3723D1ZB
-                                    </td>
-                                    <td style="text-align: center" colspan="3">Reference No. &amp; Date.
+<!--                                    <td style="border-right: 1px solid black; border-bottom:1px solid white; border-top:1px solid white; border-left:1px solid white; "-->
+<!--                                        colspan="3">Ernakulam, Kerala - 686693<br/>GSTIN/UIN: 32AACCE3723D1ZB-->
+<!--                                    </td>-->
+                                    <td style="text-align: center" colspan="3">Dispatched through.
                                         <br/>
                                     </td>
-                                    <td style="text-align: center" colspan="3">Other References
-                                        <br/>
+                                    <td style="text-align: center" colspan="3">Delivery Date:
+                                        <br/><strong><p style="text-align:center;" t-field="o.date_planned"/></strong>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="border-right: 1px solid black; border-bottom:1px solid black; border-top:1px solid white; border-left:1px solid white; "
-                                        colspan="3">State Name : Kerala, Code : 32<br/>CIN:
-                                        U15491KL2010PTC025741<br/>E-Mail :
-                                        eastea@eastern.in
+<!--                                    <td style="border-right: 1px solid black; border-bottom:1px solid black; border-top:1px solid white; border-left:1px solid white; "-->
+<!--                                        colspan="3">State Name : Kerala, Code : 32<br/>CIN:-->
+<!--                                        U15491KL2010PTC025741<br/>E-Mail :-->
+<!--                                        eastea@eastern.in-->
+<!--                                    </td>-->
+                                    <td style="text-align: center" colspan="3">Destination</td>
+                                    <td style="text-align: center" colspan="4">Payment Terms:
+                                    <strong><p style="text-align:center;" t-field="o.payment_term_id"/></strong>
                                     </td>
-                                    <td style="text-align: center" colspan="3">Dispatched through</td>
-                                    <td style="text-align: center" colspan="4">Destination</td>
                                 </tr>
                                 <tr>
                                     <td colspan="4">Supplier (Bill from)

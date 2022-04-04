@@ -18,6 +18,8 @@
 
           ],
  'demo': [],
+ 'images': ['static/description/logo.png'],
+    'installable': True,
  'installable': True,
  'auto_install': False,
  'application' : True

@@ -18,6 +18,8 @@
                             attrs="{'invisible': [('move_type','=','out_invoice')]}"/>
 
                 </xpath>
+
+
             </field>
 
 
