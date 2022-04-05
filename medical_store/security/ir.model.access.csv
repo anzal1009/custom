@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_medical_products,access.medical.products,model_medical_products,,1,1,1,1
+access_medical_staff,access.medical.staff,model_medical_staff,,1,1,1,1
+access_medical_sales,access.medical.sales,model_medical_sales,,1,1,1,1
+access_sales_line,access.sales.line,model_sales_line,,1,1,1,1

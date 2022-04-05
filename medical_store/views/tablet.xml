@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.actions.act_window" id="action_view_tablets">
+        <field name="name">Tablets</field>
+        <field name="res_model">medical.products</field>
+        <!--            <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="domain">[('category','=','t')]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create new Tablet</p>
+        </field>
+    </record>
+    <menuitem id="medical_tablets" name="Tablet" parent="medical_products" action="action_view_tablets" sequence="20"/>
+</odoo>
