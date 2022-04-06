@@ -11,12 +11,6 @@
   'depends': ['sale_management','purchase','account',],
  'license': 'AGPL-3',
  'data': [
- # 'security/ir.model.access.csv'
-  # 'reports/report.xml',
-  # 'reports/sales_order.xml',
-  # 'reports/purchase_order.xml',
-  # 'reports/vendor_bill.xml',
-  # 'reports/customer_invoice.xml',
   'views/button_inherit.xml',
 
 

@@ -13,11 +13,11 @@ class IrnInherit(models.Model):
     _inherit = "account.move"
 
     tax_sh = fields.Char(string="Tax sch")
-    sup_typ = fields.Char(string="Sup typ")
+    sup_typ = fields.Char(string="Sup Typ")
     reg_rev = fields.Char(string="Reg Rev")
-    ecm_gstin = fields.Char(string="Ecm Gstin")
-    igst_on_intra = fields.Char(string="Igst On Intra")
-    name1 = fields.Char(string="name")
+    ecm_gstin = fields.Char(string="ECM Gstin")
+    igst_on_intra = fields.Char(string="IGST On Intra")
+    name1 = fields.Char(string="Name")
     Addr_1 = fields.Char(string="Address")
     Addr_2 = fields.Char(string="Address 2")
     loc = fields.Char(string="Location")
@@ -59,22 +59,22 @@ class IrnInherit(models.Model):
     # PaymtDue = fields.Char(string="PaymtDue")
     ShipBNo = fields.Char(string="Shipping Bill No *")
     ShipBDt = fields.Date(string="Shipping Bill Date *")
-    Port = fields.Char(string="Port*")
+    Port = fields.Char(string="Port *")
     RefClm = fields.Char(string="RefClm")
-    ForCur = fields.Char(string="ForCur")
-    CntCode = fields.Char(string="CntCode")
+    ForCur = fields.Char(string="Currency")
+    CntCode = fields.Char(string="Country Code")
     TransId = fields.Char(string="Transaction Id")
     TransName = fields.Char(string="Transaction Name")
     Distance = fields.Char(string="Distance")
     TransDocNo = fields.Char(string="Transaction DocNo")
-    TransDocDt = fields.Date(string="Transaction Doc Date")
+    TransDocDt = fields.Date(string="Transaction Doc Date *")
     VehNo = fields.Char(string="Vehicle No")
     VehType = fields.Char(string="Vehicle Type")
     TransMode = fields.Char(string="Transport Mode")
     Success = fields.Char(string="Success")
     AckNo = fields.Char(string="Acknowledgment No")
     AckDt = fields.Date(string="Acknowledgment Date")
-    Irn = fields.Char(string="Irn")
+    Irn = fields.Char(string="IRN")
     SignedInvoice = fields.Char(string="Signed Invoice")
     # qr_code = fields.Binary( string="Signed QRCode",attachment=True,store=True)
     Status = fields.Char(string="Status")
@@ -90,17 +90,26 @@ class IrnInherit(models.Model):
 class SaleOrderInherit(models.Model):
     _inherit = 'account.move'
 
-
-
     def action_generate_irn(self):
+        sample_str = self.company_id.partner_id.vat
+        state_code = sample_str[0:2]
+        print(self.company_id.partner_id.vat)
+
+        sampl_str = self.partner_id.vat
+        state_code1 = sample_str[0:2]
+        print(state_code1)
 
         print(self, "generate_irn")
+        # Clear Tax Credentials
+        company_owner_id = "853ad3de-eff3-478b-a07e-31e2c69b8486"
+        company_auth_token = "1.0e34e660-c559-4ad5-ab87-b53547ebd091_8f680e5750e447de7676af3ba12197022d98029bdae09955fe1b332a99e6e391"
+        company_gstin = "32AAACE6765D1ZX"
 
         url = "https://einvoicing.internal.cleartax.co/v2/eInvoice/generate"
         headers = {"Content-type": "application/json",
-                   "x-cleartax-auth-token": "1.76c8055b-687c-4563-87bf-4bcff17081c8_9ce29420ba9a947b529b2d81c44e7cee949fdeae1971920b17438ddd425ddf94",
-                   "x-cleartax-product": "EInvoice", "owner_id": "5b664f35-4214-46ed-84c8-4f30fabc9cba",
-                   "gstin": "29AAFCD5862R000"}
+                   "x-cleartax-auth-token": company_auth_token,
+                   "x-cleartax-product": "EInvoice", "owner_id": company_owner_id,
+                   "gstin": company_gstin}
         item_list = []
         count = 1
         TotalAssVal = 0
@@ -172,7 +181,6 @@ class SaleOrderInherit(models.Model):
         print(ShipBDt)
         print(item_list)
 
-
         formated_original = [
             {
                 "transaction": {
@@ -189,49 +197,24 @@ class SaleOrderInherit(models.Model):
                         "Dt": Invoicedate
                     },
                     "SellerDtls": {
-                        "Gstin": "29AAFCD5862R000",
-                        "LglNm": "NIC company pvt ltd",
-                        "TrdNm": "NIC Industries",
-                        "Addr1": "5th block, kuvempu layout",
-                        "Addr2": "kuvempu layout",
-                        "Loc": "GANDHINAGAR",
-                        "Pin": 560037,
-                        "Stcd": "29",
-                        "Ph": "9000000000",
-                        "Em": "abc@gmail.com"
+                        "Gstin": "32AAACE6765D1ZX",
+                        "LglNm": self.company_id.partner_id.street,
+                        "TrdNm": self.company_id.partner_id.street,
+                        "Addr1": self.company_id.partner_id.street2,
+                        "Loc": self.company_id.partner_id.city,
+                        "Pin": self.company_id.partner_id.zip,
+                        "Stcd": state_code,
                     },
                     "BuyerDtls": {
-                        "Gstin": "29AWGPV7107B1Z1",
-                        "LglNm": "XYZ company pvt ltd",
-                        "TrdNm": "XYZ Industries",
-                        "Pos": "12",
-                        "Addr1": "7th block, kuvempu layout",
-                        "Addr2": "kuvempu layout",
-                        "Loc": "GANDHINAGAR",
-                        "Pin": 562160,
-                        "Stcd": "29",
-                        "Ph": "91111111111",
-                        "Em": "xyz@yahoo.com"
+                        "Gstin": self.partner_id.vat,
+                        "LglNm": self.partner_id.name,
+                        "TrdNm": self.partner_id.name,
+                        "Pos": state_code1,
+                        "Addr1": self.partner_id.street,
+                        "Loc": self.partner_id.state_id.name,
+                        "Pin": self.partner_id.zip,
+                        "Stcd": state_code1,
                     },
-                    # "SellerDtls": {
-                    #     "Gstin": "29AAFCD5862R000",
-                    #     "LglNm": "Eastea Chai Pvt. Ltd",
-                    #     "TrdNm": "Eastea Chai Pvt. Ltd",
-                    #     "Addr1": "Branch Code:7IV/1D,IV/1EIRUMALAPADY,PANIPRA P.O.,KOTHAMANGALAM, ERNAKULAM,",
-                    #     "Loc": "Eranakulam",
-                    #     "Pin": "562160",
-                    #     "Stcd": "29",
-                    # },
-                    # "BuyerDtls": {
-                    #     "Gstin": "self.partner_id.vat",
-                    #     "LglNm": self.partner_id.name,
-                    #     "TrdNm": self.partner_id.name,
-                    #     "Pos": "96",
-                    #     "Addr1": self.partner_id.street,
-                    #     "Loc": self.partner_id.state_id.name,
-                    #     "Pin": self.partner_id.zip,
-                    #     "Stcd": "96"
-                    # },
                     "ShipDtls": {
                         "Gstin": self.Gstin,
                         "LglNm": self.LglNm,
@@ -252,12 +235,6 @@ class SaleOrderInherit(models.Model):
                         "Discount": 0,
                         "TotInvVal": TotInvVal
                     },
-                    # "ValDtls": {
-                    #     "AssVal":,
-                    #     "IgstVal": IgstAmt,
-                    #     "Discount": 0,
-                    #     "TotInvVal": self.tax_totals_json,
-                    # },
 
                     "ExpDtls": {
                         "ShipBNo": self.ShipBNo,
@@ -273,7 +250,8 @@ class SaleOrderInherit(models.Model):
                         "VehType": self.VehType,
                         "TransMode": self.TransMode
                     }
-                },
+                }
+
             }
         ]
         print(formated_original)
@@ -459,70 +437,8 @@ class SaleOrderInherit(models.Model):
                 }
             }
         ]
-        # testeddate = self.documentdate
-        # dt_obj = datetime.strptime(testeddate, '%Y-%m-%d %H:%M:%S')
-        # formated = [
-        #     {
-        #         "transaction": {
-        #             "Version": "1.1",
-        #             "TranDtls": {
-        #                 "TaxSch": "GST",
-        #                 "SupTyp": "EXPWP",
-        #                 "EcmGstin": None,
-        #                 "IgstOnIntra": "N"
-        #             },
-        #             "DocDtls": {
-        #                 "Typ": "INV",
-        #                 "No": self.documentnumber,
-        #                 "Dt": self.documentdate
-        #             },
-        #             "SellerDtls": {
-        #                 "Gstin": "29AAFCD5862R000",
-        #                 "LglNm": self.supplierlegalname,
-        #                 "TrdNm": self.supplierlegalname,
-        #                 "Addr1": self.supplieraddress1 or "",
-        #                 "Loc": self.supplierplace or "",
-        #                 "Pin": "562160",
-        #                 "Stcd": "29",
-        #             },
-        #             "BuyerDtls": {
-        #                 "Gstin": self.recipientgstin,
-        #                 "LglNm": self.recipientlegalname,
-        #                 "TrdNm": self.recipienttradename,
-        #                 "Pos": self.placeofsupply or "",
-        #                 "Addr1": self.recipientaddress1 or "",
-        #                 "Loc": self.recipientplace or "",
-        #                 "Pin": self.recipientpincode or "",
-        #                 "Stcd": self.recipientstatecode or "",
-        #             },
-        #             "ShipDtls": {
-        #                 "Gstin": "URP",
-        #                 "LglNm": "India Gateway Terminal Private Limited",
-        #                 "TrdNm": "India Gateway Terminal Private Limited",
-        #                 "Addr1": "Administration Building, ICTT,",
-        #                 "Addr2": "Vallarpadam SEZ, Mulavukadu Village",
-        #                 "Loc": "Ernakulam",
-        #                 "Pin": 562160,
-        #                 "Stcd": 29
-        #             },
-        #             "ItemList": item_list,
-        #             "ValDtls": {
-        #                 "AssVal": AssVal,
-        #                 "IgstVal": IgstVal,
-        #                 "Discount": Discount,
-        #                 "TotInvVal": TotInvVal,
-        #             },
-        #             "ExpDtls": {
-        #                 "ShipBNo": self.shippingbillnumber or "",
-        #                 "ShipBDt": self.shippingbilldate or "",
-        #             }
-        #         }
-        #     }
-        # ]
-        #
-        # print(data,"data1c")
         try:
-            req = requests.put(url, data=json.dumps(test_data), headers=headers, timeout=50)
+            req = requests.put(url, data=json.dumps(formated_original), headers=headers, timeout=50)
             req.raise_for_status()
             content = req.json()
             print(content)
@@ -558,16 +474,12 @@ class SaleOrderInherit(models.Model):
             self.AckDt = content[0]['govt_response']['AckDt']
             self.EwbNo = content[0]['govt_response']['EwbNo']
             self.EwbDt = content[0]['govt_response']['EwbDt']
-            self.EwbValidTill= content[0]['govt_response']['EwbValidTill']
-            self.Success =content[0]['govt_response']['Success']
-            self.SignedInvoice=content[0]['govt_response']['SignedInvoice']
+            self.EwbValidTill = content[0]['govt_response']['EwbValidTill']
+            self.Success = content[0]['govt_response']['Success']
+            self.SignedInvoice = content[0]['govt_response']['SignedInvoice']
 
 
 
         except IOError:
             error_msg = _("Required Fields Missing or Invalid Format For IRN generation.")
             raise self.env['res.config.settings'].get_config_warning(error_msg)
-    #
-
-    # for row in cursor:
-    #     print(row)
