@@ -1,35 +1,36 @@
-from odoo import api, models, fields, _
-import requests
 import json
 import qrcode
 import base64
 from io import BytesIO
+
+from odoo import api, models, fields, _
+import requests
+
 from datetime import datetime
-
-
 
 
 class IrnInherit(models.Model):
     _inherit = "account.move"
+
     tax_sh = fields.Char(string="Tax sch")
     sup_typ = fields.Char(string="Sup typ")
     reg_rev = fields.Char(string="Reg Rev")
     ecm_gstin = fields.Char(string="Ecm Gstin")
     igst_on_intra = fields.Char(string="Igst On Intra")
     name1 = fields.Char(string="name")
-    Addr_1 = fields.Char(string="Addr1")
-    Addr_2 = fields.Char(string="Addr2")
+    Addr_1 = fields.Char(string="Address")
+    Addr_2 = fields.Char(string="Address 2")
     loc = fields.Char(string="Location")
     pin = fields.Char(string="Pin")
-    stcd = fields.Char(string="Stcd")
-    Gstin = fields.Char(string="Gstin")
-    LglNm = fields.Char(string="LglNm")
-    TrdNm = fields.Char(string="TradeName")
-    Addrs1 = fields.Char(string="Addr1")
-    Addrs2 = fields.Char(string="Addr2")
-    Loc1 = fields.Char(string="Location")
-    Pin1 = fields.Char(string="Pin")
-    stcd1 = fields.Char(string="Stcd")
+    stcd = fields.Char(string="State Code")
+    Gstin = fields.Char(string="Gstin *")
+    LglNm = fields.Char(string="Legal Name *")
+    TrdNm = fields.Char(string="Trade Name")
+    Addrs1 = fields.Char(string="Address * ")
+    Addrs2 = fields.Char(string="Address 2")
+    Loc1 = fields.Char(string="Location *")
+    Pin1 = fields.Char(string="Pin*")
+    stcd1 = fields.Char(string="State Code *")
     # name2 = fields.Char(string="Name")
     # Val = fields.Char(string="Val")
     #
@@ -56,9 +57,9 @@ class IrnInherit(models.Model):
     # CrDay = fields.Char(string="CrDay")
     # PaidAmt = fields.Char(string="PaidAmt")
     # PaymtDue = fields.Char(string="PaymtDue")
-    ShipBNo = fields.Char(string="Ship Bill No")
-    ShipBDt = fields.Date(string="Ship Bill Date")
-    Port = fields.Char(string="Port")
+    ShipBNo = fields.Char(string="Shipping Bill No *")
+    ShipBDt = fields.Date(string="Shipping Bill Date *")
+    Port = fields.Char(string="Port*")
     RefClm = fields.Char(string="RefClm")
     ForCur = fields.Char(string="ForCur")
     CntCode = fields.Char(string="CntCode")
@@ -66,45 +67,28 @@ class IrnInherit(models.Model):
     TransName = fields.Char(string="Transaction Name")
     Distance = fields.Char(string="Distance")
     TransDocNo = fields.Char(string="Transaction DocNo")
-    TransDocDt = fields.Date(string="TransactionDoc Dt")
-    VehNo = fields.Char(string="Veh No")
-    VehType = fields.Char(string="Veh Type")
-    TransMode = fields.Char(string="Trans Mode")
+    TransDocDt = fields.Date(string="Transaction Doc Date")
+    VehNo = fields.Char(string="Vehicle No")
+    VehType = fields.Char(string="Vehicle Type")
+    TransMode = fields.Char(string="Transport Mode")
     Success = fields.Char(string="Success")
-    AckNo = fields.Char(string="AckNo")
-    AckDt = fields.Date(string="Ack Dt")
+    AckNo = fields.Char(string="Acknowledgment No")
+    AckDt = fields.Date(string="Acknowledgment Date")
     Irn = fields.Char(string="Irn")
     SignedInvoice = fields.Char(string="Signed Invoice")
     # qr_code = fields.Binary( string="Signed QRCode",attachment=True,store=True)
     Status = fields.Char(string="Status")
-    EwbNo = fields.Char(string="Ewb No")
-    EwbDt = fields.Date(string="Ewb Dt")
-    EwbValidTill = fields.Date(string="Ewb ValidTill")
+    EwbNo = fields.Char(string="EWB No")
+    EwbDt = fields.Date(string="EWB Date")
+    EwbValidTill = fields.Date(string="EWB Valid Till")
     log = fields.Char(string="Log")
-    govt_log = fields.Char(string="Gov Log")
-    qr_code = fields.Binary("QR Code", attachment=True, store=True)
+    govt_log = fields.Char(string="Government Log")
+    qr_code = fields.Binary("Signed QRCode", attachment=True, store=True)
 
 
+#
 class SaleOrderInherit(models.Model):
     _inherit = 'account.move'
-
-    # def action_generate_irn(self):
-    #     print('hello')
-    @api.depends('Irn')
-    def generate_qr_code(self):
-        qr = qrcode.QRCode(
-            version=1,
-            error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=10,
-            border=4,
-        )
-        qr.add_data(self.Irn)
-        qr.make(fit=True)
-        img = qr.make_image()
-        temp = BytesIO()
-        img.save(temp, format="PNG")
-        qr_image = base64.b64encode(temp.getvalue())
-        self.qr_code = qr_image
 
 
 
@@ -133,6 +117,7 @@ class SaleOrderInherit(models.Model):
             IgstAmt = 0.0
 
             if items.tax_ids.name.startswith('GST'):
+                print('gst')
                 GstRt = items.tax_ids.amount
                 GstAmt = (items.quantity * items.price_unit * items.tax_ids.amount) / 100
                 IgstAmt = 0.0
@@ -140,6 +125,7 @@ class SaleOrderInherit(models.Model):
                 SgstAmt = GstAmt / 2
 
             elif items.tax_ids.name.startswith('IGST'):
+                print('igst')
                 GstRt = items.tax_ids.amount
                 GstAmt = (items.quantity * items.price_unit * items.tax_ids.amount) / 100
                 IgstAmt = GstAmt
@@ -162,7 +148,7 @@ class SaleOrderInherit(models.Model):
                 "AssAmt": (items.quantity * items.price_unit) - (
                         (items.quantity * items.price_unit) * (items.discount / 100)),
                 "GstRt": GstRt,
-                # "IgstAmt": IgstAmt,
+                "IgstAmt": IgstAmt,
                 "CgstAmt": CgstAmt,
                 "SgstAmt": SgstAmt,
                 "TotItemVal": total,
@@ -186,6 +172,7 @@ class SaleOrderInherit(models.Model):
         print(ShipBDt)
         print(item_list)
 
+
         formated_original = [
             {
                 "transaction": {
@@ -193,7 +180,7 @@ class SaleOrderInherit(models.Model):
                     "TranDtls": {
                         "TaxSch": self.tax_sh,
                         "SupTyp": self.sup_typ,
-                        "EcmGstin":None,
+                        "EcmGstin": None,
                         "IgstOnIntra": "N"
                     },
                     "DocDtls": {
@@ -228,15 +215,15 @@ class SaleOrderInherit(models.Model):
                     },
                     # "SellerDtls": {
                     #     "Gstin": "29AAFCD5862R000",
-                    #     "LglNm": "Eastern Condiments Pvt. Ltd",
-                    #     "TrdNm": "Eastern Condiments Pvt. Ltd",
+                    #     "LglNm": "Eastea Chai Pvt. Ltd",
+                    #     "TrdNm": "Eastea Chai Pvt. Ltd",
                     #     "Addr1": "Branch Code:7IV/1D,IV/1EIRUMALAPADY,PANIPRA P.O.,KOTHAMANGALAM, ERNAKULAM,",
                     #     "Loc": "Eranakulam",
                     #     "Pin": "562160",
                     #     "Stcd": "29",
                     # },
                     # "BuyerDtls": {
-                    #     "Gstin": "URP",
+                    #     "Gstin": "self.partner_id.vat",
                     #     "LglNm": self.partner_id.name,
                     #     "TrdNm": self.partner_id.name,
                     #     "Pos": "96",
@@ -258,10 +245,10 @@ class SaleOrderInherit(models.Model):
                     "ItemList": item_list,
 
                     "ValDtls": {
-                        "AssVal":TotalAssVal,
+                        "AssVal": TotalAssVal,
                         "CgstVal": TotalCgstVal,
                         "SgstVal": TotalSgstVal,
-                        # "IgstVal": TotalIgstVal,
+                        "IgstVal": TotalIgstVal,
                         "Discount": 0,
                         "TotInvVal": TotInvVal
                     },
@@ -274,7 +261,7 @@ class SaleOrderInherit(models.Model):
 
                     "ExpDtls": {
                         "ShipBNo": self.ShipBNo,
-                        "ShipBDt":ShipBDt
+                        "ShipBDt": ShipBDt
                     },
                     "EwbDtls": {
                         "TransId": self.TransId,
@@ -544,14 +531,36 @@ class SaleOrderInherit(models.Model):
             if content[0]['govt_response']['Success'] == 'Y':
                 self.Irn = content[0]['govt_response']['Irn'] if content[0]['govt_response'][
                                                                      'Success'] == 'Y' else False
+                qr = qrcode.QRCode(
+                    version=1,
+                    error_correction=qrcode.constants.ERROR_CORRECT_L,
+                    box_size=10,
+                    border=4,
+                )
+                print("generate QR CODE")
+                qr.add_data(self.Irn)
+                qr.make(fit=True)
+                img = qr.make_image()
+                temp = BytesIO()
+                img.save(temp, format="PNG")
+                qr_image = base64.b64encode(temp.getvalue())
+                self.qr_code = qr_image
+
+                self.govt_log = content[0]['govt_response']['Status']
 
             else:
                 self.Irn = False
+                self.govt_log = content[0]['govt_response']['ErrorDetails']['error_message']
             # self.irn = content[0]['govt_response']['Irn'] if content[0]['govt_response']['Success'] == 'Y' else False
             self.log = content[0]['document_status']
-            self.govt_log = content[0]['govt_response']
-            # self.AckNo = content[0]['AckNo']
-            # self.AckDt = content[0]['AckDt']
+            # self.govt_log = content[0]['govt_response']['s']
+            self.AckNo = content[0]['govt_response']['AckNo']
+            self.AckDt = content[0]['govt_response']['AckDt']
+            self.EwbNo = content[0]['govt_response']['EwbNo']
+            self.EwbDt = content[0]['govt_response']['EwbDt']
+            self.EwbValidTill= content[0]['govt_response']['EwbValidTill']
+            self.Success =content[0]['govt_response']['Success']
+            self.SignedInvoice=content[0]['govt_response']['SignedInvoice']
 
 
 

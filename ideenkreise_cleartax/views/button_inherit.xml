@@ -39,18 +39,25 @@
                                attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('state', '!=', 'posted')]}"/>
                         <field name="AckDt"
                                attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('state', '!=', 'posted')]}"/>
-                        <field name="Irn"
-                               attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('state', '!=', 'posted')]}"/>
-                        <field name="SignedInvoice"
-                               attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('state', '!=', 'posted')]}"/>
-                       <field name="qr_code" widget="image" class="oe_left oe_avatar"
-                               attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('state', '!=', 'posted')]}"/>
+
+
+
                         <field name="Status"
                                attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('state', '!=', 'posted')]}"/>
-                        <field name="govt_log" style= "display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"
-                               attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('state', '!=', 'posted')]}"  />
+                        <field name="govt_log"
+                               style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"
+                               attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('state', '!=', 'posted')]}"/>
 
-                        <!--                        </group>-->
+                    </xpath>
+                    <xpath expr="//div[@class='oe_title']" position="after">
+                        <group>
+                            <field name="qr_code" widget="image" class="oe_right oe_avatar"
+                               attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('state', '!=', 'posted')]}"/>
+                            <field name="Irn"
+                                   attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('state', '!=', 'posted')]}"/>
+                            <field name="SignedInvoice" style="width: 50vw !important; word-wrap: break-word; display: -webkit-box; -webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;"
+                                   attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('state', '!=', 'posted')]}"/>
+                        </group>
                     </xpath>
                     <xpath expr="//field[@name='invoice_vendor_bill_id']" position="after">
                         <!--                        <group style="width:900px" col="5" colspan="5" name="other_detail7"-->
@@ -63,7 +70,6 @@
                                attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('state', '!=', 'posted')]}"/>
                         <field name="log"
                                attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('state', '!=', 'posted')]}"/>
-
 
 
                         <!--                        </group>-->
@@ -185,7 +191,6 @@
                 </notebook>
             </field>
         </record>
-
 
 
     </data>
