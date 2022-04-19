@@ -259,8 +259,8 @@ class Purchase(http.Controller):
                     'product_uom': 1,
                     'picking_id': picking.id,
                     'picking_type_id': 19,
-                    'location_id': record["location"],
-                    'location_dest_id':location_dest_id,
+                    'location_id': location_id,
+                    'location_dest_id':29,
                 })
         # if move_receipt_1:
         #
