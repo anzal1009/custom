@@ -248,6 +248,7 @@ class Purchase(http.Controller):
                 #
                 # print(line["name"])
                 # print( record["location_dest"])
+                location_id = record["location"]
 
 
                 move_receipt_1 = request.env['stock.move'].create({
