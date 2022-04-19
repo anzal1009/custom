@@ -8,7 +8,7 @@
  'company': 'Ideenkreise Tech Pvt Ltd',
  'website': 'https://www.ideenkreisetech.com',
  'category': 'Tools',
-  'depends': ['sale_management','purchase','account','laxicon_tds','purchase_order_automation_lot_import','bi_create_single_invoice'],
+  'depends': ['sale_management','purchase','account','purchase_order_automation_lot_import','bi_create_single_invoice'],
  'license': 'AGPL-3',
  'data': [
   'reports/report.xml',
