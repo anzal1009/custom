@@ -16,10 +16,13 @@ class Purchase(http.Controller):
     # ****************new invoice ***************
 
     @http.route('/data/create_rm_purchase', type='json', auth='user')
+    # @http.route('/data/create_rm_purchase', auth='Key', type='json')
     def create_rm_purchase(self, **rec):
         print(rec)
         po_numbers = []
         for row in rec["data"]:
+            invoice_date = row["master"]["date_approve"]
+
             vendor_gst = row["master"]["partner_id"]["gst_no"]
             if vendor_gst:
                 vendor = vendor_gst and request.env['res.partner'].sudo().search([('vat', '=', vendor_gst)],
@@ -100,7 +103,10 @@ class Purchase(http.Controller):
                 })
                 request.env.cr.commit()
 
+
                 if purchase_order_1:
+                    purchase_order_1.button_confirm()
+                    purchase_order_1.date_approve = invoice_date
                     po_numbers.append({
                         'poNumber': purchase_order_1.name,
                         'orderID': row["master"]["orderID"]
@@ -162,20 +168,21 @@ class Purchase(http.Controller):
     @http.route('/get_products', type='json', auth='user')
     def get_products(self):
         print("Yes here entered")
-        patients_rec = request.env['product.template'].search([])
-        patients = []
-        for rec in patients_rec:
-            vals = {
-                # 'id': rec.partner_id,
-                'name': rec.name,
-                'qty': rec.qty_available,
-                'loc': rec.property_stock_inventory.name,
-                'id': rec.company_id,
-                'uom': rec.product_id.uom_id
+        stock_det = request.env['stock.quant'].search([])
+        print(stock_det)
+        stock = []
+        for i in stock_det:
+            datas = {
+                'location': i.location_id.name,
+                'on hand': i.quantity,
+                'lot': i.lot_id.name,
+                'product id':i.product_id.id,
+                'product name':i.product_id.name,
+                'uom':i.product_id.uom_id.id
             }
-            patients.append(vals)
-        print("Purchase order--->", patients)
-        data = {'status': 200, 'response': patients, 'message': 'Done All Products Returned'}
+            stock.append(datas)
+        print("Purchase order--->", stock)
+        data = {'status': 200, 'response': stock, 'message': 'Done All Products Returned'}
         return data
 
     # ****************Inventory_Transfer_details**********
@@ -190,13 +197,13 @@ class Purchase(http.Controller):
             vals = {
                 # 'id': rec.partner_id,
                 # 'name': rec.location_id,
-                'opera': rec.picking_type_id.name,
-                'dest': rec.location_dest_id.name,
-                'loca': rec.location_id.name,
+                'opera': rec.picking_type_id,
+                'dest': rec.location_dest_id,
+                'loca': rec.location_id,
                 'name': rec.product_id.name,
                 'product_id': rec.product_id,
                 'qty': rec.product_uom_qty,
-                'uom': rec.product_id.uom_id.name,
+                'uom': rec.product_id.uom_id.id,
                 # 'name': rec.product_id.name,
                 # 'res':rec.reserved_availability,
             }
@@ -205,71 +212,64 @@ class Purchase(http.Controller):
         data = {'status': 200, 'response': patients, 'message': 'Done All Products Returned'}
         return data
 
-    @http.route('/create_transfers', type='json', auth='user')
-    def create_customer(self, **rec):
-        if request.jsonrequest:
-            print("rec", rec)
-            if rec['operation']:
-                vals = {
-                    'picking_type_id': rec["operation"],
-                    'location_dest_id': rec['destination'],
-                    'location_id': rec['location'],
-                    'description_picking': rec['des'],
-                    'product_id': rec['product_id'],
-                    'product_uom_qty': rec['qty'],
-                    'product_uom': rec['uom'],
-                    'name': rec['name']
-                }
-                new_customer = request.env['stock.move'].sudo().create(vals)
-                print("New Customer Is", new_customer)
-                args = {'success': True, 'message': 'Success', 'id': new_customer.id}
-        return args
 
     @http.route('/create_transfers_inv', type='json', auth='user')
     def action_approve(self, **rec):
         if request.jsonrequest:
-            picking = []
 
+            picking_type = request.env['stock.picking.type'].search([])
+            print(picking_type)
+            for o in picking_type:
+                if o.name.startswith('Internal Transfers'):
+                    picking_type_id=o.id
+                    print(o.id)
+                    print(o.name)
+                    print(picking_type)
+
+
+
+
+
+            picking = []
             for record in rec["picking"]:
                 picking = request.env['stock.picking'].create({
                     'location_id': record["location"],
                     'location_dest_id': record["location_dest"],
                     # 'partner_id': self.test_partner.id,
-                    'picking_type_id': 19,
+                    'picking_type_id':o.id,
                     'immediate_transfer': False,
                 })
-                location_id = record["location"]
-                print(location_id)
-                location_dest_id =record["location_dest"]
-                print(location_dest_id)
             move_receipt_1 = []
-
             for line in rec["pick_lines"]:
-                #
-                # print(line["name"])
-                # print( record["location_dest"])
-                location_id = record["location"]
 
+                location_id = record["location"]
+                location_dest_id = record["location_dest"]
+                product_id = line["product_id"]
+                # print(product_id.uom)
+
+                units = request.env['product.template'].search([])
+                print(units)
 
                 move_receipt_1 = request.env['stock.move'].create({
                     'name': line["name"],
-                    'product_id': 41,
+                    'product_id': int(product_id),
                     'product_uom_qty': line["qty"],
-                    'quantity_done': line["qty_done"],
-                    'product_uom': 1,
+                    # 'quantity_done': line["qty_done"],
+                    'product_uom': 12,
                     'picking_id': picking.id,
-                    'picking_type_id': 19,
+                    'picking_type_id':o.id,
                     'location_id': location_id,
-                    'location_dest_id':29,
+                    'location_dest_id':int(location_dest_id),
                 })
-        # if move_receipt_1:
-        #
-        #     record.state = 'approved'
-        #     record.approved_date = fields.Datetime.now()
-        #     record.approved_by = request.env.uid
-        # else:
-        #     raise ValidationError(_("Something went wrong during your Request generation"))
-        # return True
+        if move_receipt_1:
+            data = {'status':'success','message': 'Done All Transfers Returned'}
+
+            # record.state = 'approved'
+            # record.approved_date = fields.Datetime.now()
+            # record.approved_by = request.env.uid
+        else:
+            raise ValidationError(_("Something went wrong during your Request generation"))
+        return data
 
         # if request.jsonrequest:
         #     print("rec", rec)
