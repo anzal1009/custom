@@ -22,6 +22,10 @@ class Purchase(http.Controller):
         po_numbers = []
         for row in rec["data"]:
             invoice_date = row["master"]["date_approve"]
+            print(invoice_date)
+            # testeddate =  invoice_date
+            # Invoicedate = datetime.strftime(testeddate, '%m/%d/%Y')
+            # print(Invoicedate)
 
             vendor_gst = row["master"]["partner_id"]["gst_no"]
             if vendor_gst:
@@ -103,10 +107,18 @@ class Purchase(http.Controller):
                 })
                 request.env.cr.commit()
 
-
                 if purchase_order_1:
                     purchase_order_1.button_confirm()
-                    purchase_order_1.date_approve = invoice_date
+                    # purchase_order_1.date_approve = invoice_date
+                    purchase_order_1.action_view_picking()
+                    if purchase_order_1.picking_ids:
+                        for picking in purchase_order_1.picking_ids:
+                            picking.button_validate()
+                            # pick_to_backorder = request.env['stock.immediate.transfer']
+                            # stock_immediate = pick_to_backorder.create(
+                            #     {'pick_ids': [(6, 0, purchase_order_1.picking_ids.ids)]})
+                            request.env.cr.commit()
+                            # stock_immediate.process()
                     po_numbers.append({
                         'poNumber': purchase_order_1.name,
                         'orderID': row["master"]["orderID"]
@@ -168,6 +180,7 @@ class Purchase(http.Controller):
     @http.route('/get_products', type='json', auth='user')
     def get_products(self):
         print("Yes here entered")
+
         stock_det = request.env['stock.quant'].search([])
         print(stock_det)
         stock = []
@@ -176,9 +189,11 @@ class Purchase(http.Controller):
                 'location': i.location_id.name,
                 'on hand': i.quantity,
                 'lot': i.lot_id.name,
-                'product id':i.product_id.id,
-                'product name':i.product_id.name,
-                'uom':i.product_id.uom_id.id
+                'product id': i.product_id.id,
+                'product name': i.product_id.name,
+                'uom': i.product_id.uom_id.id,
+                'pdt category': i.product_id.categ_id.name,
+                # 'quantity':i.product_id.qty_available
             }
             stock.append(datas)
         print("Purchase order--->", stock)
@@ -212,6 +227,7 @@ class Purchase(http.Controller):
         data = {'status': 200, 'response': patients, 'message': 'Done All Products Returned'}
         return data
 
+    # *****
 
     @http.route('/create_transfers_inv', type='json', auth='user')
     def action_approve(self, **rec):
@@ -221,14 +237,10 @@ class Purchase(http.Controller):
             print(picking_type)
             for o in picking_type:
                 if o.name.startswith('Internal Transfers'):
-                    picking_type_id=o.id
+                    picking_type_id = o.id
                     print(o.id)
                     print(o.name)
                     print(picking_type)
-
-
-
-
 
             picking = []
             for record in rec["picking"]:
@@ -236,12 +248,11 @@ class Purchase(http.Controller):
                     'location_id': record["location"],
                     'location_dest_id': record["location_dest"],
                     # 'partner_id': self.test_partner.id,
-                    'picking_type_id':o.id,
+                    'picking_type_id': o.id,
                     'immediate_transfer': False,
                 })
             move_receipt_1 = []
             for line in rec["pick_lines"]:
-
                 location_id = record["location"]
                 location_dest_id = record["location_dest"]
                 product_id = line["product_id"]
@@ -257,12 +268,12 @@ class Purchase(http.Controller):
                     # 'quantity_done': line["qty_done"],
                     'product_uom': 12,
                     'picking_id': picking.id,
-                    'picking_type_id':o.id,
+                    'picking_type_id': o.id,
                     'location_id': location_id,
-                    'location_dest_id':int(location_dest_id),
+                    'location_dest_id': int(location_dest_id),
                 })
         if move_receipt_1:
-            data = {'status':'success','message': 'Done All Transfers Returned'}
+            data = {'status': 'success', 'message': 'Done All Transfers Returned'}
 
             # record.state = 'approved'
             # record.approved_date = fields.Datetime.now()
@@ -270,76 +281,6 @@ class Purchase(http.Controller):
         else:
             raise ValidationError(_("Something went wrong during your Request generation"))
         return data
-
-        # if request.jsonrequest:
-        #     print("rec", rec)
-        #
-        # for record in rec:
-        #     pick_lines = []
-        #     for line in rec["pick_lines"]:
-        #         pick_line_values = {
-        #             # 'product_id.name': line['name'],
-        #             'product_id': line['product_id'],
-        #             'product_uom_qty': line['qty'],
-        #             'product_uom': line['uom'],
-        #             # 'name': line['des'],
-        #             'state': 'draft',
-        #             'name':'eee',
-        #             'location_id': 29,
-        #             'location_dest_id': 8,
-        #             'picking_type_id': 19,
-        #         }
-        #         pick_lines.append((0, 0, pick_line_values))
-        #         print(pick_lines)
-        # picking = {
-        #     'location_id': "29",
-        #     'location_dest_id': "8",
-        #     'move_type': 'direct',
-        #     'picking_type_id': 19,
-        #     # 'ctsrf': record.id,
-        #     'move_lines': pick_lines,
-        # }
-        # print(picking)
-
-        # picking = request.env['stock.picking'].sudo().create({
-        #
-        #     'location_id': 29,
-        #     'location_dest_id': 8,
-        #     # 'partner_id': self.test_partner.id,
-        #     'picking_type_id': 19,
-        #     'immediate_transfer': False,
-
-        # })
-
-        # move_receipt_1 = request.env['stock.move'].create({
-        #     # 'name': self.kit_parent.name,
-        #     'product_id': "41",
-        #     'product_uom_qty': 3,
-        #     'product_uom': "Units",
-        #     'picking_id': picking.id,
-        #     'picking_type_id': 19,
-        #     'location_id': 29,
-        #     'location_dest_id': 8,
-        # })
-        # picking.action_confirm()
-
-        #     'location_id': "29",
-        #     'location_dest_id': "8",
-        #     # 'partner_id': self.test_partner.id,
-        #     'picking_type_id': "19",
-        #     'immediate_transfer': False,
-        # })
-
-        # transfer = request.env['stock.picking'].sudo().create(picking)
-
-        #     if transfer:
-        #         record.state = 'approved'
-        #         record.approved_date = fields.Datetime.now()
-        #         record.approved_by = self.env.uid
-        #     else:
-        #         raise ValidationError(_("Something went wrong during your Request generation"))
-        # return True
-        #
 
     # ******************Sales Orders********************
 
@@ -362,24 +303,201 @@ class Purchase(http.Controller):
         data = {'status': 200, 'response': patients, 'message': 'Done All Products Returned'}
         return data
 
-# ****
-#  picking = self.env['stock.picking'].create({
-#             'location_id': self.test_supplier.id,
-#             'location_dest_id': self.warehouse_1.wh_input_stock_loc_id.id,
-#             'partner_id': self.test_partner.id,
-#             'picking_type_id': self.env.ref('stock.picking_type_in').id,
-#             'immediate_transfer': False,
-#         })
-#         move_receipt_1 = self.env['stock.move'].create({
-#             'name': self.kit_parent.name,
-#             'product_id': self.kit_parent.id,
-#             'product_uom_qty': 3,
-#             'product_uom': self.kit_parent.uom_id.id,
-#             'picking_id': picking.id,
-#             'picking_type_id': self.env.ref('stock.picking_type_in').id,
-#             'location_id':  self.test_supplier.id,
-#             'location_dest_id': self.warehouse_1.wh_input_stock_loc_id.id,
-#         })
-#         picking.action_confirm()
-#
-#
+
+# ***************** Sale and Purchase ****************
+
+
+    @http.route('/data/create_sale_purchase', type='json', auth='user')
+    def create_rm_purchase(self, **rec):
+        print(rec)
+        po_numbers = []
+        for row in rec["data"]:
+            invoice_date = row["master"]["date_approve"]
+            print(invoice_date)
+            # testeddate =  invoice_date
+            # Invoicedate = datetime.strftime(testeddate, '%m/%d/%Y')
+            # print(Invoicedate)
+
+            vendor_gst = row["master"]["partner_id"]["gst_no"]
+            if vendor_gst:
+                vendor = vendor_gst and request.env['res.partner'].sudo().search([('vat', '=', vendor_gst)],
+                                                                                 limit=1) or False
+                if not vendor:
+                    vendor_details = {
+                        'name': row["master"]["partner_id"]["name"],
+                        'company_type': "company",
+                        'currency_id': 20,
+                        'street': row["master"]["partner_id"]["address"],
+                        'l10n_in_gst_treatment': "regular",
+                        'street2': " ",
+                        'city': " ",
+                        'zip': " ",
+                        'phone': row["master"]["partner_id"]["phone"],
+                        'email': row["master"]["partner_id"]["email"],
+                        'vat': row["master"]["partner_id"]["gst_no"],
+                        # 'parent_id': 1
+                    }
+                    vendor = request.env['res.partner'].sudo().create(vendor_details)
+                    request.env.cr.commit()
+            order_line = []
+            for product_line in row["child"]:
+                product_item = product_line["name"]
+                if product_item:
+                    product = product_item and request.env['product.product'].sudo().search(
+                        [('name', '=', product_item)], limit=1) or False
+                    uom_ids = request.env['uom.uom'].sudo().search([])
+                    unit_id = request.env.ref('uom.product_uom_unit') and request.env.ref(
+                        'uom.product_uom_unit').id or False
+                    for record in uom_ids:
+                        if record.name == "kg":
+                            unit_id = record.id
+                    if not product:
+                        product_details = {
+                            'name': product_line["name"],
+                            # 'default_code': row.ITEM_NUM,
+                            'list_price': product_line["price_unit"],
+                            # 'l10n_in_hsn_code': row.HSN_CODE,
+                            'uom_id': unit_id,
+                            'uom_po_id': unit_id,
+                            'detailed_type': 'product',
+                            'categ_id': 1,
+                            'standard_price': product_line["price_unit"],
+
+                        }
+
+                        product = request.env['product.template'].sudo().create(product_details)
+                        request.env.cr.commit()
+
+                if product:
+                    order_line.append((0, 0, {
+                        'display_type': False,
+                        # 'sequence': 10,
+                        'product_id': product.id,
+                        'name': product.name or '',
+                        # 'date_planned': row.TRANSACTION_DATE or False,
+                        'account_analytic_id': False,
+                        'product_qty': product_line["product_qty"] or 0,
+                        'qty_received_manual': 0,
+                        # 'discount': discount or 0,
+                        'product_uom': product.uom_id.id or request.env.ref(
+                            'uom.product_uom_unit') and request.env.ref('uom.product_uom_unit').id or False,
+                        'price_unit': product_line["price_unit"] or 0,
+                        # 'taxes_id': tax_variant and [(6, 0, [tax_variant.id])] or [],
+                    }))
+
+            if vendor:
+                purchase_order_1 = request.env['purchase.order'].create({
+                    'partner_id': vendor.id,
+                    # 'partner_ref': row.SALES_ORDER_NUMBER or '',
+                    # 'origin': row.INVOICE_NUM or '',
+                    # 'date_order':row["master"]["date_order"] or False,
+                    # 'date_planned':row["master"]["date_approve"] or False,
+                    # 'partner_id': self.env.ref('base.main_partner').id,
+                    # 'name': row.INVOICE_NUM or '',
+                    'order_line': order_line,
+                })
+                request.env.cr.commit()
+
+                if purchase_order_1:
+                    purchase_order_1.button_confirm()
+                    # purchase_order_1.date_approve = invoice_date
+                    purchase_order_1.action_view_picking()
+                    if purchase_order_1.picking_ids:
+                        for picking in purchase_order_1.picking_ids:
+                            picking.button_validate()
+                            # pick_to_backorder = request.env['stock.immediate.transfer']
+                            # stock_immediate = pick_to_backorder.create(
+                            #     {'pick_ids': [(6, 0, purchase_order_1.picking_ids.ids)]})
+                            request.env.cr.commit()
+                            # stock_immediate.process()
+                    po_numbers.append({
+                        'poNumber': purchase_order_1.name,
+                        'orderID': row["master"]["orderID"]
+                    })
+
+        so_numbers = []
+        for row in rec["data"]:
+            vendor_gst = row["master"]["partner_id"]["gst_no"]
+            if vendor_gst:
+                vendor = vendor_gst and request.env['res.partner'].sudo().search([('vat', '=', vendor_gst)],
+                                                                                 limit=1) or False
+                if not vendor:
+                    vendor_details = {
+                        'name': row["master"]["partner_id"]["name"],
+                        'company_type': "company",
+                        'currency_id': 20,
+                        'street': row["master"]["partner_id"]["address"],
+                        'l10n_in_gst_treatment': "regular",
+                        'street2': " ",
+                        'city': " ",
+                        'zip': " ",
+                        'phone': row["master"]["partner_id"]["phone"],
+                        'email': row["master"]["partner_id"]["email"],
+                        'vat': row["master"]["partner_id"]["gst_no"],
+                        # 'parent_id': 1
+                    }
+                    vendor = request.env['res.partner'].sudo().create(vendor_details)
+                    request.env.cr.commit()
+            order_line = []
+            for product_line in row["child"]:
+                product_item = product_line["name"]
+                if product_item:
+                    product = product_item and request.env['product.product'].sudo().search(
+                        [('name', '=', product_item)], limit=1) or False
+                    uom_ids = request.env['uom.uom'].sudo().search([])
+                    unit_id = request.env.ref('uom.product_uom_unit') and request.env.ref(
+                        'uom.product_uom_unit').id or False
+                    for record in uom_ids:
+                        if record.name == "kg":
+                            unit_id = record.id
+                    if not product:
+                        product_details = {
+                            'name': product_line["name"],
+                            # 'default_code': row.ITEM_NUM,
+                            'list_price': product_line["price_unit"],
+                            # 'l10n_in_hsn_code': row.HSN_CODE,
+                            'uom_id': unit_id,
+                            'uom_po_id': unit_id,
+                            'detailed_type': 'product',
+                            'categ_id': 1,
+                            'standard_price': product_line["price_unit"],
+                        }
+                        product = request.env['product.template'].sudo().create(product_details)
+                        request.env.cr.commit()
+                if product:
+                    order_line.append((0, 0, {
+                        'display_type': False,
+                        # 'sequence': 10,
+                        'product_id': product.id,
+                        'name': product.name or '',
+                        # 'date_planned': row.TRANSACTION_DATE or False,
+                        # 'account_analytic_id': False,
+                        'product_uom_qty': product_line["product_qty"] or 0,
+                        # 'qty_received_manual': 0,
+                        # 'discount': discount or 0,
+                        'product_uom': product.uom_id.id or request.env.ref(
+                            'uom.product_uom_unit') and request.env.ref('uom.product_uom_unit').id or False,
+                        'price_unit': product_line["price_unit"] or 0,
+                        # 'taxes_id': tax_variant and [(6, 0, [tax_variant.id])] or [],
+                    }))
+            if vendor:
+                sale_order_1 = request.env['sale.order'].create({
+                    'partner_id': vendor.id,
+                    # 'partner_ref': row.SALES_ORDER_NUMBER or '',
+                    # 'origin': row.INVOICE_NUM or '',
+                    # 'date_order':row["master"]["date_order"] or False,
+                    # 'date_planned':row["master"]["date_approve"] or False,
+                    # 'partner_id': self.env.ref('base.main_partner').id,
+                    # 'name': row.INVOICE_NUM or '',
+                    'order_line': order_line,
+                })
+                request.env.cr.commit()
+                if sale_order_1:
+                    sale_order_1.action_confirm()
+                    so_numbers.append({
+                        'poNumber': sale_order_1.name,
+                        'orderID': row["master"]["orderID"]
+                    })
+            return po_numbers
+
+
