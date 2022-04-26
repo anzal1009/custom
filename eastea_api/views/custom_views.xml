@@ -6,7 +6,7 @@
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp.production.form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='product_qty']" position="after">
+            <xpath expr="//field[@name='move_raw_ids']/tree/field[@name='product_qty']" position="after">
                  <field name="reserved_availability" invisible="0"/>
 
             </xpath>
