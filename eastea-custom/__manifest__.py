@@ -12,6 +12,7 @@
  'license': 'AGPL-3',
  'data': [
   'reports/report.xml',
+  'reports/jounal_entries.xml',
   'reports/sales_order.xml',
   'reports/purchase_order.xml',
   'reports/vendor_bill.xml',
