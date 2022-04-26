@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-			<record id="mo_inv_qty" model="ir.ui.view">
-        <field name="name">mrp.production.form.inherit</field>
-        <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.production.form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='move_raw_ids']/tree/field[@name='product_qty']" position="after">
-                 <field name="reserved_availability" invisible="0"/>
-
-            </xpath>
-        </field>
-    </record>
-    </data>
+	<data>
+		<record id="mo_inv_qty" model="ir.ui.view">
+			<field name="name">mrp.production.form.inherit</field>
+			<field name="model">mrp.production</field>
+			<field name="inherit_id" ref="mrp.production.form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='move_raw_ids']/tree/field[@name='product_qty']" position="after">
+					<field name="reserved_availability"/>
+				</xpath>
+			</field>
+		</record>
+	</data>
 </odoo>
