@@ -13,11 +13,11 @@
  'data': [
   'reports/report.xml',
   'reports/jounal_entries.xml',
-  'reports/sales_order.xml',
-  'reports/purchase_order.xml',
-  'reports/vendor_bill.xml',
-  'reports/customer_invoice.xml',
-  'views/button_inherit.xml',
+  # 'reports/sales_order.xml',
+  # 'reports/purchase_order.xml',
+  # 'reports/vendor_bill.xml',
+  # 'reports/customer_invoice.xml',
+  # 'views/button_inherit.xml',
 
 
 
