@@ -15,6 +15,8 @@
 #  'views/test_team.xml',
 #  'views/product_qc.xml',
 #  'views/quality_check.xml',
+  
+#   'views/custom_views.xml',
 
           ],
  'demo': [],
