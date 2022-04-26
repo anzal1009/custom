@@ -7,6 +7,7 @@
                 <t t-foreach="docs" t-as="o">
                     <div class="page" style="font-size:15px;">
                         <div>
+
                             <h3>
                                 <span t-field="o.name"/>
                             </h3>

@@ -2,13 +2,25 @@
 <odoo>
 
 
-     <report
-                id="action_report_journal_entries"
-                string="Journals Entries"
-                model="account.move"
-                report_type="qweb-pdf"
-                name="eastea-custom.report_journal_entries"
-                file="eastea-custom.report_journal_entries"/>
+    <record id="action_report_journal_entries" model="ir.actions.report">
+        <field name="name">Journals Entries</field>
+<!--        <field name="domain">[('move_type', '=', entry)]</field>-->
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">eastea-custom.report_journal_entries</field>
+        <field name="report_file">eastea-custom.report_journal_entries</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <!--     <report-->
+<!--                id="action_report_journal_entries"-->
+<!--                string="Journals Entries"-->
+<!--                model="account.move"-->
+<!--                report_type="qweb-pdf"-->
+<!--                name="eastea-custom.report_journal_entries"-->
+<!--                file="eastea-custom.report_journal_entries"/>-->
 
 
     <!--    PurchaseOrderFormat-->
