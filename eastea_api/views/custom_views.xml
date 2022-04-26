@@ -4,7 +4,7 @@
 		<record id="mo_inv_qty" model="ir.ui.view">
 			<field name="name">mrp.production.form.inherit</field>
 			<field name="model">mrp.production</field>
-			<field name="inherit_id" ref="mrp.production.form"/>
+			<field name="inherit_id" ref="mrp.mrp_production_form_view"/>
 			<field name="arch" type="xml">
 				<xpath expr="//field[@name='move_raw_ids']/tree/field[@name='product_qty']" position="after">
 					<field name="reserved_availability"/>
