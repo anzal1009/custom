@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <report
+                id="purchase_order_report_qweb_paperform"
+                string="E Invoice"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="eastea-custom.purchase_order_report"
+                file="eastea-custom.purchase_order_report"
+                menu="True"/>
+
+</odoo>

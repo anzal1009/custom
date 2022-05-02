@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_import_mrp_wizard_from" model="ir.ui.view">
+            <field name="name">view.import.mrp.wizard.from</field>
+            <field name="model">import.mrp.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Import Mrp Wizard">
+                	<group>
+                		<field name="file_name" invisible="1"/>
+						<field name="file" filename="file_name"/>
+                	</group>
+                	<footer>
+						<div class="d-inline-block pull-left">
+							<button name="import_mrp_file" string="Import" type="object" class="oe_highlight" />
+                        	<button string="Cancel" special="cancel" />
+						</div>
+						<div class="d-inline-block pull-right">
+							Download Sample File: <button type="object" name="get_mrp_file_sample" class="btn btn-primary" string="Sample Import File"/>
+						</div>
+                    </footer>
+               </form>
+            </field>
+        </record>
+        
+        <record id="action_import_mrp_wizard" model="ir.actions.act_window">
+	        <field name="name">Import MRP Order</field>
+	        <field name="res_model">import.mrp.wizard</field>
+	        <field name="view_mode">form</field>
+	        <field name="target">new</field>
+	     </record>
+	     
+	     <menuitem 
+	    	name="Import MRP Orders" 
+	    	id="import_mrp_order_menu"
+	    	parent="mrp.menu_mrp_root"
+	     	action="action_import_mrp_wizard"
+	     	groups = "evo_import_mrp_order.group_mrp_order_import"
+	    	sequence="500"/>
+    </data>
+</odoo>

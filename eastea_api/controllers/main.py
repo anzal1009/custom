@@ -35,7 +35,7 @@ class Purchase(http.Controller):
                 'product id': i.product_id.id,
                 'product name': i.product_id.name,
                 'uom': i.product_id.uom_id.name,
-                'pdt category': i.product_id.categ_id.name,
+                'pdt category': i.product_id.categ_id.id,
                 # 'quantity':i.product_id.qty_available
             }
             stock.append(datas)
@@ -50,7 +50,7 @@ class Purchase(http.Controller):
     def get_transfers(self):
 
         print("Yes here entered")
-        patients_rec = request.env['stock.move'].search([])
+        patients_rec = request.env['stock.move.line'].search([])
         patients = []
         for rec in patients_rec:
             vals = {
@@ -59,10 +59,12 @@ class Purchase(http.Controller):
                 'opera': rec.picking_type_id.name,
                 'dest': rec.location_dest_id.name,
                 'loca': rec.location_id.name,
-                'name': rec.product_id.name,
+                'product_name': rec.product_id.name,
                 'product_id': rec.product_id.id,
                 'qty': rec.product_uom_qty,
                 'uom': rec.product_id.uom_id.id,
+                'name':rec.lot_name,
+                'reference':rec.reference,
                 # 'name': rec.product_id.name,
                 # 'res':rec.reserved_availability,
             }
@@ -342,7 +344,7 @@ class Purchase(http.Controller):
                         # 'discount': discount or 0,
                         'product_uom': product.uom_id.id or request.env.ref(
                             'uom.product_uom_unit') and request.env.ref('uom.product_uom_unit').id or False,
-                        'price_unit': product_line["price_unit"] or 0,
+                        'price_unit': product_line["rate"] or 0,
                         # 'taxes_id': tax_variant and [(6, 0, [tax_variant.id])] or [],
                     }))
             if vendor:
@@ -414,13 +416,13 @@ class Purchase(http.Controller):
                         product_details = {
                             'name': product_line["name"],
                             # 'default_code': row.ITEM_NUM,
-                            'list_price': product_line["price_unit"],
+                            'list_price': product_line["rate"],
                             # 'l10n_in_hsn_code': row.HSN_CODE,
                             'uom_id': unit_id,
                             'uom_po_id': unit_id,
                             'detailed_type': 'product',
                             'categ_id': 1,
-                            'standard_price': product_line["price_unit"],
+                            'standard_price': product_line["rate"],
                         }
                         product = request.env['product.template'].sudo().create(product_details)
                         request.env.cr.commit()
@@ -437,7 +439,7 @@ class Purchase(http.Controller):
                         # 'discount': discount or 0,
                         'product_uom': product.uom_id.id or request.env.ref(
                             'uom.product_uom_unit') and request.env.ref('uom.product_uom_unit').id or False,
-                        'price_unit': product_line["price_unit"] or 0,
+                        'price_unit': product_line["rate"] or 0,
                         # 'taxes_id': tax_variant and [(6, 0, [tax_variant.id])] or [],
                     }))
             if vendor:
@@ -582,19 +584,25 @@ class Purchase(http.Controller):
 #******************** MO Details ******************
 
     @http.route('/get_manufacture', type='json', auth='user')
-    def get_sales(self):
+    def get_manufacture(self):
         print("Yes here entered")
-        patients_rec = request.env['mrp.production'].search([])
+        patients_rec = request.env['mrp.production'].search([('state', '=', 'confirmed') ])
         patients = []
         for rec in patients_rec:
+            move_line = []
+            for line in rec.move_raw_ids:
+                print(line)
+
+
+
             vals = {
                 # 'id': rec.partner_id,
                 'name': rec.product_id.name,
                 'qty': rec.product_qty,
                 'qtyy': rec.product_uom_qty,
-                'nnamme': rec.move_raw_ids.product_id.name,
-                'uom':rec.move_raw_ids.name,
-                # 'bom_id':rec.bom_id.id
+                'bom_id':rec.bom_id.id,
+                'linepdt':rec.move_raw_ids.name
+
             }
             patients.append(vals)
         print("Purchase order--->", patients)
@@ -610,12 +618,13 @@ class Purchase(http.Controller):
         print(rec)
         po_numbers = []
         for row in rec["data"]:
-            invoice_date = row["master"]["date_approve"]
-            print(invoice_date)
-            date = datetime.strptime(invoice_date, '%d/%m/%Y')
-            print(date)
+            # invoice_date = row["master"]["date_approve"]
+            # print(invoice_date)
+            # date = datetime.strptime(invoice_date, '%d/%m/%Y')
+            # print(date)
 
             vendor_gst = row["master"]["partner_id"]["gst_no"]
+            company_name=row["master"]["company_ware_house"]["name"]
             if vendor_gst:
                 vendor = vendor_gst and request.env['res.partner'].sudo().search([('vat', '=', vendor_gst)],
                                                                                  limit=1) or False
@@ -652,13 +661,13 @@ class Purchase(http.Controller):
                         product_details = {
                             'name': product_line["name"],
                             # 'default_code': row.ITEM_NUM,
-                            'list_price': product_line["price_unit"],
+                            'list_price': product_line["rate"],
                             # 'l10n_in_hsn_code': row.HSN_CODE,
                             'uom_id': unit_id,
                             'uom_po_id': unit_id,
                             'detailed_type': 'product',
                             'categ_id': 1,
-                            'standard_price': product_line["price_unit"],
+                            'standard_price': product_line["rate"],
 
                         }
 
@@ -678,7 +687,7 @@ class Purchase(http.Controller):
                         # 'discount': discount or 0,
                         'product_uom': product.uom_id.id or request.env.ref(
                             'uom.product_uom_unit') and request.env.ref('uom.product_uom_unit').id or False,
-                        'price_unit': product_line["price_unit"] or 0,
+                        'price_unit': product_line["rate"] or 0,
                         # 'taxes_id': tax_variant and [(6, 0, [tax_variant.id])] or [],
                     }))
 
@@ -687,7 +696,7 @@ class Purchase(http.Controller):
                     'partner_id': vendor.id,
                     # 'partner_ref': row.SALES_ORDER_NUMBER or '',
                     # 'origin': row.INVOICE_NUM or '',
-                    'date_order':date,
+                    # 'date_order':date,
                     # 'date_planned':row["master"]["date_approve"] or False,
                     # 'partner_id': self.env.ref('base.main_partner').id,
                     # 'name': row.INVOICE_NUM or '',
@@ -697,7 +706,7 @@ class Purchase(http.Controller):
 
                 if purchase_order_1:
                     purchase_order_1.button_confirm()
-                    purchase_order_1.date_approve = date
+                    # purchase_order_1.date_approve = date
                     purchase_order_1.action_view_picking()
                     if purchase_order_1.picking_ids:
                         for picking in purchase_order_1.picking_ids:
