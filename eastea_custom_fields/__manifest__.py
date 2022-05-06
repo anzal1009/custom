@@ -13,8 +13,10 @@
  'data': [
 'reports/invoice_inherit.xml',
 'views/fields.xml',
+# 'views/payment.xml',
 'views/blend.xml',
-'views/assets.xml',
+# 'views/assets.xml',
+
           ],
  'demo': [],
  'installable': True,

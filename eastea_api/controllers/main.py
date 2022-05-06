@@ -586,27 +586,29 @@ class Purchase(http.Controller):
     @http.route('/get_manufacture', type='json', auth='user')
     def get_manufacture(self):
         print("Yes here entered")
-        patients_rec = request.env['mrp.production'].search([('state', '=', 'confirmed') ])
-        patients = []
-        for rec in patients_rec:
-            move_line = []
+        mo_rec = request.env['mrp.production'].search([('state', '=', 'confirmed') ])
+        mo_details = []
+        for rec in mo_rec:
+
+            order_lines = []
             for line in rec.move_raw_ids:
-                print(line)
-
-
+                order_lines.append( {
+                    'consumed_product':line.product_id.name,
+                    'consumed_qty':line.product_uom_qty,
+                    # 'done_qty':line.quantity_done
+                })
 
             vals = {
                 # 'id': rec.partner_id,
-                'name': rec.product_id.name,
+                'manufacturing_order_no': rec.name,
+                'product_name': rec.product_id.name,
                 'qty': rec.product_qty,
-                'qtyy': rec.product_uom_qty,
-                'bom_id':rec.bom_id.id,
-                'linepdt':rec.move_raw_ids.name
-
+                # 'bom_id':rec.bom_id.id,
+                'date':rec.date_planned_start,
+                'line_items':order_lines,
             }
-            patients.append(vals)
-        print("Purchase order--->", patients)
-        data = {'status': 200, 'response': patients, 'message': 'Done All Products M O Returned'}
+            mo_details.append(vals)
+        data = {'status': 200, 'response': mo_details, 'message': 'Done All Products M O Returned'}
         return data
 
 # *********************** Purchase ***********************
@@ -726,47 +728,36 @@ class Purchase(http.Controller):
 
 
 
+#*****************************PAyments***
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    # @http.route('/create_customer_payments', type='json', auth='user')
+    #
+    #
+    # def create_customer_payments(self, **rec):
+    #     if request.jsonrequest:
+    #         paymnt_number = []
+    #         for record in rec["payment"]:
+    #             customer_name = record["name"]
+    #             print(customer_name)
+    #
+    #             testeddate = record['date']
+    #             date = datetime.strptime(testeddate, '%d/%m/%Y')
+    #             print(date)
+    #
+    #             if customer_name:
+    #                 customer_id = customer_name and request.env['res.partner'].sudo().search(
+    #                     [('name', '=', customer_name)], limit=1) or False
+    #                 print(customer_id.id)
+    #
+    #         payment_details = []
+    #         payment_details = request.env['account.payment'].create({
+    #             'partner_id': customer_id.id,
+    #             'amount': record["amount"],
+    #             'date': date
+    #         })
+    #         if payment_details:
+    #             paymnt_number.append({
+    #                 'paymntNumber': payment_details.name
+    #             })
+    #         return paymnt_number

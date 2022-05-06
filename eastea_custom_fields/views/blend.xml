@@ -8,11 +8,11 @@
         <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='user_id']" position="after">
-                <field name="blend" attrs="{'required':1}"/>
+                <field name="blend"/>
             </xpath>
-             <xpath expr="//field[@name='user_id']" position="after">
-                <field name="categ"/>
-            </xpath>
+<!--             <xpath expr="//field[@name='user_id']" position="after">-->
+<!--                <field name="categ"/>-->
+<!--            </xpath>-->
 
 
         </field>
