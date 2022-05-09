@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <template id="report_invoice_document_default_print_inherit" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@id='informations']//div[@name='reference']" position="after">
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.vehicle_no" name="vehicle_no">
+                    <strong>Vehicle No.:</strong>
+                    <p class="m-0" t-field="o.vehicle_no"/>
+                </div>
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.dispatch_through">
+                    <strong>Dispatch Through.:</strong>
+                    <p class="m-0" t-field="o.vehicle_no"/>
+                </div>
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.destination">
+                    <strong>Destination.:</strong>
+                    <p class="m-0" t-field="o.vehicle_no"/>
+                </div>
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.dispatch_doc_no">
+                    <strong>Dispatch Document No.:</strong>
+                    <p class="m-0" t-field="o.vehicle_no"/>
+                </div>
+            </xpath>
+     </template>
+
+</odoo>
