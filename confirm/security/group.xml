@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="grop_confirm_sale_hide" model="res.groups">
+        <field name="name">Sale Confirm 2</field>
+    </record>
+
+</odoo>

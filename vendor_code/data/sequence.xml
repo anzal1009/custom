@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="sequence_unique_vendor_code" model="ir.sequence">
+            <field name="name">Vendor Code</field>
+            <field name="code">vendor.code</field>
+            <field name="prefix">VD</field>
+            <field name="padding" eval="5"/>
+        </record>
+
+        <record id="sequence_unique_customer_code" model="ir.sequence">
+            <field name="name">Customer Code</field>
+            <field name="code">customer.code</field>
+            <field name="prefix">CS</field>
+            <field name="padding" eval="5"/>
+        </record>
+
+        <record id="sequence_vendor_customer_code" model="ir.sequence">
+            <field name="name">Customer Vendor Code</field>
+            <field name="code">vendor.customer.code</field>
+            <field name="prefix">VC</field>
+            <field name="padding" eval="5"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="lot_number_creation" model="ir.ui.view">
+            <field name="name">lot.create.ext.field</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_stock_move_nosuggest_operations"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//footer" position="after">
+<!--                    <field name="ch" />-->
+                     <button name="def_confirm" string="Confirmed" type="object" class="oe_highlight"/>
+
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

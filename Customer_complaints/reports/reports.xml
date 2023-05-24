@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report
+            id="report_complaint_receipt"
+            string="Complaint Slip"
+            model="cst.complaints"
+            report_type="qweb-pdf"
+            name="Customer_complaints.complaint"
+            file="Customer_complaints.complaint"/>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="details_button_inherit" model="ir.ui.view">
+            <field name="name">mrp.production.inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='action_confirm']" position="before">
+                    <button name="action_mo_details" string="Details" type="object" class="btn-danger"
+                         attrs="{'invisible':[('state','!=','done')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

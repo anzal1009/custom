@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+<!--         <template id="report_invoice" inherit_id="account.report_invoice_document"> -->
+<!--             <xpath expr="//div[@class='page']" position="before"> -->
+<!--                 <t t-foreach="docs" t-as="o"> -->
+<!--                     <div class="page" style="font-size: 15px !important;"> -->
+<!--                         <img t-att-src="'data:image/png;base64,%s' % to_text(docs.qr_code)" -->
+<!--                              height="100" width="100"/> -->
+<!--                     </div> -->
+<!--                 </t> -->
+<!--             </xpath> -->
+<!--         </template> -->
+
+        <template id="report_delivery_slip" inherit_id="sca_delivery_slip.delivery_slip">
+            <xpath expr="//div[@class='row mt32 mb32']" position="inside">
+                <t t-foreach="docs" t-as="o">
+                    <div class="col-auto col-3 mw-100 mb-2" style="font-size: 15px !important;">
+                        <strong>Eway:</strong>
+                        <p t-field="o.EwbNo"/>
+                    </div>
+                     <div class="col-auto col-3 mw-100 mb-2" style="font-size: 15px !important;">
+                        <strong>Eway Date:</strong>
+                        <p t-field="o.EwbDt"/>
+                    </div>
+                </t>
+            </xpath>
+        </template>
+
+        <record id="print_button_inherit" model="ir.ui.view">
+            <field name="name">account.move.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='action_register_payment']" position="before">
+                    <button name="action_generate_irn" string="Generate IRN" type="object" class="oe_highlight"
+                            attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+                    <button name="action_generate_eway" string="Generate EWAY" type="object" class="oe_highlight"
+
+                            attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="irn_inherit" model="ir.ui.view">
+            <field name="name">account move Irn Inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//div[@name='journal_div']" position="after">
+                        <field name="Success"
+                               attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                               attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+
+<!--                               attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+<!--                               attrs="{'invisible': [('state','!=','posted'),('move_type', 'not in', ['out_invoice', 'out_refund','in_refund'])]}"/>-->
+<!--                               attrs="{'invisible':['&&',('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund'),('state','!=','posted')]}"/>-->
+
+                        <field name="AckNo"
+                               attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                               attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+                        <field name="AckDt"
+                               attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                               attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+                        <field name="Status"
+                                attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                               attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+                        <field name="transid"
+                                attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                           attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+                        <field name="log"
+                                attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                               attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+                        <field name="govt_log"
+                               style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"
+                                attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                               attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+                    </xpath>
+                    <xpath expr="//div[@class='oe_title']" position="after">
+                        <group>
+                            <field name="qr_code" widget="image" class="oe_right oe_avatar"
+                                   attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                               attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+                            <field name="Irn"
+                                   attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                                   attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+                            <field name="SignedInvoice" style="width: 50vw !important; word-wrap: break-word; display: -webkit-box; -webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;"
+                                   attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                                   attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+                        </group>
+                    </xpath>
+                    <xpath expr="//field[@name='invoice_vendor_bill_id']" position="after">
+                        <field name="EwbNo"
+                               attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                               attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+                        <field name="EwbDt"
+                               attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                               attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+                        <field name="EwbValidTill"
+                               attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                               attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+                       <field name="ewb_status"
+                              attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                           attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+                        <field name="elog"
+                               attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}"/>
+<!--                               attrs="{'invisible': [('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('move_type','!=','in_refund')]}"/>-->
+
+                    </xpath>
+                </data>
+                <notebook position="inside">
+                    <page name="irn_field" string="IRN Info"
+                          attrs="{'invisible':['|',('move_type','not in',('out_invoice','out_refund','in_refund')),('state','not in','posted')]}">
+<!--                          attrs="{'invisible': ['|',('move_type','!=','out_invoice'),('move_type','!=','out_refund'),('state', '!=', 'posted'),('state', '!=', 'draft')]}">-->
+<!--                         <h5 style="color:blue;">Transaction Details</h5>
+                        <group col="4" colspan="4" name="other_detail">
+                            <field name="tax_sh"/>
+                            <field name="sup_typ"/>
+                            <field name="reg_rev"/>
+                            <field name="ecm_gstin"/>
+                            <field name="igst_on_intra"/>
+                        </group> -->
+<!--                         <table style="width:100%;" border="1px solid black" cellspacing="0">
+                            <tr>
+                                <td style="border-top:1px solid white; border-left:1px solid white; border-bottom:1px solid black;border-right:1px solid white;">
+                                </td>
+                            </tr>
+                        </table>
+                        <br></br>
+                        <br></br>
+                        <h5 style="color:blue;">Dispatch Details</h5>
+                        <group col="4" colspan="4" name="other_detail">
+                            <field name="name1"/>
+                            <field name="Addr_1"/>
+                            <field name="Addr_2"/>
+                            <field name="loc"/>
+                            <field name="pin"/>
+                            <field name="stcd"/>
+                        </group>
+                        <table style="width:100%;" border="1px solid black" cellspacing="0">
+                            <tr>
+                                <td style="border-top:1px solid white; border-left:1px solid white; border-bottom:1px solid black;border-right:1px solid white;">
+                                </td>
+                            </tr>
+                        </table>
+                        <br></br>
+                        <br></br>
+                        <h5 style="color:blue;">Shipping Details</h5>
+                        <group col="4" colspan="4" name="other_detail">
+                            <field name="Gstin"/>
+                            <field name="LglNm"/>
+                            <field name="TrdNm"/>
+                            <field name="Addrs1"/>
+                            <field name="Addrs2"/>
+                            <field name="Loc1"/>
+                            <field name="Pin1"/>
+                            <field name="stcd1"/>
+                        </group> -->
+                        <!--                         <h5>Val Details</h5>-->
+                        <!--                        <group col="4" colspan="4" name="other_detail">-->
+                        <!--                            <field name="AssVal"/>-->
+                        <!--                            <field name="CgstVal"/>-->
+                        <!--                            <field name="SgstVal"/>-->
+                        <!--                            <field name="IgstVal"/>-->
+                        <!--                            <field name="CesVal"/>-->
+                        <!--                            <field name="StCesVal"/>-->
+                        <!--                            <field name="Discount"/>-->
+                        <!--                            <field name="OthChrg"/>-->
+                        <!--                            <field name="RndOffAmt"/>-->
+                        <!--                            <field name="TotInvVal"/>-->
+                        <!--                            <field name="TotInvValFc"/>-->
+                        <!--                        </group>-->
+                        <!--                        <h5>Payment Details</h5>-->
+                        <!--                        <group col="4" colspan="4" name="other_detail">-->
+                        <!--                            <field name="name3"/>-->
+                        <!--                            <field name="AccDet"/>-->
+                        <!--                            <field name="Mode"/>-->
+                        <!--                            <field name="FinInsBr"/>-->
+                        <!--                            <field name="PayTerm"/>-->
+                        <!--                            <field name="PayInstr"/>-->
+                        <!--                            <field name="CrTrn"/>-->
+                        <!--                            <field name="DirDr"/>-->
+                        <!--                            <field name="CrDay"/>-->
+                        <!--                            <field name="PaidAmt"/>-->
+                        <!--                            <field name="PaymtDue"/>-->
+                        <!--                        </group>-->
+                        <table style="width:100%;" border="1px solid black" cellspacing="0">
+                            <tr>
+                                <td style="border-top:1px solid white; border-left:1px solid white; border-bottom:1px solid black;border-right:1px solid white;">
+                                </td>
+                            </tr>
+                        </table>
+                        <br></br>
+                        <br></br>
+                        <h5 style="color:blue;">Export Details</h5>
+                        <group col="4" colspan="4" name="other_detail">
+                            <field name="ShipBNo"/>
+                            <field name="ShipBDt"/>
+<!--                             <field name="Port"/>
+                            <field name="RefClm"/>
+                            <field name="ForCur"/>
+                            <field name="CntCode"/> -->
+                        </group>
+                        <table style="width:100%;" border="1px solid black" cellspacing="0">
+                            <tr>
+                                <td style="border-top:1px solid white; border-left:1px solid white; border-bottom:1px solid black;border-right:1px solid white;">
+                                </td>
+                            </tr>
+                        </table>
+                        <br></br>
+                        <br></br>
+                        <h5 style="color:black;">E Way Bill Details</h5>
+                        <group col="4" colspan="4" name="other_detail">
+<!--                             <field name="TransId"/> -->
+                            <field name="TransName"/>
+                            <field name="TransId"/>
+                            <field name="TransMode"/>
+<!--                             <field name="Distance"/> -->
+                            <field name="TransDocNo"/>
+                            <field name="TransDocDt"/>
+                             <field name="VehNo"/>
+                             <field name="VehType"/>
+                            <field name="Distance"/>
+                            <field name="transgst"/>
+
+<!--                             <field name="VehType"/>
+                            <field name="TransMode"/> -->
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
+

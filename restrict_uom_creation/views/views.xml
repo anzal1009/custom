@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <record id="uom_hide_create_tree_view" model="ir.ui.view">
+            <field name="name">uom.hide.create.tree</field>
+            <field name="model">uom.uom</field>
+            <field name="inherit_id" ref="uom.product_uom_tree_view"/>
+            <field name="groups_id" eval="[(6, 0, [ref('restrict_uom_creation.group_hide_uom_creation')])]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">false</attribute>
+                    <attribute name="edit">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="uom_hide_create_form_view" model="ir.ui.view">
+            <field name="name">uom.hide.create.form</field>
+            <field name="model">uom.uom</field>
+            <field name="inherit_id" ref="uom.product_uom_form_view"/>
+            <field name="groups_id" eval="[(6, 0, [ref('restrict_uom_creation.group_hide_uom_creation')])]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">false</attribute>
+                    <attribute name="edit">false</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

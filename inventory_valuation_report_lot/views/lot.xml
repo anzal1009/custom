@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="lot_field_inherit" model="ir.ui.view">
+            <field name="name">stock.production.lot.inherit</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page name="value_fields" string="Valuation Info">
+                        <group col="4" colspan="4" name="other_detail">
+                            <field name="lot_cost"/>
+                            <field name="total_cost"/>
+                            <field name="lot_cost_copy"/>
+<!--                            <field name="lot_total"/>-->
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record id="stock_lot_valuation_inh" model="ir.ui.view">
+            <field name="name">stock.valuation.layer.inherit</field>
+            <field name="model">stock.valuation.layer</field>
+            <field name="inherit_id" ref="stock_account.stock_valuation_layer_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="after">
+                     <field name="lot_name_id"/>
+                    <field name="cost_of_lot"/>
+                </xpath>
+                 <xpath expr="//field[@name='value']" position="replace">
+                    <field name="tot_lot_val"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="stock_lot_valuation_form_inh" model="ir.ui.view">
+            <field name="name">stock.valuation.layer.inherit.form</field>
+            <field name="model">stock.valuation.layer</field>
+            <field name="inherit_id" ref="stock_account.stock_valuation_layer_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <field name="lot_name_id"/>
+                    <field name="cost_of_lot"/>
+
+                    <button name="action_done" string="Request" type="object" class="btn-danger"/>
+
+
+                </xpath>
+                 <xpath expr="//field[@name='value']" position="replace">
+                    <field name="tot_lot_val"/>
+                </xpath>
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>

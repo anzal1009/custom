@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<odoo>
+    <template id="inv_age_report_temp">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+
+                <t t-foreach="docs" t-as="o">
+
+
+                    <h3 style="text-align: center">
+                        INVENTORY AGING REPORT
+                    </h3>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+
+                    <div class="pages">
+                        <table class="table table-condensed" style="border: 3px solid black !important;">
+<!--                                        <t t-foreach="products_list" t-as="app">-->
+                                        <t t-foreach="stock_list" t-as="stk">
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="stk['product_id']"/>
+                                                </td>
+                                                 <td>
+                                                    <t t-esc="stk['quantity']"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="stk['location_id']"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="stk['lot_id']"/>
+                                                </td>
+<!--                                                 <td>-->
+<!--                                                    <t t-esc="stk['avg']"/>-->
+<!--                                                </td>-->
+<!--                                                <td>-->
+<!--                                                    <t t-esc="app['appointment_date']"/>-->
+<!--                                                </td>-->
+                                            </tr>
+
+<!--                                        </t>-->
+                                        </t>
+                                    </table>
+
+
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

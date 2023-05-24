@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+        <record id="view_tyre_tree" model="ir.ui.view">
+            <field name="name">tyre.management.tree</field>
+            <field name="model">tyre.management</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+
+
+                <tree>
+                    <header>
+
+                        <button string="Inventory Date" class="oe_highlight"
+                                name="button_inventory" type="object"/>
+
+                    </header>
+
+                    <field name="custom_id"/>
+                    <field name="name"/>
+
+
+                </tree>
+            </field>
+        </record>
+        <record id="view_tyre_form" model="ir.ui.view">
+            <field name="name">tyre.management.form</field>
+            <field name="model">tyre.management</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Tyre Management">
+
+
+                    <sheet>
+
+
+                        <group>
+                            <group col="2">
+                                <field name="name"/>
+                                <field name="custom_id"/>
+
+
+                            </group>
+
+                        </group>
+
+
+                    </sheet>
+
+
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_tyre">
+            <field name="name">Tyre Management</field>
+            <field name="res_model">tyre.management</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create new Enquiry</p>
+            </field>
+        </record>
+
+
+        <menuitem id="root_tyre" name="Tyre Management"/>
+        <menuitem id="menu_tyre_mangement" name="Tyre" parent="root_tyre" action="action_view_tyre" sequence="-20"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_fail_tree" model="ir.ui.view">
+            <field name="name">quality.fail.tree</field>
+            <field name="model">quality.fail</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree>
+
+                    <field name="name_seq"/>
+                    <field name="name"/>
+                    <field name="fdate"/>
+
+
+                </tree>
+            </field>
+        </record>
+        <record id="view_fail_form" model="ir.ui.view">
+            <field name="name">quality.fail.form</field>
+            <field name="model">quality.fail</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Quality Failure ">
+
+                        <header>
+
+<!--                            <button id="button_ongoing" name="action_ongoing"  class="btn-primary" string="Pending" type="object"-->
+<!--                                   states="d"/>-->
+<!--                            <button id="button_done" name="action_done"  class="btn-primary" string="Completed" type="object"-->
+<!--                                    states="o"/>-->
+
+<!--                            <field name="state" widget="statusbar" />-->
+                        </header>
+
+                    <sheet>
+
+<!--                        <widget name="web_ribbon" title="Completed"  states ="do"/>-->
+
+                        <h1>
+                            <field name="name_seq"/>
+
+                        </h1>
+
+
+                        <group>
+                            <group col="2">
+                                <field name="name"/>
+                                <field name="fid"/>
+                                <field name="user"/>
+
+
+
+
+                            </group>
+                            <group col="2">
+                                <field name="fdate"/>
+                                <field name="source"/>
+                                 <field name="company_id"/>
+
+
+
+
+
+
+
+
+
+                            </group>
+                        </group>
+
+
+                        <notebook colspan="4">
+                            <page name="qcf_indos" string="QCF info">
+                                <field name="qc_fail_line_ids">
+                                    <tree editable="bottom">
+<!--                                        <field name="sno"/>-->
+                                        <field name="product"/>
+<!--                                        <field name="res"/>-->
+                                        <field name="remark"/>
+
+                                        <field name="fail_id" invisible='1'/>
+                                    </tree>
+                                    <form>
+                                        <group>
+<!--                                            <field name="sno"/>-->
+                                            <field name="product"/>
+                                            <field name="res"/>
+                                            <field name="remark"/>
+
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+
+
+
+
+
+                    </sheet>
+
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                        </div>
+
+
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_quality_fails">
+            <field name="name">Quality Failures</field>
+            <field name="res_model">quality.fail</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Failure Reports</p>
+            </field>
+        </record>
+
+        <menuitem id="root_quality_failure" name="Quality Failures" parent="root_quality" />
+<!--        <menuitem id="menu_quality_failure" name="Quality Failures" parent="root_quality_failure" action="action_view_quality_fails"-->
+<!--                  sequence="-10"/>-->
+<!--         <menuitem id="menu_quality_params_sub" name="Purchase Parameters" parent="menu_quality_fails" action="action_view_quality_fails"-->
+<!--                  sequence="20"/>-->
+
+
+
+    </data>
+</odoo>

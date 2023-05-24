@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record id="address_in_stock_location_form" model="ir.ui.view">
+            <field name="name">stock.location.address.form</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='additional_info']" position="inside">
+                    <field name="partner_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <template id="report_stock_transfer_invoice">
+            <t t-set="is_sti_report" t-value="True"/>
+            <t t-set="docs" t-value="docs.with_context(sti_report=True)"/>
+            <t t-foreach="docs" t-as="o">
+                <t t-call="stock.report_delivery_document" t-lang="o.partner_id.lang"/>
+            </t>
+        </template>
+
+        <record id="action_report_stock_transfer_invoice" model="ir.actions.report">
+            <field name="name">STI</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">eastern_delivery_slip.report_stock_transfer_invoice</field>
+            <field name="report_file">eastern_delivery_slip.report_stock_transfer_invoice</field>
+            <field name="print_report_name">'Stock Transfer Invoice - %s - %s' % (object.partner_id.name or '',
+                object.name)
+            </field>
+            <field name="binding_model_id" ref="stock.model_stock_picking"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

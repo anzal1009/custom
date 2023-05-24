@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+<!-- ############################ Creation and edit ###########################       -->
+
+          <record id="lot_edit_inherit" model="ir.ui.view">
+            <field name="name">stock.production.lot.inherit.field</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form"/>
+            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_lot_creation'))]"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//form" position="attributes">
+                    <attribute name="edit">false</attribute>
+                </xpath>
+                <xpath expr="//form" position="attributes">
+                     <attribute name="create">false</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="lot_inh_create_inherit" model="ir.ui.view">
+            <field name="name">lot.inherit.field</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_tree"/>
+            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_lot_creation'))]"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//tree" position="attributes">
+                     <attribute name="create">false</attribute>
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+
+
+
+<!--######################### Manufacturing Order Lot ############################        -->
+
+        <record id="mo_unlock_inherit" model="ir.ui.view">
+            <field name="name">stock.move.line.operations.tree</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_stock_move_line_operation_tree"/>
+             <field name="groups_id" eval="[(4, ref('hide_product_creation.group_lot_creation'))]"/>
+            <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='lot_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit':True}</attribute>
+            </xpath>
+
+
+            </field>
+        </record>
+
+
+
+<!--######################### Interanl Transfer & Sales Order Lot ############################        -->
+
+        <record id="lot_number_inherit" model="ir.ui.view">
+            <field name="name">stock.move.line.operations.tree</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_stock_move_line_detailed_operation_tree"/>
+             <field name="groups_id" eval="[(4, ref('hide_product_creation.group_lot_creation'))]"/>
+            <field name="arch" type="xml">
+
+
+
+            <xpath expr="//field[@name='lot_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit':True}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='lot_name']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit':True}</attribute>
+            </xpath>
+
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

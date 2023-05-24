@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--    <record id="sca_transfer_report_qweb_paperform" model="report.paperformat">-->
+<!--        <field name="default" eval="True"/>-->
+<!--        <field name="format">custom</field>-->
+<!--        <field name="page_height">297</field>-->
+<!--        <field name="page_width">210</field>-->
+<!--        <field name="orientation">Portrait</field>-->
+<!--        <field name="margin_top">80</field>-->
+<!--        <field name="margin_bottom">20</field>-->
+<!--        <field name="margin_left">5</field>-->
+<!--        <field name="margin_right">5</field>-->
+<!--        <field name="header_line" eval="False"/>-->
+<!--        <field name="header_spacing">60</field>-->
+<!--        <field name="dpi">115</field>-->
+<!--    </record>-->
+
+
+    <report
+            id="sca_sales_invoice"
+            string="SCA Sales Invoice"
+            model="account.move"
+            report_type="qweb-pdf"
+            name="sca_sales_invoice.sca_invoice"
+            file="sca_sales_invoice.sca_invoice"
+            print_report_name ="('SCA Invoice - %s' % (object.name))"/>
+<!--            paperformat="sca_delivery_slip.sca_transfer_report_qweb_paperform"-->
+<!--            menu="True"/>-->
+
+</odoo>

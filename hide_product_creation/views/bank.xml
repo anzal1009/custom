@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="ifsc_partner_bank_form" model="ir.ui.view">
+            <field name="name">res.partner.bank.form</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='acc_holder_name']" position="after">
+                        <field name="ifsc"/>
+                </xpath>
+            </field>
+        </record>
+
+
+
+        <record id="ifsc_bank_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.account.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bank_ids']/tree/field[@name='acc_number']" position="after">
+                    <field name="ifsc" required="True"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+        <record id="smart_button_mo_inherit" model="ir.ui.view">
+            <field name="name">mrp.production.inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="moqc_check"
+                            icon="fa-users" attrs="{'invisible': [('state', '=', 'draft')]}">
+
+                         <div class="o_stat_info">
+
+                                    <span class="o_stat_text">
+                                        Quality
+                                    </span>
+                                    <span class="o_stat_value">
+                                        <field name="tagss"/>
+                                    </span>
+                                </div>
+
+<!--                        <span class="o_stat_text">Quality</span>-->
+                    </button>
+
+                </div>
+
+                 <xpath expr="//field[@name='user_id']" position="after">
+                         <field name="tagss" readonly="1" invisible="1"/>
+<!--                         <field name="tagss"/>-->
+                   </xpath>
+<!--                <field name="state" position="replace">-->
+<!--                    <field name="state" widget="statusbar"-->
+<!--                           statusbar_visible="draft,q,confirmed,progress,to_close,done,cancel" readonly="1"></field>-->
+<!--                </field>-->
+<!--                <xpath expr="//header/button[@name='action_confirm']" position="before">-->
+<!--                    <button name="action_moqc_button" string="MOQC" type="object" class="btn-danger"-->
+<!--                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>-->
+<!--                </xpath>-->
+
+<!--                <xpath expr="//button[@name='action_confirm']" position="attributes">-->
+<!--                    <attribute name="attrs">{'invisible': [('state' ,'!=', 'q')]}</attribute>-->
+
+<!--                </xpath>-->
+
+
+
+<!--                <xpath expr="//button[@name='action_confirm']" position="attributes">-->
+
+<!--                    <button name="action_confirm" states="q,pending" string="Confirm" type="object"-->
+<!--                            context="{'action_mrp': True}"/>-->
+
+<!--                </xpath>-->
+<!--                <xpath expr="//header/button[@name='action_confirm']" position="replace">-->
+<!--                    <button name="action_confirm" attrs="{'invisible': [('state' ,'!=', 'q')]}" type="object" string="Confirm" />-->
+<!--                </xpath>-->
+<!--                <xpath expr="//header/button[@name=action_confirm']" position="attributes">-->
+<!--                      <button name="action_confirm" string="Confirm" states="q,pending" type="object"-->
+<!--                    attrs="{'invisible': [('state' ,'!=', 'q')]}"/>-->
+<!--                </xpath>-->
+
+            </field>
+        </record>
+    </data>
+</odoo>

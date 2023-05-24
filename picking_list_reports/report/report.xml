@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="packing_customer_report_qweb_paperform" model="report.paperformat">
+<!--         <field name="name">Packing Customs Format Custom</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">165</field>
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">150</field>
+        <field name="dpi">115</field> -->
+        
+        <field name="name">Packing Customs Format Custom</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">112</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">.5</field>
+        <field name="margin_right">.5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">110</field>
+        <field name="dpi">120</field>
+
+    </record>
+    <report
+        id="eastea_packing_invoice"
+        string="Customer Packing List"
+        model="sale.order"
+        report_type="qweb-pdf"
+        name="picking_list_reports.customer_packing_custom"
+        file="picking_list_reports.customer_packing_custom"
+        paperformat="picking_list_reports.packing_customer_report_qweb_paperform"
+        print_report_name ="('Customer Packing List - %s' % (object.name))"
+        menu="True"/>
+
+
+
+   <record id="packing_customs_report_qweb_paperform" model="report.paperformat">
+<!--        <field name="name">Packing Customs Format Custom Customs</field>
+       <field name="default" eval="True"/>
+       <field name="format">custom</field>
+       <field name="page_height">297</field>
+       <field name="page_width">210</field>
+       <field name="orientation">Portrait</field>
+       <field name="margin_top">165</field>
+       <field name="margin_bottom">25</field>
+       <field name="margin_left">5</field>
+       <field name="margin_right">5</field>
+       <field name="header_line" eval="False"/>
+       <field name="header_spacing">150</field>
+       <field name="dpi">115</field> -->
+       
+        <field name="name">Packing Customs Format Custom</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">112</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">.5</field>
+        <field name="margin_right">.5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">110</field>
+        <field name="dpi">120</field>
+
+   </record>
+   <report
+        id="eastea_packing_customs"
+        string="Customs Packing List"
+        model="sale.order"
+        report_type="qweb-pdf"
+        name="picking_list_reports.customs_packing_custom"
+        file="picking_list_reports.customs_packing_custom"              
+        paperformat="picking_list_reports.packing_customs_report_qweb_paperform"
+        print_report_name ="('Customs Packing List - %s' % (object.name))"
+        menu="True"/>
+
+</odoo>

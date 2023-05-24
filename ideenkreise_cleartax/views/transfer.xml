@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="stock_irn_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.irn</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_ids_without_package']/tree//field[@name='quantity_done']"
+                       position="after">
+
+                    <field name="price"/>
+                    <field name="taxes_id" />
+                    <field name="sub_totals"/>
+
+                </xpath>
+            </field>
+        </record>
+
+        <record id="irn_trn_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                   <xpath expr="//header/button[@name='action_open_label_layout']" position="before">
+                    <button name="action_irnt" string="Generate Eway" type="object" class="oe_highlight"
+                          attrs="{'invisible':[('state', '!=', 'done')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+         <record id="eway_inherit" model="ir.ui.view">
+            <field name="name">Eway Irn Inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='location_dest_id']" position="after">
+                        <field name="EwbNo"
+                               attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                        <field name="EwbDt"
+                               attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                        <field name="EwbValidTill"
+                               attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                </xpath>
+                 <xpath expr="//field[@name='origin']" position="after">
+                       <field name="ewb_status"
+                           attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                        <field name="elog"
+                               attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                         <field name="Status"
+                               attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                      <field name="transid"
+                               attrs="{'invisible': [('state', '!=', 'done')]}"/>
+
+                    </xpath>
+
+
+
+                <notebook position="inside">
+                    <page name="e_field" string="Eway Info">
+                               <h5 style="color:black;">E Way Bill Details</h5>
+                        <group col="4" colspan="4" name="other_detail">
+<!--                             <field name="TransId"/> -->
+<!--                            <field name="TransName"/>-->
+<!--                            <field name="TransId"/>-->
+                            <field name="TransMode"/>
+<!--                             <field name="Distance"/> -->
+<!--                            <field name="TransDocNo"/>-->
+                            <field name="TransDocDt"/>
+                             <field name="VehNo"/>
+                             <field name="VehType"/>
+                            <field name="Distance"/>
+                            <field name="transgst"/>
+
+<!--                             <field name="VehType"/>
+                            <field name="TransMode"/> -->
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+         </record>
+
+
+    </data>
+</odoo>

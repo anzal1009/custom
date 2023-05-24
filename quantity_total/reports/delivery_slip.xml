@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_delivery_document_inherit" inherit_id="stock.report_delivery_document">
+        <xpath expr="/t/t/t/div/table[2]" position="after">
+            <div class="row" style= "margin-left:5pt;" >
+                <table name="qty" style="border: 1pt solid black; margin-left:5pt;" cellpadding="5" cellspacing="3" width="30%">
+                    <tr t-if="o.total_stk_qty_kg" style="border: 1pt solid black;">
+                        <td name="td_total_qty_label" style="border: 1pt solid black;">
+                            <strong>Total Odered KG</strong>
+                        </td>
+                        <td class="text-right" style="border: 1pt solid black;">
+                            <span t-field="o.total_stk_qty_kg"/>
+                        </td>
+                    </tr>
+                    <tr t-if="o.total_stk_qty_nos" style="border: 1pt solid black;">
+                        <td name="td_total_qty_label" style="border: 1pt solid black;">
+                            <strong>Total Odered Nos</strong>
+                        </td>
+                        <td class="text-right" style="border: 1pt solid black;">
+                            <span t-field="o.total_stk_qty_nos"/>
+                        </td>
+                    </tr>
+                    <tr t-if="o.total_stk_qty_lit" style="border: 1pt solid black;">
+                        <td name="td_total_qty_label" style="border: 1pt solid black;">
+                            <strong>Total Odered Liters</strong>
+                        </td>
+                        <td class="text-right" style="border: 1pt solid black;">
+                            <span t-field="o.total_stk_qty_lit"/>
+                        </td>
+                    </tr>
+                    <tr t-if="o.total_stk_qty_units" style="border: 1pt solid black;">
+                        <td name="td_total_qty_label" style="border: 1pt solid black;">
+                            <strong>Total Odered Units</strong>
+                        </td>
+                        <td class="text-right" style="border: 1pt solid black;">
+                            <span t-field="o.total_stk_qty_units"/>
+                        </td>
+                    </tr>
+
+
+
+                    <table style="border: 1pt solid white; align:right" width="30%">
+                        <tr style="border: 1pt solid white;">
+                            <td style="border: 1pt solid white;"></td>
+                        </tr>
+                        <tr style="border: 1pt solid white;">
+                            <td style="border: 1pt solid white;"></td>
+                        </tr>
+                        <tr style="border: 1pt solid white;">
+                            <td style="border: 1pt solid white;"></td>
+                        </tr>
+                        <tr style="border: 1pt solid white;">
+                            <td style="border: 1pt solid white;"></td>
+                        </tr>
+                        <tr style="border: 1pt solid white;">
+                            <td style="border: 1pt solid white;"></td>
+                        </tr>
+                    </table>
+
+
+
+
+                    <div class="row" style= "margin-left:5pt;" >
+
+                    <table name="qty_done" style="border: 1pt solid black;"  cellpadding="5" cellspacing="3"  >
+                    <tr t-if="o.total_done_qty_kg" style="border: 1pt solid black;">
+                        <td name="td_total_qty_label" style="border: 1pt solid black; padding:20px;">
+                            <strong>Total Done KG</strong>
+                        </td>
+                        <td class="text-right" style="border: 1pt solid black;padding:20px;" >
+                            <span t-field="o.total_done_qty_kg"/>
+                        </td>
+                    </tr>
+                    <tr t-if="o.total_done_qty_nos" style="border: 1pt solid black;">
+                        <td name="td_total_qty_label" style="border: 1pt solid black;">
+                            <strong>Total Done Nos</strong>
+                        </td>
+                        <td class="text-right" style="border: 1pt solid black;">
+                            <span t-field="o.total_done_qty_nos"/>
+                        </td>
+                    </tr>
+                    <tr t-if="o.total_done_qty_lit" style="border: 1pt solid black;">
+                        <td name="td_total_qty_label" style="border: 1pt solid black;">
+                            <strong>Total Done Liters</strong>
+                        </td>
+                        <td class="text-right" style="border: 1pt solid black;">
+                            <span t-field="o.total_done_qty_lit"/>
+                        </td>
+                    </tr>
+                    <tr t-if="o.total_done_qty_units" style="border: 1pt solid black;">
+                        <td name="td_total_qty_label" style="border: 1pt solid black;">
+                            <strong>Total Done Units</strong>
+                        </td>
+                        <td class="text-right" style="border: 1pt solid black;">
+                            <span t-field="o.total_done_qty_units"/>
+                        </td>
+                    </tr>
+                    </table>
+                    </div>
+
+
+
+
+
+
+                </table>
+            </div>
+
+        </xpath>
+    </template>
+
+</odoo>

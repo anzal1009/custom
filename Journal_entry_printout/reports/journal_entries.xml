@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_journal_entries">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" style="font-size:15px;">
+                        <div>
+
+                            <h3>
+                                <span t-field="o.name"/>
+                            </h3>
+                        </div>
+                        <br></br>
+                        <div class="row">
+                            <table width="100%" class="table-bordered" style="border:1px solid black;">
+
+                                <tr>
+                                    <td style="border:1px solid black;">Journal:
+                                        <span t-field="o.journal_id.name"/>
+                                    </td>
+                                    <td style="border:1px solid black;">
+                                        Date:
+                                        <span t-field="o.date" t-options="{'widget': 'date'}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid black;">
+                                        Partner:
+                                        <span t-field="o.partner_id.display_name"/>
+                                    </td>
+                                    <td style="border:1px solid black;">
+                                        Reference:
+                                        <span t-field="o.ref"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="row">
+                            <br></br>
+                            <br/>
+                            <br/>
+                            <table width="100%" class="table-bordered" style="border:1px solid black;">
+                                <thead>
+                                    <tr style="border:1px solid black;">
+                                        <th>Account</th>
+                                        <th>Date</th>
+                                        <th>Partner</th>
+                                        <th>Label</th>
+                                        <th>Analytic Account</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="total_credit" t-value="0"/>
+                                    <t t-set="total_debit" t-value="0"/>
+                                    <t t-foreach="o.line_ids" t-as="line">
+                                        <tr>
+                                            <td style="border:1px solid black;">
+                                                <span t-field="line.account_id.name"/>
+                                            </td>
+                                            <td style="border:1px solid black;">
+                                                <span t-field="line.date" t-options="{'widget': 'date'}"/>
+                                            </td>
+                                            <td style="border:1px solid black;">
+                                                <span t-field="line.partner_id.display_name"/>
+                                            </td>
+                                            <td style="border:1px solid black;">
+                                                <span t-field="line.name"/>
+                                            </td>
+                                            <td style="border:1px solid black;">
+                                                <span t-field="line.analytic_account_id.display_name"/>
+                                            </td>
+                                            <td style="border:1px solid black;">
+                                                <span t-field="line.debit"
+                                                      t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"/>
+
+                                            </td>
+                                            <td style="border:1px solid black;">
+                                                <span t-field="line.credit"
+                                                      t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"/>
+                                            </td>
+                                            <t t-set="total_credit" t-value="total_credit + line.credit"/>
+                                            <t t-set="total_debit" t-value="total_debit + line.debit"/>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfooter>
+                                    <tr>
+                                        <td colspan="5"></td>
+                                        <td style="border:1px solid black;">
+                                            <span t-esc="total_debit"/>
+                                        </td>
+                                        <td style="border:1px solid black;">
+                                            <span t-esc="total_credit"/>
+                                        </td>
+                                    </tr>
+                                </tfooter>
+                            </table>
+                        </div>
+
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br></br>
+                    <br></br>
+
+                    <table width="100%" style="border:1px solid white;">
+
+
+                        <tr style="border:1px solid white;">
+
+                            <td style="border:1px solid white;"><strong>Receiver Signature:</strong></td>
+
+                            <td style="text-align:right;border:1px solid white;"><strong>Authorised Signitary:</strong></td>
+
+                        </tr>
+
+                        <tr style="border:1px solid white;">
+                            <td style="border:1px solid white;">
+                                <p style="white-space: pre-wrap;"/>
+                                <p style="white-space: pre-wrap;"/>
+                                <p style="white-space: pre-wrap;"/>
+                            </td>
+                        </tr>
+
+
+                        <tr style="border:1px solid white;">
+                            <td style="border:1px solid white;"><strong>Checked by:</strong></td>
+
+                            <td style="text-align:right;border:1px solid white;"><strong>Verified by:</strong></td>
+                        </tr>
+
+
+                    </table>
+
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
+
+
+        <!--<?xml version="1.0" encoding="utf-8"?>-->
+        <!--<odoo>-->
+
+        <!--    <template id="report_journal_entries">-->
+        <!--        <t t-call="web.html_container">-->
+        <!--            <t t-call="web.external_layout">-->
+        <!--                <t t-foreach="docs" t-as="o">-->
+        <!--                    <div class="page" style="font-size:15px;">-->
+        <!--                        <div>-->
+
+        <!--                            <h3>-->
+        <!--                                <span t-field="o.name"/>-->
+        <!--                            </h3>-->
+        <!--                        </div>-->
+        <!--                        <br></br>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <table width="100%" class="table-bordered">-->
+
+        <!--                                <tr>-->
+        <!--                                    <td>Journal:-->
+        <!--                                        <span t-field="o.journal_id.name"/>-->
+        <!--                                    </td>-->
+        <!--                                    <td>-->
+        <!--                                        Date:-->
+        <!--                                        <span t-field="o.date" t-options="{'widget': 'date'}"/>-->
+        <!--                                    </td>-->
+        <!--                                </tr>-->
+        <!--                                <tr>-->
+        <!--                                    <td>-->
+        <!--                                        Partner:-->
+        <!--                                        <span t-field="o.partner_id.display_name"/>-->
+        <!--                                    </td>-->
+        <!--                                    <td>-->
+        <!--                                        Reference:-->
+        <!--                                        <span t-field="o.ref"/>-->
+        <!--                                    </td>-->
+        <!--                                </tr>-->
+        <!--                            </table>-->
+        <!--                        </div>-->
+        <!--                        <br></br>-->
+        <!--                        <br></br>-->
+
+        <!--                        <div class="row">-->
+        <!--                            <br></br>-->
+        <!--                            <table width="100%" class="table-bordered">-->
+        <!--                                <thead>-->
+        <!--                                    <tr>-->
+        <!--                                        <th>Account</th>-->
+        <!--&lt;!&ndash;                                        <th>Date</th>&ndash;&gt;-->
+        <!--                                        <th>Partner</th>-->
+        <!--                                        <th>Label</th>-->
+        <!--                                        <th>Analytic Account</th>-->
+        <!--                                        <th>Taxes</th>-->
+        <!--                                        <th>Debit</th>-->
+        <!--                                        <th>Credit</th>-->
+        <!--                                    </tr>-->
+        <!--                                </thead>-->
+        <!--                                <tbody>-->
+        <!--                                    <t t-set="total_credit" t-value="0"/>-->
+        <!--                                    <t t-set="total_debit" t-value="0"/>-->
+        <!--                                    <t t-foreach="o.line_ids" t-as="line">-->
+        <!--                                        <tr>-->
+        <!--                                            <td>-->
+        <!--                                                <span t-field="line.account_id.name"/>-->
+        <!--                                            </td>-->
+        <!--&lt;!&ndash;                                            <td>&ndash;&gt;-->
+        <!--&lt;!&ndash;                                                <span t-field="line.date" t-options="{'widget': 'date'}"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;                                            </td>&ndash;&gt;-->
+        <!--                                            <td>-->
+        <!--                                                <span t-field="line.partner_id.display_name"/>-->
+        <!--                                            </td>-->
+        <!--                                            <td>-->
+        <!--                                                <span t-field="line.name"/>-->
+        <!--                                            </td>-->
+        <!--                                            <td>-->
+        <!--                                                <span t-field="line.analytic_account_id.display_name"/>-->
+        <!--                                            </td>-->
+        <!--                                            <td>-->
+        <!--                                                <span t-field="line.tax_ids.display_name"/>-->
+        <!--                                            </td>-->
+        <!--                                            <td>-->
+        <!--                                                <span t-field="line.debit"-->
+        <!--                                                      t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"/>-->
+
+        <!--                                            </td>-->
+        <!--                                            <td>-->
+        <!--                                                <span t-field="line.credit"-->
+        <!--                                                      t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"/>-->
+        <!--                                            </td>-->
+        <!--                                            <t t-set="total_credit" t-value="total_credit + line.credit"/>-->
+        <!--                                            <t t-set="total_debit" t-value="total_debit + line.debit"/>-->
+        <!--                                        </tr>-->
+        <!--                                    </t>-->
+        <!--                                </tbody>-->
+
+        <!--                               <br></br>-->
+        <!--                               <br></br>-->
+        <!--                                <tfooter>-->
+        <!--                                    <tr>-->
+        <!--                                        <td colspan="5"></td>-->
+        <!--                                        <td>-->
+        <!--                                            <span t-esc="total_debit"/>-->
+        <!--                                        </td>-->
+        <!--                                        <td>-->
+        <!--                                            <span t-esc="total_credit"/>-->
+        <!--                                        </td>-->
+        <!--                                    </tr>-->
+        <!--                                </tfooter>-->
+
+        <!--                            </table>-->
+        <!--                        </div>-->
+        <!--                        <br></br>-->
+        <!--                        <br></br>-->
+        <!--                        <br></br>-->
+        <!--                        <div>-->
+        <!--                             <table width="100%">-->
+
+
+        <!--                                    <tr>-->
+
+        <!--                                        <td>Receiver Signature</td>-->
+        <!--                                        <td style="text-align:right;">Authorised Signitary</td>-->
+
+
+        <!--                                    </tr>-->
+        <!--                                 <tr>-->
+        <!--                                     <td>Checked by</td>-->
+        <!--                                     <td style="text-align:right;">Verified by</td>-->
+        <!--                                 </tr>-->
+
+
+        <!--                            </table>-->
+
+        <!--                        </div>-->
+
+        <!--                            <br></br>-->
+
+
+        <!--                    </div>-->
+        <!--                </t>-->
+        <!--            </t>-->
+        <!--        </t>-->
+        <!--    </template>-->
+
+        <!--</odoo>-->
+
+

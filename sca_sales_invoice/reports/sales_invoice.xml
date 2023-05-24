@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<odoo>
+
+
+
+    <template id="sca_invoice">
+        <t t-call="web.html_container">
+
+
+            <table align="center" style="width:100%;" cellpadding="10">
+
+            <div class="header">
+                 <t t-foreach="docs" t-as="o">
+
+                <tr>
+                    <td style="border-bottom:1px sold black;">
+                 <img t-if="res_company.logo" t-att-src="'data:image/jpg;base64,%s' % to_text(res_company.logo)"
+                  style="max-height: 120px; border-bottom:1px sold white;"/>
+
+                    </td>
+                    <td style="border-bottom:1px sold black;">
+                        <div name="company_address" class="float-right mb4">
+                <div t-field="o.depo_address.loc_address"
+                     t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                    </div>
+                    </td>
+
+
+                </tr>
+                 </t>
+                 </div>
+
+            </table>
+
+
+
+            <template id="sca_invoice">
+                    <t t-call="web.external_layout">
+
+                        <t t-foreach="docs" t-as="o">
+                            <h3 style="text-align: center">
+                                    SALES INVOICE
+                            </h3>
+
+
+
+
+                            <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+                        <t t-set="partner"
+                            t-value="o.partner_id or (o.move_lines and o.move_lines[0].partner_id) or False" />
+                        <t t-set="address">
+                            <div name="div_outgoing_address">
+                                <div
+                                    t-if="o.partner_shipping_id">
+                                    <span>
+                                        <strong>Ship To:</strong>
+                                    </span>
+                                    <div t-field="o.partner_shipping_id"
+                                        t-options='{"widget": "contact", "fields": ["address", "name", "phone","vat"], "no_marker": True, "phone_icons": True}' />
+                                </div>
+                                <!--                         <div t-if="o.picking_type_id.code != 'internal' and (not o.move_ids_without_package or not o.move_ids_without_package[0].partner_id) and o.picking_type_id.warehouse_id.partner_id">
+                            <span>
+                                <strong>Warehouse Address:</strong>
+                            </span>
+                            <div t-field="o.picking_type_id.warehouse_id.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                        </div> -->
+                            </div>
+                        </t>
+<!--                        <t t-if="o.picking_type_id.code=='internal'" t-set="information_block">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-7" name="div_incoming_address">-->
+<!--                                    <div>-->
+<!--                                        <span>-->
+<!--                                            <strong>Bill To:</strong>-->
+<!--                                        </span>-->
+<!--                                    </div>-->
+<!--                                    <div>-->
+<!--                                        <div t-field="o.partner_id"-->
+<!--                                            t-options='{"widget": "contact", "fields": ["address", "name", "phone","vat"], "no_marker": True, "phone_icons": True}' />-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </t>-->
+
+
+                        <t t-if="o.partner_id"
+                            t-set="information_block">
+                            <div class="row">
+                                <div class="col-7" name="div_incoming_address">
+<!--                                    <div t-if="o.picking_type_id.code=='incoming' and partner">-->
+<!--                                        <span>-->
+<!--                                            <strong>Vendor Address:</strong>-->
+<!--                                        </span>-->
+<!--                                    </div>-->
+                                    <div>
+                                        <span>
+                                            <strong>Customer Address:</strong>
+                                        </span>
+                                    </div>
+<!--                                    <div t-if="partner and (o.picking_type_id.code == 'outgoing' or o.picking_type_id.code == 'incoming')"-->
+<!--                                        name="partner_header">-->
+                                        <div t-field="o.partner_id"
+                                            t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}' />
+                                        <p t-if="o.partner_id.vat">
+                                            <t t-esc="o.company_id.country_id.vat_label or 'Tax ID'" />:
+                                            <span t-field="o.partner_id.vat" />
+                                        </p>
+<!--                                    </div>-->
+                                </div>
+                            </div>
+                        </t>
+
+
+
+                        <div id="informations" class="row mt32 mb32">
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.invoice_date" name="invoice_date">
+                            <strong>Invoice Date:</strong>
+                            <p class="m-0" t-field="o.invoice_date"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
+                            <strong>Due Date:</strong>
+                            <p class="m-0" t-field="o.invoice_date_due"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.invoice_origin" name="origin">
+                            <strong>Source:</strong>
+                            <p class="m-0" t-field="o.invoice_origin"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.partner_id.ref" name="customer_code">
+                            <strong>Customer Code:</strong>
+                            <p class="m-0" t-field="o.partner_id.ref"/>
+                        </div>
+                        <div class="col-auto col-3 mw-100 mb-2" t-if="o.ref" name="reference">
+                            <strong>Reference:</strong>
+                            <p class="m-0" t-field="o.ref"/>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+                        </t>
+                    </t>
+            </template>
+        </t>
+    </template>
+</odoo>
+

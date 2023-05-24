@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<odoo>
+
+
+    <template id="sample_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+
+                    <!--                    <h1>Sale Report</h1>-->
+                    <table class="table header" width="100%">
+                        <tr>
+                            <td style="border:1px solid black;" colspan="8">
+                                <center>
+                                    <strong>SALE ORDER</strong>
+                                </center>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td style="border:1px solid black;width: 50%" colspan="4" >SELLER:
+                                <strong>
+                                    <span t-field="o.company_id"/>
+                                    <br></br>
+                                </strong>
+                                <span t-field="o.company_id.street"/>
+                                <br></br>
+                                <span t-field="o.company_id.city"/>
+                                <br></br>
+                                <span t-field="o.company_id.state_id"/>
+                            </td>
+
+                            <td style="border:1px solid black;width: 50%" colspan="4" >CUSTOMER:
+                                <strong>
+                                    <span t-field="o.partner_id"/>
+                                    <br></br>
+                                </strong>
+                                <span t-field="o.partner_id.street"/>
+                                <br></br>
+                                <span t-field="o.partner_id.city"/>
+                                <br></br>
+                                <span t-field="o.partner_id.state_id"/>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid black;width: 50%" colspan="4">DATE
+                                <strong>
+                                    <br></br>
+                                    <span t-field="o.date_order"/>
+
+                                </strong>
+                            </td>
+                            <td style="border:1px solid black;width: 50%" colspan="4">SALES PERSON:
+                                <strong>
+                                    <br></br>
+                                    <span t-field="o.user_id"/>
+
+                                </strong>
+                            </td>
+
+                        </tr>
+                    </table>
+                    <br/>
+                    <br/>
+
+                    <table class="table_items" width="100%">
+                         <thead>
+                                            <tr style="border:1px solid black;">
+                                                <th style="border:1px solid black;">Product</th>
+                                                <th style="border:1px solid black;">QTY</th>
+                                                <th style="border:1px solid black;">PRICE</th>
+                                                <th style="border:1px solid black;">TAX</th>
+                                                <th style="border:1px solid black;">SUBTOTAL</th>
+
+                                            </tr>
+                                        </thead>
+
+                         <tbody class="sale_tbody">
+                             <t t-set="lines" t-value="o.order_line.filtered(lambda x: x.product_uom_qty)"/>
+
+                                <t t-foreach="lines" t-as="i">
+                                         <tr style="border:1px solid black;">
+                                                    <t t-if="not i.display_type">
+                                                        <td style="border:1px solid black;width: 20%">
+<!--                                                            <span t-field="i.product_id"/>-->
+                                                            <p t-if="i.name != i.product_id.name">
+                                                            <span t-field="i.name"/>
+                                                            </p>
+                                                        </td>
+                                                        <td style="border:1px solid black;width: 5%">
+                                                            <span t-field="i.product_uom_qty"/>
+                                                        </td>
+                                                        <td style="border:1px solid black;width: 5%">
+                                                            <span t-field="i.price_unit"/>
+                                                        </td>
+                                                        <td style="border:1px solid black;width: 5%">
+                                                            <span t-field="i.tax_id"/>
+                                                        </td>
+                                                        <td style="border:1px solid black;width: 5%">
+                                                            <span t-field="i.price_subtotal"/>
+                                                        </td>
+                                                    </t>
+                                         </tr>
+                                </t>
+                         </tbody>
+
+
+                    </table>
+
+                    <br/>
+                    <br/>
+                    <table class="table_items" width="50%" align="right">
+                         <tr>
+                             <td style="border:1px solid black;width: 50%" colspan="4" >TOTAL UnTaxed:
+                            <span t-field="o.amount_untaxed"/>
+                              </td>
+                         </tr>
+                        <tr>
+
+                            <td style="border:1px solid black;width: 50%" colspan="4" >TOTAL:
+                            <span t-field="o.amount_total"/>
+                              </td>
+                         </tr>
+
+                    </table>
+
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

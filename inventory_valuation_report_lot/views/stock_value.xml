@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<odoo>
+        <record id="view_stock_val_lot_tree" model="ir.ui.view">
+            <field name="name">stock.val.lot.tree</field>
+            <field name="model">stock.lot.value</field>
+             <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Stock Valuation"   >
+                    <field name="date"/>
+                    <field name="product_id"/>
+                    <field name="quantity"/>
+                    <field name="uom_id"/>
+                    <field name="value"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_stock_val_lot_form" model="ir.ui.view">
+            <field name="name">stock.val.lot.form</field>
+            <field name="model">stock.lot.value</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Stock Valuation" edit="0" create="0">
+                    <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="product_id"/>
+                            <field name="quantity"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Valuation" name="valuation">
+                            <group>
+                                <field name="quantity"/>
+                                <field name="uom_id" groups="uom.group_uom"/>
+                                <field name="unit_cost"/>
+                                <field name="value"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="action_stock_lot_value">
+            <field name="name">Stock Lot Valuation</field>
+            <field name="res_model">stock.lot.value</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create new </p>
+            </field>
+        </record>
+
+
+        <menuitem id="stock_lot_menu"
+                  name="Stock Lot Valuation"
+                  parent="stock.menu_warehouse_report"
+                  action="action_stock_lot_value"/>
+
+
+        <record id="view_inventory_lot_val_search" model="ir.ui.view">
+            <field name="name">Inventory Valuation</field>
+            <field name="model">stock.lot.value</field>
+            <field name="arch" type="xml">
+                <search string="Inventory Valuation">
+                    <field name="product_id"/>
+<!--                    <field name="categ_id" />-->
+                    <field name="product_tmpl_id" />
+                    <separator/>
+                    <group expand='0' string='Group by...'>
+                        <filter string='Products' name="group_by_product_id" context="{'group_by': 'product_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

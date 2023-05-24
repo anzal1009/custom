@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<odoo>
+    <template id="customer_invoice_custom">
+        <t t-call="web.html_container">
+            <body>
+                <style>
+                    td {
+                    padding: 5px;
+                    }
+                </style>
+                <!--          Hearder-->
+                <template id="sale_template_internal_layout_header_inherited"
+                          inherit_id="web.external_layout_standard">
+                    <xpath expr="//div[@class='header']" position="replace">
+                        <t t-foreach="docs" t-as="o">
+                        </t>
+                    </xpath>
+                    <xpath expr="//div[@class='row zero_min_height']" position="replace">
+                        <div t-if="report_type == 'pdf'" class="text-muted" style="text-align: right;">
+                            Page:
+                            <span class="page"/>
+                            /
+                            <span class="topage"/>
+                        </div>
+                    </xpath>
+                    <xpath expr="//div[@name='company_address']" position="replace">
+                        <div class="header">
+
+
+                            <table class="table header" width="100%" >
+                                <tr>
+                                    <td style="border:1px solid black;" colspan="8">
+                                        <center>
+                                            <strong>INVOICE</strong>
+                                        </center>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border:1px solid black;width: 50%" colspan="2" rowspan="4">
+                                        <strong>Exporter</strong>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="col-xs-6">
+                                                        <img t-if="res_company.logo"
+                                                             t-att-src="'data:image/jpg;base64,%s' % to_text(res_company.logo)"
+                                                             style="max-height: 160px; border-bottom:1px sold black;"/>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <strong>
+                                                        <p>Eastea Chai Private Limited
+                                                            <br/>
+                                                            Building No. 15/66, 67, Nellimattam P.O
+                                                            <br/>
+                                                            Kavalangadu, Kothamangalam,
+                                                            <br/>
+                                                            Ernakulam, Kerala - 686693
+                                                            <br/>
+                                                            Tel: +91 484 3001252
+                                                            <br/>
+                                                            Email: exports@eastea.in
+                                                            <br/>
+                                                            GSTIN/UIN: 32AACCE3723D1ZB, FSSAI LIC.no.10017041001212
+                                                        </p>
+                                                    </strong>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="border:1px solid black;" colspan="3">
+                                        <center>Invoice No
+                                            <br/>
+                                            <strong>
+                                                <span t-field="o.name"/>
+                                            </strong>
+                                        </center>
+                                    </td>
+                                    <td style="border:1px solid black;" colspan="3">
+                                        <center>Exporter's Ref/Invoice Date
+                                            <br/>
+                                            <strong>
+                                                <span t-field="o.invoice_date"/>
+                                            </strong>
+                                        </center>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid black;" colspan="6">
+                                        <center>Buyer's Order No &amp; Date
+                                            <br/>
+                                            <strong>
+                                                <br/>
+
+                                            </strong>
+                                        </center>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid black;" colspan="6">
+                                        <center>PO Number dated
+                                            <br/>
+                                            <strong>
+                                                <span t-field="o.invoice_origin"/>
+                                                <br/>
+                                                <span/>
+                                            </strong>
+                                        </center>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid black;" colspan="6">Other Reference(s)
+                                        <br/>
+                                        <strong>
+                                            CIN: U15491KL2010PTC025741
+                                        </strong>
+                                        <br/>
+                                        <strong>
+                                            PAN NO:AACCE3723D
+                                        </strong>
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+
+                                    <td style="border:1px solid black;width: 50%" colspan="2" rowspan="2">Consignee:
+                                        <strong>
+                                            <span t-field="o.partner_id"/>
+                                            <br></br>
+                                        </strong>
+                                        <span t-field="o.partner_id.street"/>
+                                        <br></br>
+                                        <span t-field="o.partner_id.city"/>
+                                        <br></br>
+                                        <span t-field="o.partner_id.state_id"/>
+                                    </td>
+
+                                    <td style="border:1px solid black;" colspan="6">Buyer (if other than Consignee):
+                                        <strong>
+                                            <span t-field="o.partner_id"/>
+                                        </strong>
+                                        <span t-field="o.partner_id.street"/>
+                                        <br></br>
+                                        <span t-field="o.partner_id.city"/>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid black;" colspan="6">Notify Party:
+                                        <strong>
+                                            <span t-field="o.partner_id"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td style="border:1px solid black;" colspan="1">Pre-carriage by
+                                        <br/>
+                                        <strong>
+                                            <span t-field="o.cariage"/>
+                                        </strong>
+                                    </td>
+                                    <td style="border:1px solid black;" colspan="1">Place of Receipt:
+                                        <br/>
+                                        <strong>
+                                            <span t-field="o.company_id.state_id"/>
+                                        </strong>
+                                    </td>
+                                    <td style="border:1px solid black;" colspan="3">Country of origin of goods
+                                        <br/>
+                                        <strong>
+                                            <span t-field="o.company_id.country_id"/>
+                                        </strong>
+                                    </td>
+                                    <td style="border:1px solid black;" colspan="3">Country of final destination:
+                                        <br/>
+                                        <strong>
+                                            <span t-field="o.partner_id.country_id"/>
+                                        </strong>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid black;width: 25%" colspan="1">Vessel/Flight No:
+                                        <br/>
+                                        <strong>
+                                            <span t-field="o.vessal"/>
+                                        </strong>
+                                    </td>
+                                    <td style="border:1px solid black;width: 25%" colspan="1">Port of Loading:
+                                        <!--                                        <br/>-->
+                                        <strong>
+                                            <span t-field="o.loading"/>
+
+                                        </strong>
+                                    </td>
+                                    <td style="border:1px solid black;" colspan="6">Terms of Delivery and Payment:
+                                        <!--                                        <br/>-->
+                                        <strong>
+
+                                            <span t-field="o.terms"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid black;width: 25%" colspan="1">Port of Discharge:
+                                        <!--                                        <br/>-->
+                                        <strong>
+                                            <span t-field="o.discharge"/>
+                                        </strong>
+                                    </td>
+                                    <td style="border:1px solid black;width: 25%" colspan="1">Final Destination:
+                                        <!--                                        <br/>-->
+                                        <strong>
+                                            <span t-field="o.destination"/>
+                                        </strong>
+                                    </td>
+                                    <td style="border:1px solid black;" colspan="6" rowspan="2">No. &amp; Kind of Pkgs
+                                        <br/>
+                                        <strong>
+                                            <span t-field="o.package"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr style="border:1px solid black;">
+                                    <td style="border:1px solid black;width: 50%" colspan="2">CONTAINER No :
+                                        <strong>
+                                            <span t-field="o.container"/>
+                                        </strong>
+                                        <br/>
+                                        E SEAL :
+                                        <strong>
+                                            <span t-field="o.eseal"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </xpath>
+
+
+                    <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div[1]//ul[@class='list-inline mb4']"
+                           position="replace">
+                        <div class="footer">
+
+                            <table class="" width="100%" cellpadding="5" cellspacing="5"
+                                   style="margin-top: 0%; border-collapse: collapse; border: 1px solid black;">
+
+                                <tr>
+                                    <td style="border-top:1px solid black;" colspan="3">
+                                        <u>Declaration</u>
+                                        <br></br>We declare that this invoice shows the actual price of the
+                                        goods
+                                        described and <br></br>that
+                                        all particulars
+                                        are true and correct
+                                    </td>
+                                    <td colspan="6"
+                                        style="text-align:right;padding-left:100px; border-top:1px solid black; border-right:1px solid black;">
+                                        <b>Ernakulam</b>
+                                        <br></br>
+                                        <br></br>Authorised Signature
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </xpath>
+                    <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div[1]//div[@class='text-muted']"
+                           position="replace">
+                    </xpath>
+                </template>
+
+                <style>
+                    table,th,td {
+                    padding: 5px;
+                    }
+                </style>
+
+
+                <template id="customer_invoice_custom">
+                    <t t-call="web.external_layout">
+
+                        <t t-foreach="docs" t-as="o">
+
+                            <!--                    <t t-set="o" t-value="o.with_context({'lang':o.user_id.lang})" />-->
+                            <div class="page" style="font-size: 15px !important;">
+                                <div class="line">
+
+                                    <table align="center" style="width:100%;"
+                                           border="1px solid black"
+                                           cellspacing="0" cellpadding="0">
+                                        <thead>
+                                            <tr>
+                                                <td style="padding: 5px; border:1px solid black;width: 11%">
+                                                    <b>EAN.</b>
+                                                </td>
+                                                <td style="border:1px solid black;width: 11%">
+                                                    <b>Article Number</b>
+                                                </td>
+                                                <td style="border:1px solid black;width: 15%">
+                                                    <b>Description of Good</b>
+                                                </td>
+                                                <td style="border:1px solid black;width: 10%">
+                                                    <b>HSC Cod</b>
+                                                </td>
+                                                <td style="border:1px solid black;width: 5%">
+                                                    <b>Quantity</b>
+                                                </td>
+                                                <td style="border:1px solid black;width: 10%">
+                                                    <b>UOM</b>
+                                                </td>
+                                                <td style="border:1px solid black;width: 10%">
+                                                    <b>Qty in KGS</b>
+                                                </td>
+                                                <td style="border:1px solid black;width: 15%">
+                                                    <b>Rate/ KG</b>
+                                                </td>
+                                                <td style="border:1px solid black;width: 15%">
+                                                    <b>Amt in USD FOB</b>
+                                                </td>
+                                            </tr>
+                                        </thead>
+
+                                        <t t-set="totalqty" t-value="0"/>
+                                        <t t-set="totalamt" t-value="0"/>
+
+                                        <tbody>
+
+                                            <t t-foreach="o.invoice_line_ids" t-as="order_line">
+
+                                                <tr t-att-class="'bg-200 font-weight-bold o_line_section' if order_line.display_type == 'line_section' else 'font-italic o_line_note' if order_line.display_type == 'line_note' else ''">
+                                                    <t t-if="not order_line.display_type">
+                                                        <td style="border:1px solid black;  width: 11%">
+                                                            <span t-field="order_line.name"/>
+                                                        </td>
+                                                        <td style="border:1px solid black;  width: 11%">
+                                                            <span t-field="order_line.name"/>
+                                                        </td>
+                                                        <td style="border:1px solid black;  width: 15%">
+                                                            <span t-field="order_line.name"/>
+                                                        </td>
+                                                        <td style="border:1px solid black; width: 10%">
+                                                            <span t-field="order_line.product_id.l10n_in_hsn_code"/>
+                                                        </td>
+                                                        <td style="border:1px solid black;  width: 5%">
+                                                            <span t-field="order_line.quantity"/>
+                                                        </td>
+                                                        <td style="border:1px solid black;  width: 10%">
+                                                            <span t-field="order_line.product_uom_id"/>
+                                                        </td>
+                                                        <td style="border:1px solid black;  width: 10%">
+                                                            <span t-field="order_line.quantity"/>
+                                                        </td>
+                                                        <td style="border:1px solid black;  width: 15%">
+                                                            <span t-field="order_line.price_unit"/>
+                                                        </td>
+                                                        <td style="border:1px solid black;  width: 15%">
+                                                            <span t-field="order_line.price_subtotal"/>
+                                                        </td>
+                                                    </t>
+                                                </tr>
+
+                                                <t t-set="totalqty" t-value="totalqty+order_line.quantity"/>
+                                                <t t-set="totalamt" t-value="totalamt+order_line.price_subtotal"/>
+
+                                            </t>
+
+                                            <tr>
+                                                <td colspan="9"
+                                                    style="border-top:1px solid black;border-bottom:1px solid white; text-align:left;">
+                                                    <b>Total Gross Weight:</b>
+                                                    <span t-field="o.gross"/>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td colspan="9"
+                                                    style="border-top:1px solid white;border-bottom:1px solid white; text-align:left;">
+                                                    <b>Total Net Weight:</b>
+                                                    <span t-field="o.net"/>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td colspan="9"
+                                                    style="border-top:1px solid white;border-bottom:1px solid black;  text-align:left;">
+                                                    <b>Total Cubic Metres:</b>
+                                                    <span t-field="o.cubic"/>
+                                                </td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="4" style="text-align:center;">
+                                                    <b>
+                                                        <strong>Total</strong>
+                                                    </b>
+                                                </td>
+
+                                                <td>
+                                                    <b>
+                                                        <span t-esc="'%.0f'% totalqty"/>
+                                                    </b>
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    <b>
+                                                        <span t-esc="'%.0f'% totalqty"/>
+                                                    </b>
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    <b>
+                                                        <span t-field="o.amount_untaxed"/>
+                                                    </b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="9" style="border-top:1px solid black; text-align:left;">
+                                                    <b>Amount in Words:
+                                                        <span t-field="o.text_amount_ar"/>
+                                                    </b>
+                                                </td>
+                                            </tr>
+
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                </template>
+            </body>
+        </t>
+    </template>
+</odoo>
+
+
+        <!--####################################################################################-->
+        <!--<?xml version="1.0" encoding="utf-8" standalone="yes"?>-->
+        <!--<odoo>-->
+        <!--    <template id="customer_invoice_custom">-->
+        <!--        <t t-call="web.html_container">-->
+        <!--            <body>-->
+        <!--&lt;!&ndash;                <style>&ndash;&gt;-->
+        <!--&lt;!&ndash;                    td {&ndash;&gt;-->
+        <!--&lt;!&ndash;                    padding: 5px;&ndash;&gt;-->
+        <!--&lt;!&ndash;                    font color:#0000FF;&ndash;&gt;-->
+        <!--&lt;!&ndash;                    }&ndash;&gt;-->
+        <!--&lt;!&ndash;                </style>&ndash;&gt;-->
+        <!--                &lt;!&ndash;          Hearder&ndash;&gt;-->
+        <!--                <template id="sale_template_internal_layout_header_inherited"-->
+        <!--                          inherit_id="web.external_layout_standard">-->
+        <!--                    <xpath expr="//div[@class='header']" position="replace">-->
+        <!--                        <t t-foreach="docs" t-as="o">-->
+        <!--                        </t>-->
+        <!--                    </xpath>-->
+        <!--                    <xpath expr="//div[@class='row zero_min_height']" position="replace">-->
+        <!--                        <div t-if="report_type == 'pdf'" class="text-muted" style="text-align: right;">-->
+        <!--                            Page:-->
+        <!--                            <span class="page"/>-->
+        <!--                            /-->
+        <!--                            <span class="topage"/>-->
+        <!--                        </div>-->
+        <!--                    </xpath>-->
+        <!--                    <xpath expr="//div[@name='company_address']" position="replace">-->
+        <!--                        <div class="header">-->
+
+
+        <!--                            <table class="table header" width="100%" cellpadding="5px">-->
+        <!--                                <tr>-->
+        <!--                                    <td style="border:1px solid black;" colspan="8">-->
+        <!--                                        <center>-->
+        <!--                                            <strong>INVOICE</strong>-->
+        <!--                                        </center>-->
+        <!--                                    </td>-->
+        <!--                                </tr>-->
+
+        <!--                                <tr>-->
+        <!--                                    <td style="border:1px solid black;width: 50%" colspan="2" rowspan="4">-->
+        <!--                                        <strong>Exporter</strong>-->
+        <!--                                        <table>-->
+        <!--                                            <tr>-->
+        <!--                                                <td>-->
+        <!--                                                    <div class="col-xs-6">-->
+        <!--                                                        <img t-if="res_company.logo"-->
+        <!--                                                             t-att-src="'data:image/jpg;base64,%s' % to_text(res_company.logo)"-->
+        <!--                                                             style="max-height: 160px; border-bottom:1px sold black;"/>-->
+        <!--                                                    </div>-->
+        <!--                                                </td>-->
+        <!--                                                <td>-->
+        <!--                                                    <strong>-->
+        <!--                                                        <p>Eastea Chai Private Limited-->
+        <!--                                                            <br/>-->
+        <!--                                                            Building No. 15/66, 67, Nellimattam P.O-->
+        <!--                                                            <br/>-->
+        <!--                                                            Kavalangadu, Kothamangalam,-->
+        <!--                                                            <br/>-->
+        <!--                                                            Ernakulam, Kerala - 686693-->
+        <!--                                                            <br/>-->
+        <!--                                                            Tel: +91 484 3001252-->
+        <!--                                                            <br/>-->
+        <!--                                                            Email: exports@eastea.in-->
+        <!--                                                            <br/>-->
+        <!--                                                            GSTIN/UIN: 32AACCE3723D1ZB, FSSAI LIC.no.10017041001212-->
+        <!--                                                        </p>-->
+        <!--                                                    </strong>-->
+        <!--                                                </td>-->
+        <!--                                            </tr>-->
+        <!--                                        </table>-->
+        <!--                                    </td>-->
+        <!--                                    <td style="border:1px solid black;" colspan="3">-->
+        <!--                                        <center>Invoice No-->
+        <!--                                            <br/>-->
+        <!--                                            <strong>-->
+        <!--                                                <span t-field="o.name"/>-->
+        <!--                                            </strong>-->
+        <!--                                        </center>-->
+        <!--                                    </td>-->
+        <!--                                    <td style="border:1px solid black;" colspan="3">-->
+        <!--                                        <center>Exporter's Ref/Invoice Date-->
+        <!--                                            <br/>-->
+        <!--                                            <strong>-->
+        <!--                                                <span t-field="o.invoice_date"/>-->
+        <!--                                            </strong>-->
+        <!--                                        </center>-->
+        <!--                                    </td>-->
+        <!--                                </tr>-->
+        <!--                                <tr>-->
+        <!--                                    <td style="border:1px solid black;" colspan="6">-->
+        <!--                                        <center>Buyer's Order No &amp; Date-->
+        <!--                                            <br/>-->
+        <!--                                            <strong>-->
+        <!--                                                <br/>-->
+
+        <!--                                            </strong>-->
+        <!--                                        </center>-->
+        <!--                                    </td>-->
+        <!--                                </tr>-->
+        <!--                                <tr>-->
+        <!--                                    <td style="border:1px solid black;" colspan="6">-->
+        <!--                                        <center>PO Number dated-->
+        <!--                                            <br/>-->
+        <!--                                            <strong>-->
+        <!--                                                 <span t-field="o.invoice_origin"/>-->
+        <!--                                                <br/>-->
+        <!--                                                <span/>-->
+        <!--                                            </strong>-->
+        <!--                                        </center>-->
+
+        <!--                                    </td>-->
+        <!--                                </tr>-->
+        <!--                                <tr>-->
+        <!--                                    <td style="border:1px solid black;" colspan="6">Other Reference(s)-->
+        <!--                                        <br/>-->
+        <!--                                        <strong>-->
+        <!--                                             CIN: U15491KL2010PTC025741-->
+        <!--                                        </strong>-->
+        <!--                                        <br/>-->
+        <!--                                        <strong>-->
+        <!--                                             PAN NO:AACCE3723D-->
+        <!--                                        </strong>-->
+
+        <!--                                    </td>-->
+        <!--                                </tr>-->
+
+        <!--                                <tr>-->
+
+        <!--                                    <td style="border:1px solid black;width: 50%" colspan="2" rowspan="2">Consignee:-->
+        <!--                                        <strong>-->
+        <!--                                            <span t-field="o.partner_id"/><br></br>-->
+        <!--                                        </strong>-->
+        <!--                                         <span t-field="o.partner_id.street"/><br></br>-->
+        <!--                                         <span t-field="o.partner_id.city"/><br></br>-->
+        <!--                                         <span t-field="o.partner_id.state_id"/>-->
+        <!--                                    </td>-->
+
+        <!--                                    <td style="border:1px solid black;" colspan="6">Buyer (if other than Consignee):-->
+        <!--                                        <strong>-->
+        <!--                                            <span t-field="o.partner_id"/>-->
+        <!--                                        </strong>-->
+        <!--                                         <span t-field="o.partner_id.street"/><br></br>-->
+        <!--                                         <span t-field="o.partner_id.city"/>-->
+        <!--                                    </td>-->
+
+        <!--                                </tr>-->
+        <!--                                <tr>-->
+        <!--                                    <td style="border:1px solid black;" colspan="6">Notify Party:-->
+        <!--                                        <strong>-->
+        <!--                                            <span t-field="o.partner_id"/>-->
+        <!--                                        </strong>-->
+        <!--                                    </td>-->
+        <!--                                </tr>-->
+        <!--                                <tr>-->
+
+        <!--                                    <td style="border:1px solid black;" colspan="1"> Pre-carriage by-->
+        <!--                                      <br/>-->
+        <!--                                        <strong>-->
+        <!--                                            <span t-field="o.cariage"/>-->
+        <!--                                        </strong>-->
+        <!--                                    </td>-->
+        <!--                                    <td style="border:1px solid black;" colspan="1"> Place of Receipt:-->
+        <!--                                         <br/>-->
+        <!--                                        <strong>-->
+        <!--                                            <span t-field="o.company_id.state_id"/>-->
+        <!--                                        </strong>-->
+        <!--                                    </td>-->
+        <!--                                    <td style="border:1px solid black;" colspan="3">Country of origin of goods-->
+        <!--                                        <br/>-->
+        <!--                                        <strong>-->
+        <!--                                            <span t-field="o.company_id.country_id"/>-->
+        <!--                                        </strong>-->
+        <!--                                    </td>-->
+        <!--                                    <td style="border:1px solid black;" colspan="3">Country of final destination:-->
+        <!--                                        <br/>-->
+        <!--                                        <strong>-->
+        <!--                                            <span t-field="o.partner_id.country_id"/>-->
+        <!--                                        </strong>-->
+        <!--                                    </td>-->
+
+        <!--                                </tr>-->
+        <!--                                <tr>-->
+        <!--                                    <td style="border:1px solid black;width: 25%" colspan="1">Vessel/Flight No:-->
+        <!--                                        <br/>-->
+        <!--                                        <strong>-->
+        <!--                                           <span t-field="o.vessal"/>-->
+        <!--                                        </strong>-->
+        <!--                                    </td>-->
+        <!--                                    <td style="border:1px solid black;width: 25%" colspan="1">Port of Loading:-->
+        <!--&lt;!&ndash;                                        <br/>&ndash;&gt;-->
+        <!--                                        <strong>-->
+        <!--                                             <span t-field="o.loading"/>-->
+
+        <!--                                        </strong>-->
+        <!--                                    </td>-->
+        <!--                                    <td style="border:1px solid black;" colspan="6">Terms of Delivery and Payment:-->
+        <!--&lt;!&ndash;                                        <br/>&ndash;&gt;-->
+        <!--                                        <strong>-->
+
+        <!--                                             <span t-field="o.terms"/>-->
+        <!--                                        </strong>-->
+        <!--                                    </td>-->
+        <!--                                </tr>-->
+        <!--                                <tr>-->
+        <!--                                    <td style="border:1px solid black;width: 25%" colspan="1">Port of Discharge:-->
+        <!--&lt;!&ndash;                                        <br/>&ndash;&gt;-->
+        <!--                                        <strong>-->
+        <!--                                            <span t-field="o.discharge"/>-->
+        <!--                                        </strong>-->
+        <!--                                    </td>-->
+        <!--                                    <td style="border:1px solid black;width: 25%" colspan="1">Final Destination:-->
+        <!--&lt;!&ndash;                                        <br/>&ndash;&gt;-->
+        <!--                                        <strong>-->
+        <!--                                           <span t-field="o.destination"/>-->
+        <!--                                        </strong>-->
+        <!--                                    </td>-->
+        <!--                                    <td style="border:1px solid black;" colspan="6" rowspan="2">No. &amp; Kind of Pkgs-->
+        <!--                                        <br/>-->
+        <!--                                        <strong>-->
+        <!--                                              <span t-field="o.package"/>-->
+        <!--                                        </strong>-->
+        <!--                                    </td>-->
+        <!--                                </tr>-->
+        <!--                                <tr style="border:1px solid black;">-->
+        <!--                                    <td style="border:1px solid black;width: 50%" colspan="2">CONTAINER No :-->
+        <!--                                         <strong>-->
+        <!--                                           <span t-field="o.container"/>-->
+        <!--                                        </strong>-->
+        <!--                                        <br/>-->
+        <!--                                        E SEAL :-->
+        <!--                                        <strong>-->
+        <!--                                           <span t-field="o.eseal"/>-->
+        <!--                                        </strong>-->
+        <!--                                    </td>-->
+        <!--                                </tr>-->
+
+        <!--                            </table>-->
+        <!--                        </div>-->
+        <!--                    </xpath>-->
+
+
+        <!--                    <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div[1]//ul[@class='list-inline mb4']"-->
+        <!--                           position="replace">-->
+        <!--                        <div class="footer">-->
+
+        <!--                            <table class="" width="100%" cellpadding="5" cellspacing="5"-->
+        <!--                                   style="margin-top: 0%; border-collapse: collapse; border: 1px solid black;">-->
+
+        <!--                                <tr>-->
+        <!--                                    <td style="border-top:1px solid black;" colspan="3">-->
+        <!--                                        <u>Declaration</u>-->
+        <!--                                        <br></br>We declare that this invoice shows the actual price of the-->
+        <!--                                        goods-->
+        <!--                                        described and <br></br>that-->
+        <!--                                        all particulars-->
+        <!--                                        are true and correct-->
+        <!--                                    </td>-->
+        <!--                                    <td colspan="6"-->
+        <!--                                        style="text-align:right;padding-left:100px; border-top:1px solid black; border-right:1px solid black;">-->
+        <!--                                        <b>Ernakulam</b>-->
+        <!--                                        <br></br>-->
+        <!--                                        <br></br>Authorised Signature-->
+        <!--                                    </td>-->
+        <!--                                </tr>-->
+        <!--                            </table>-->
+
+        <!--                        </div>-->
+        <!--                    </xpath>-->
+        <!--                    <xpath expr="//div[@t-attf-class='footer o_standard_footer o_company_#{company.id}_layout']/div[1]//div[@class='text-muted']"-->
+        <!--                           position="replace">-->
+        <!--                    </xpath>-->
+        <!--                </template>-->
+
+
+        <!--                <template id="customer_invoice_custom">-->
+        <!--                    <t t-call="web.external_layout">-->
+
+        <!--                        <t t-foreach="docs" t-as="o">-->
+
+        <!--                            &lt;!&ndash;                    <t t-set="o" t-value="o.with_context({'lang':o.user_id.lang})" />&ndash;&gt;-->
+        <!--                            <div class="page" style="font-size: 15px !important;">-->
+        <!--                                <div class="line">-->
+
+        <!--                                    <table align="center" style="width:100%;"-->
+        <!--                                           border="1px solid black"-->
+        <!--                                           cellspacing="0" cellpadding="5">-->
+        <!--                                        <thead>-->
+        <!--                                            <tr>-->
+        <!--                                                <td style="border:1px solid black;width: 11%" > <font color="#000000">  <b>EAN.</b> </font></td>-->
+        <!--                                                <td style="border:1px solid black;width: 11%"><b>Article Number</b></td>-->
+        <!--                                                <td style="border:1px solid black;width: 15%"><b>Description of Good</b></td>-->
+        <!--                                                <td style="border:1px solid black;width: 10%"><b>HSC Cod</b> </td>-->
+        <!--                                                <td style="border:1px solid black;width: 5%"> <b>Quantity</b></td>-->
+        <!--                                                <td style="border:1px solid black;width: 10%"><b>UOM</b></td>-->
+        <!--                                                <td style="border:1px solid black;width: 10%"><b>Qty in KGS</b></td>-->
+        <!--                                                <td style="border:1px solid black;width: 15%"><b>Rate/ KG</b></td>-->
+        <!--                                                <td style="border:1px solid black;width: 15%"><b>Amt in USD FOB</b></td>-->
+        <!--                                            </tr>-->
+        <!--                                        </thead>-->
+
+        <!--                                         <t t-set="totalqty" t-value="0" />-->
+        <!--                                         <t t-set="totalamt" t-value="0" />-->
+
+        <!--                                        <tbody>-->
+
+        <!--                                            <t t-foreach="o.invoice_line_ids" t-as="order_line">-->
+
+        <!--                                                <tr t-att-class="'bg-200 font-weight-bold o_line_section' if order_line.display_type == 'line_section' else 'font-italic o_line_note' if order_line.display_type == 'line_note' else ''">-->
+        <!--                                                    <t t-if="not order_line.display_type">-->
+        <!--                                                        <td style="border:1px solid black; width: 11%">-->
+        <!--                                                            <span t-field="order_line.name"/>-->
+        <!--                                                        </td>-->
+        <!--                                                        <td style="border:1px solid black;  width: 11%">-->
+        <!--                                                            <span t-field="order_line.name"/>-->
+        <!--                                                        </td>-->
+        <!--                                                        <td style=" width: 15%">-->
+        <!--                                                            <span t-field="order_line.name"/>-->
+        <!--                                                        </td>-->
+        <!--                                                        <td style="width: 10%">-->
+        <!--                                                            <span t-field="order_line.product_id.l10n_in_hsn_code"/>-->
+        <!--                                                        </td>-->
+        <!--                                                        <td style="width: 5%">-->
+        <!--                                                            <span t-field="order_line.quantity"/>-->
+        <!--                                                        </td>-->
+        <!--                                                        <td style="width: 10%">-->
+        <!--                                                            <span t-field="order_line.product_uom_id"/>-->
+        <!--                                                        </td>-->
+        <!--                                                        <td style="width: 10%">-->
+        <!--                                                            <span t-field="order_line.quantity"/>-->
+        <!--                                                        </td>-->
+        <!--                                                        <td style="width: 15%">-->
+        <!--                                                            <span t-field="order_line.price_unit"/>-->
+        <!--                                                        </td>-->
+        <!--                                                        <td style="width: 15%">-->
+        <!--                                                            <span t-field="order_line.price_subtotal"/>-->
+        <!--                                                        </td>-->
+        <!--                                                    </t>-->
+        <!--                                                </tr>-->
+
+        <!--                                                <t t-set="totalqty" t-value="totalqty+order_line.quantity" />-->
+        <!--                                                <t t-set="totalamt" t-value="totalamt+order_line.price_subtotal" />-->
+
+        <!--                                            </t>-->
+
+
+        <!--                                            <tr >-->
+        <!--                                                <td colspan="9" style="border-top:1px solid black;border-bottom:1px solid white; text-align:left;" ><b>Total Gross Weight:</b> <span t-field="o.gross"/></td>-->
+
+        <!--                                            </tr>-->
+        <!--                                            <tr>-->
+        <!--                                                <td colspan="9" style="border-top:1px solid white;border-bottom:1px solid white; text-align:left;" ><b>Total Net Weight:</b><span t-field="o.net"/> </td>-->
+
+        <!--                                            </tr>-->
+        <!--                                            <tr>-->
+        <!--                                                <td colspan="9" style="border-top:1px solid white;border-bottom:1px solid black;  text-align:left;" ><b>Total Cubic Metres:</b> <span t-field="o.cubic"/></td>-->
+
+        <!--                                            </tr>-->
+        <!--                                            <tr>-->
+        <!--                                                <td  colspan="4" style="text-align:center;"> <strong>Total</strong></td>-->
+
+        <!--                                                <td><span t-esc="'%.0f'% totalqty"/></td>-->
+        <!--                                                <td></td>-->
+        <!--                                                <td><span t-esc="'%.0f'% totalqty"/></td>-->
+        <!--                                                <td></td>-->
+        <!--                                                <td><span t-field="o.amount_untaxed"/></td>-->
+        <!--                                            </tr>-->
+        <!--                                            <tr>-->
+        <!--                                                <td colspan="9" style="border-top:1px solid black; text-align:left;"> <b>Amount in Words: <span t-field="o.text_amount_ar"/></b></td>-->
+        <!--                                            </tr>-->
+
+
+        <!--                                        </tbody>-->
+
+        <!--                                    </table>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </t>-->
+        <!--                    </t>-->
+        <!--                </template>-->
+        <!--            </body>-->
+        <!--        </t>-->
+        <!--    </template>-->
+        <!--</odoo>-->
+
+        <!--#######################################################################################################-->

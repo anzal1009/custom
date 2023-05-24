@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@class='clearfix']" position="after">
+            <div class="row" style= "margin-left:5pt;" >
+                <table name="qty" style="border: 1pt solid black;" cellpadding="5" cellspacing="3" width="30%">
+                    <tr t-if="doc.total_qty_kg" style="border: 1pt solid black;">
+                        <td name="td_total_qty_label" style="border: 1pt solid black;">
+                            <strong>Total KG</strong>
+                        </td>
+                        <td class="text-right" style="border: 1pt solid black;">
+                            <span t-field="doc.total_qty_kg"/>
+                        </td>
+                    </tr>
+                    <tr t-if="doc.total_qty_nos" style="border: 1pt solid black;">
+                        <td name="td_total_qty_label" style="border: 1pt solid black;">
+                            <strong>Total Nos</strong>
+                        </td>
+                        <td class="text-right" style="border: 1pt solid black;">
+                            <span t-field="doc.total_qty_nos"/>
+                        </td>
+                    </tr>
+                    <tr t-if="doc.total_qty_lit" style="border: 1pt solid black;">
+                        <td name="td_total_qty_label" style="border: 1pt solid black;">
+                            <strong>Total Liters</strong>
+                        </td>
+                        <td class="text-right" style="border: 1pt solid black;">
+                            <span t-field="doc.total_qty_lit"/>
+                        </td>
+                    </tr>
+                    <tr t-if="doc.total_qty_units" style="border: 1pt solid black;">
+                        <td name="td_total_qty_label" style="border: 1pt solid black;">
+                            <strong>Total Units</strong>
+                        </td>
+                        <td class="text-right" style="border: 1pt solid black;">
+                            <span t-field="doc.total_qty_units"/>
+                        </td>
+                    </tr>
+
+
+                </table>
+            </div>
+
+        </xpath>
+    </template>
+
+</odoo>

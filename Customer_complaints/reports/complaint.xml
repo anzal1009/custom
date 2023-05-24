@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <template id="complaint">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+
+                <style>
+                    table,
+                    th,
+                    td {
+                    border: 1px solid black;
+                    }
+                </style>
+                <body>
+
+                    <table style="width: 1000px;" align="center" cellspacing="0">
+                        <tr>
+                            <th colspan="14"  height="60"><u>PRODUCT COMPLAINT FORM </u> </th>
+                        </tr>
+                        <tr>
+                            <th rowspan="3" colspan="2" align="left" style="border-right : 1px solid white;">
+                                 <p style="text-align:center;padding-top:10px;">
+                                          <img t-attf-src="data:image/jpg;base64,{{ res_company.logo }}" align="left" height="120" width="120"  />
+                           </p>
+                            </th>
+                        <th rowspan="3" colspan="10" style="border-left: 1px solid white;" align="left">
+                                <p style="text-align:left;padding-left:190px;">
+                                    <b>
+                                        <br>EASTEA CHAI PVT LIMITED</br>
+                                    </b>
+                                </p>
+
+                            </th>
+                        </tr>
+                    </table>
+                    <br></br>
+
+
+
+                    <table style="border: 1px solid white;" align="right" cellspacing="0">
+                        <tr>
+
+                            <td colspan="14" style="text-align:right;padding-right:0px; border: 1px solid white;">Date:</td>
+                            <td colspan="2" style="border: 1px solid white;">
+                                <p style="text-align:left;padding-left:0px;"
+                                   t-field="doc.cdate"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="14" style="text-align:right;padding-right:0px; border: 1px solid white;">Complaint No:</td>
+                            <td colspan="2" style="border: 1px solid white;">
+                                <p style="text-align:left;padding-left:0px;"
+                                   t-field="doc.name_seq"/></td>
+
+                        </tr>
+                    </table>
+                    <br></br>
+                    <br></br>
+                    <table style="width: 1000px; border: 1px solid black;" align="center" cellspacing="0" height="150">
+                        <tr>
+                            <td colspan="7">Customer Name</td>
+                            <td colspan="7"><p style="text-align:left;padding-left:10px;" t-field="doc.name"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">Phone</td>
+                            <td colspan="7"><p style="text-align:left;padding-left:10px;" t-field="doc.mobile"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">Mail</td>
+                             <td colspan="7"><p style="text-align:left;padding-left:10px;" t-field="doc.mail"/></td>
+                        </tr>
+                        <tr>
+
+                            <td colspan="7">Product</td>
+                            <td colspan="7"><p style="text-align:left;padding-left:10px;" t-field="doc.product"/></td>
+
+
+                        </tr>
+
+                    </table>
+                    <table>
+                        <h4> <u> Please write down the complaint below :</u> </h4>
+                        <br></br>
+                        <br></br>
+
+                        <span style="text-align:center;"
+                              t-field="doc.note"></span>
+
+                    </table>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+<!--                    <div class="footer">-->
+                    <table class="footer" style="width: 1000px; border: 1px solid black;" align="center" cellspacing="0" height="50">
+                        <tr>
+                            <td colspan="4">Customer Signature:</td>
+                            <td colspan="4">Responsible Authority</td>
+                            <td colspan="4">Factory Head</td>
+                        </tr>
+                    </table>
+                    <br></br>
+                    <table class="footer" style="width: 1000px; border: 1px solid white;" align="center" cellspacing="0" >
+                        <tr style="align:center">
+                            <td style="text-align: center;">For Eastea Chai Pvt Ltd.</td>
+                        </tr>
+                    </table>
+<!--                    </div>-->
+
+
+
+                </body>
+            </t>
+        </t>
+    </template>
+</odoo>

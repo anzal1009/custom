@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_complaints_tree" model="ir.ui.view">
+            <field name="name">cst.complaints.tree</field>
+            <field name="model">cst.complaints</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name_seq"/>
+                    <field name="name"/>
+                    <field name="product"/>
+                    <field name="responsible"/>
+                    <field name="state"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="view_complaints_form" model="ir.ui.view">
+            <field name="name">cst.complaints.form</field>
+            <field name="model">cst.complaints</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Packing">
+
+                        <header>
+
+                            <button id="button_validate" name="action_validte"  class="btn-primary" string="Register" type="object"
+                                   states="d"/>
+                            <button id="button_initiated" name="action_initiated"  class="btn-primary" string="Initiated" type="object"
+                                    states="s"/>
+                            <button id="button_done" name="action_done"  class="btn-primary" string="Completed" type="object"
+                                    states="i"/>
+                            <button id="send_mail" name="action_send_email"  class="btn-primary" string="Send Mail" type="object" states="r"/>
+                            <button name="action_email_done"  class="btn-primary" string="Send Mail" type="object" states="do"/>
+
+                            <field name="state" widget="statusbar" />
+                        </header>
+
+                    <sheet>
+                        <widget name="web_ribbon" title="Completed"  states ="do"/>
+
+                        <h1>
+                            <field name="name_seq"/>
+
+                        </h1>
+
+
+                        <group>
+                            <group col="2">
+                                <field name="name"/>
+
+                                <field name="product"/>
+
+
+
+                            </group>
+                            <group col="2">
+                                <field name="cdate"/>
+                                <field name="responsible" />
+
+<!--                                <field name="location"/>-->
+
+
+
+
+
+
+
+                            </group>
+
+                        </group>
+                        <group>
+                            <field name="note"/>
+                        </group>
+                        <group>
+                            <field name="sol" attrs="{'invisible': [('state', '!=', 'i'),('state', '!=', 'do')] }"/>
+                        </group>
+
+                        <notebook colspan="4">
+                            <page name="cust_info" string="Customer Info">
+                                    <group col="4" colspan="4" name="cust_detail">
+                                    <field name="mail"/>
+                                     <field name="mobile"/>
+                                    <field name="addrs"/>
+                                    <field name="location"/>
+
+
+                                    </group>
+                            </page>
+                            <page name="pdt_info" string="Product Info">
+                                    <group col="4" colspan="4" name="pdt_detail">
+                                    <field name="qty"/>
+                                    <field name="lot"/>
+                                    <field name="price"/>
+
+                                    </group>
+                            </page>
+                            <page name="other_info" string="Other Info">
+                                    <group col="4" colspan="4" name="other_detail">
+                                   <field name="responsible_ids" widget="many2many_tags"/>
+                                    <field name="company_id"/>
+                                    </group>
+                            </page>
+                        </notebook>
+
+
+
+                    </sheet>
+
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                        </div>
+
+
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_customers">
+            <field name="name">Complaints</field>
+            <field name="res_model">cst.complaints</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create new Enquiry</p>
+            </field>
+        </record>
+        <menuitem id="root_complaints" name="Customer Complaints"/>
+        <menuitem id="menu_complaints" name="Complaints" parent="root_complaints" action="action_view_customers"
+                  sequence="-10"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+<!--######################### Sale Order Vendor External Link ############################        -->
+
+        <record id="sakolu_link_inherit" model="ir.ui.view">
+            <field name="name">ext.link.field</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_extrnal_link'))]"/>
+            <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+             <xpath expr="//field[@name='partner_invoice_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='analytic_account_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+
+
+            </field>
+        </record>
+
+        <record id="sale_line_ext_pdt" model="ir.ui.view">
+            <field name="name">ext.line.pdt.field</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+             <field name="groups_id" eval="[(4, ref('hide_product_creation.group_extrnal_link'))]"/>
+            <field name="arch" type="xml">
+
+                <!--                                ************ Not Working *************-->
+                <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='product_id']"
+                       position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,'no_create': True}
+                    </attribute>
+                </xpath>
+
+                <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='product_template_id']"
+                       position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,'no_create': True}
+                    </attribute>
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+        <!--######################### Purchase Order Vendor External Link ############################        -->
+
+        <record id="purchase_external_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.inherit.field</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_extrnal_link'))]"/>
+            <field name="arch" type="xml">
+
+
+             <xpath expr="//field[@name='l10n_in_journal_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='picking_type_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+            <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+             <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='account_analytic_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+
+
+            </field>
+        </record>
+
+
+<!--######################### Accounting External Link ############################        -->
+
+        <record id="accounting_external_inherit" model="ir.ui.view">
+            <field name="name">account.move.inhert.field</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_extrnal_link'))]"/>
+<!--            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_prdt_creation'))]"/>-->
+            <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='journal_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+            <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+            <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='analytic_account_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+            <xpath expr="/form/sheet/notebook/page/field[@name='invoice_line_ids']/tree/field[@name='account_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+
+
+            </field>
+        </record>
+
+
+
+<!--######################### Inventory Vendor External Link ############################        -->
+
+        <record id="inventory_external_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.inherit.field</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_extrnal_link'))]"/>
+<!--            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_prdt_creation'))]"/>-->
+            <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+            <xpath expr="/form/sheet/notebook/page/field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+            </xpath>
+
+
+            </field>
+        </record>
+
+
+        <record id="inv_ext_pdt_inherit" model="ir.ui.view">
+            <field name="name">stock.move.line.operations.tree.mrp</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_stock_move_line_detailed_operation_tree"/>
+            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_extrnal_link'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_quick_create':True,'no_create_edit':True,'no_open': True,}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+
+
+
+
+
+    </data>
+</odoo>

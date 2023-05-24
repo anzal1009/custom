@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+<!--  Purchase description readonly      -->
+
+        <record id="purchase_edit_inherit" model="ir.ui.view">
+            <field name="name">purchase.inherit.field</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+<!--            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_prdt_creation'))]"/>-->
+            <field name="arch" type="xml">
+
+                <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='name']"
+                       position="attributes">
+
+                    <attribute name="readonly">1</attribute>
+
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

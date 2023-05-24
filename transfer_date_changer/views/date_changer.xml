@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_transfer_date_confirm" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='action_cancel']" type="object" position="after">
+                    <button name="date_confirm" string="Change Date" type="object" class="oe_highlight"
+                            confirm="Are you Sure,You want to change Effective Date as Transfer Date"
+                            attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='origin']" position="before">
+                    <field name="transaction_date" attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+

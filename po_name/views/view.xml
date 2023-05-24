@@ -1,0 +1,27 @@
+<odoo>
+
+
+<!--    <record id="name_button_inherit" model="ir.ui.view">-->
+<!-- 	<field name="name">purchase.order.inherit</field>-->
+<!-- 	<field name="model">purchase.order</field>-->
+<!-- 	<field name="inherit_id" ref="purchase.purchase_order_form" />-->
+<!-- 	<field name="arch" type="xml">-->
+<!-- 		<xpath expr="//field[@name='name']" position="attributes">-->
+<!--                    <attribute name="editable" />-->
+<!-- 		</xpath>-->
+<!-- 	</field>-->
+<!-- </record>-->
+<!--    -->
+<!--    <data>-->
+<!--         <record id="name_button_inherit" model="ir.ui.view">-->
+<!--            <field name="name">purchase.order.inherit</field>-->
+<!--            <field name="model">purchase.order</field>-->
+<!--            <field name="inherit_id" ref="purchase.purchase_order_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                  <xpath expr="//header/button[@name='button_confirm']" position="after">-->
+<!--                   <button name="action_name_change" string="PONAME" type="object" class="btn-danger"/>-->
+<!--              </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--    </data>-->
+</odoo>

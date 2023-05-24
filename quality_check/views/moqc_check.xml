@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+        <record id="view_moqc_search" model="ir.ui.view">
+            <field name="name">moqc.check.search</field>
+            <field name="model">moqc.check</field>
+            <field name="arch" type="xml">
+                <search string="Search Checks">
+                   <field name="name" filter_domain="['|',('name','ilike',self),('poid','ilike',self)]"/>
+                    <field name="name_seq"/>
+                    <field name="poid"/>
+
+                     <filter string="User" name="user" domain="[('responsible','=', uid)]"/>
+
+                    <group expand="1" string="Group By">
+                        <filter string="Source Location" name="source" context="{'group_by':'source_loc_id'}"/>
+                        <filter string="Destination Location" name="destination" context="{'group_by':'dest_loc_id'}"/>
+                        <filter string="Operation Type" name="operation" context="{'group_by':'op_type'}"/>
+                    </group>
+<!--                   <separator/>-->
+<!--                   <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>-->
+               </search>
+            </field>
+        </record>
+
+        <record id="view_moqc_tree" model="ir.ui.view">
+            <field name="name">moqc.check.tree</field>
+            <field name="model">moqc.check</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree>
+
+                    <field name="name_seq"/>
+                    <field name="name"/>
+                    <field name="state" widget="badge" decoration-success="state == 'c'"
+                        decoration-warning="state == 'o'" decoration-info="state == 'd'"/>
+                    <field name="user" widget="many2one_avatar_user"/>
+                    <field name="responsible" widget="many2one_avatar_user"/>
+                    <field name="tags" attrs="{'invisible': [('state', '!=', 'c')]}" widget="badge" decoration-success="tags == 'pa'"
+                        decoration-danger="tags == 'fai'" decoration-info="tags == 'pds'"/>
+
+
+                </tree>
+            </field>
+        </record>
+        <record id="view_moqc_form" model="ir.ui.view">
+            <field name="name">moqc.check.form</field>
+            <field name="model">moqc.check</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="MOQC Check" create="0">
+
+                        <header>
+
+                            <button id="button_ongoing" name="action_ongoing"  class="btn-primary" string="Pending" type="object"
+                                   states="d"/>
+                            <button id="button_done" name="action_done"  class="btn-primary" string="Completed" type="object"
+                                    states="o"/>
+<!--                            <button name="%(moqc_wizard)d" string="Open Wizard" class="oe_edit_only" type="action"></button>-->
+
+                            <field name="state" widget="statusbar" />
+                        </header>
+
+                    <sheet>
+
+<!--                         <div class="oe_button_box" name="button_box">-->
+<!--                            <button name="create_trnsfer" class="oe_stat_button" type="object" icon="fa-star"-->
+<!--                                 attrs="{'invisible': [('failure', '!=', True)]}">-->
+<!--                                <span class="o_stat_text">Transfer</span>-->
+<!--                            </button>-->
+<!--                        </div>-->
+
+<!--                        <widget name="web_ribbon" title="Completed"  states ="do"/>-->
+<!--                         <widget name="web_ribbon" title="QC Failed" bg_color="bg-danger" attrs="{'invisible': [('failure', '!=', True),('state', '!=', 'c')]}"/>-->
+
+                        <h1>
+                            <field name="name_seq"/>
+
+                        </h1>
+
+
+                        <group>
+                            <group col="2">
+                                <field name="name"/>
+<!--                                <field name="tid"/>-->
+<!--                                <field name="pdt_ctg"/>-->
+                                <field name="pdt_ctg_id" />
+                                 <field name="poid"/>
+                                 <field name="bld_sheet"/>
+                                 <field name="lot_id"/>
+                                 <field name="responsible"/>
+
+
+
+<!--                                <field name="user"/>-->
+
+
+
+                            </group>
+                            <group col="2">
+                                 <field name="qdate"/>
+
+<!--                                <field name="pdt_temp"/>-->
+                                <field name="pdt_temp_ids" widget="many2many_tags" />
+                                <field name="product_id" />
+                                <field name="failure" invisible='1'/>
+                                <field name="failure_count" invisible='1'/>
+
+
+
+                            </group>
+                        </group>
+
+
+                        <notebook colspan="4">
+                            <page name="moqc_indos" string="MOQC info">
+                                <field name="moqc_line_idss">
+                                    <tree editable="bottom">
+<!--                                        <field name="snos"/>-->
+                                        <field name="questionss"/>
+<!--                                        <field name="product"/>-->
+                                        <field name="ress"/>
+                                        <field name="remarks"/>
+
+                                        <field name="moqc_ids" invisible='1'/>
+                                    </tree>
+                                    <form>
+                                        <group>
+<!--                                            <field name="snos"/>-->
+                                            <field name="questionss"/>
+<!--                                            <field name="product"/>-->
+                                            <field name="ress"/>
+                                            <field name="remarks"/>
+
+
+
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+
+<!--                            <page name="poqc_indos" string="PMQC info">-->
+<!--                                <field name="moqc_lines_idss">-->
+<!--                                    <tree editable="bottom">-->
+<!--&lt;!&ndash;                                        <field name="snos"/>&ndash;&gt;-->
+<!--                                        <field name="questionss"/>-->
+<!--                                        <field name="ress" />-->
+<!--                                        <field name="remarks"/>-->
+
+<!--                                        <field name="moqc_idss" invisible='1'/>-->
+<!--                                    </tree>-->
+<!--                                    <form>-->
+<!--                                        <group>-->
+<!--&lt;!&ndash;                                            <field name="snos"/>&ndash;&gt;-->
+<!--                                                <field name="questionss"/>-->
+<!--                                        <field name="ress" />-->
+<!--                                        <field name="remarks"/>-->
+<!--                                        </group>-->
+<!--                                    </form>-->
+<!--                                </field>-->
+<!--                            </page>-->
+
+                              <page name="cust_info" string="Other Info">
+                                    <group col="4" colspan="4" name="cust_detail">
+                                    <field name="user"/>
+                                     <field name="company_id"/>
+                                        <field name="source_loc_id"/>
+                                            <field name="dest_loc_id"/>
+                                     <field name="tag" invisible='1'/>
+                                     <field name="tags" invisible='1'/>
+
+
+                                    </group>
+                            </page>
+                        </notebook>
+
+
+
+
+
+                    </sheet>
+
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                        </div>
+
+
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_moqc">
+            <field name="name">MOQC Checks</field>
+            <field name="res_model">moqc.check</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create new Enquiry</p>
+            </field>
+        </record>
+
+
+         <menuitem id="menu_moqc_sub" name="MOQC Checks" parent="menu_quality" action="action_view_moqc"
+                  sequence="10"/>
+
+
+
+
+
+    </data>
+</odoo>

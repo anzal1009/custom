@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+<!--######################### Sale Order Required ############################        -->
+
+        <record id="sale_external_inherit" model="ir.ui.view">
+            <field name="name">sale.line.inherit.field</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+<!--            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_prdt_creation'))]"/>-->
+            <field name="arch" type="xml">
+
+
+            <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="required">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                    <attribute name="force_save">1</attribute>
+            </xpath>
+
+            </field>
+        </record>
+
+
+
+
+<!--######################### Purchase Order Required ############################        -->
+
+        <record id="purchase_requ_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.inherit.field</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+<!--            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_prdt_creation'))]"/>-->
+            <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='order_line']" position="attributes">
+                <attribute name="attrs">{'required': [('state', '=', 'draft')]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                    <attribute name="force_save">1</attribute>
+            </xpath>
+
+
+
+
+
+            </field>
+        </record>
+
+
+
+
+
+
+    </data>
+
+</odoo>

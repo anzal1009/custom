@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_params_moqc_tree" model="ir.ui.view">
+            <field name="name">moqc.params.tree</field>
+            <field name="model">params.moqc</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree>
+
+                    <field name="name_seq"/>
+                    <field name="name"/>
+
+
+                </tree>
+            </field>
+        </record>
+        <record id="view_quality_params_moqc_form" model="ir.ui.view">
+            <field name="name">params.moqc.form</field>
+            <field name="model">params.moqc</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="MOQC Parameters">
+
+
+
+                    <sheet>
+
+<!--                        <widget name="web_ribbon" title="Completed"  states ="do"/>-->
+
+                        <h1>
+                            <field name="name_seq"/>
+
+                        </h1>
+
+
+                        <group>
+                            <group col="2">
+                                <field name="name"/>
+                                <field name="pdt_ctgrs"/>
+
+                            </group>
+                            <group col="2">
+                                 <field name="cid"/>
+<!--                                 <field name="operation_types"/>-->
+
+                            </group>
+                        </group>
+
+
+                        <notebook colspan="4">
+                            <page name="moqcp_indos" string="MOQC info">
+                                <field name="moqc_params_line_ids">
+                                    <tree editable="bottom">
+<!--                                        <field name="sno"/>-->
+                                        <field name="questions"/>
+<!--                                        <field name="res"/>-->
+                                        <field name="remark"/>
+
+                                        <field name="moqc_params_id" invisible='1'/>
+                                    </tree>
+                                    <form>
+                                        <group>
+<!--                                            <field name="sno"/>-->
+
+                                            <field name="questions"/>
+<!--                                            <field name="res"/>-->
+                                            <field name="remark"/>
+
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+
+
+
+
+
+                    </sheet>
+
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                        </div>
+
+
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_quality_params_moqc">
+            <field name="name">MOQC Parameters</field>
+            <field name="res_model">params.moqc</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create new Check</p>
+            </field>
+        </record>
+         <menuitem id="menu_moqc_params_sub" name="MOQC Parameters" parent="menu_quality_params" action="action_view_quality_params_moqc"
+                  sequence="30"/>
+
+
+
+    </data>
+</odoo>

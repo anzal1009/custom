@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.module.category" id="module_category_journal">
+        <field name="name">Journal Entry</field>
+        <field name="description">Category For Journal entry creation</field>
+<!--        <field name="sequence">45</field>-->
+    </record>
+
+    <record id="group_acc_creation" model="res.groups">
+        <field name="name">Create</field>
+        <field name="category_id" ref="module_category_journal"/>
+    </record>
+
+    <record id="group_acc_post" model="res.groups">
+        <field name="name">Post</field>
+        <field name="category_id" ref="module_category_journal"/>
+<!--        <field name="implied_ids" eval="[(4, ref('group_hospital_doctor'))]"/>-->
+    </record>
+
+    <record id="group_acc_cancel" model="res.groups">
+        <field name="name">Cancel</field>
+        <field name="category_id" ref="module_category_journal"/>
+    </record>
+
+     <record id="group_acc_reset" model="res.groups">
+        <field name="name">Reset/Reverse</field>
+        <field name="category_id" ref="module_category_journal"/>
+    </record>
+
+</odoo>

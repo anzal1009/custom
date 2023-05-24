@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+
+        <record id="view_partner_unique_code_form" model="ir.ui.view">
+            <field name="name">res.partner.unique.code.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/group/field[@name='category_id']" position="after">
+                    <field name="partner_type"/>
+                </xpath>
+                <xpath expr="//group/group[@name='misc']/field[@name='ref']" position="attributes">
+                    <attribue name="invisible">1</attribue>
+                </xpath>
+                <xpath expr="//sheet/div/h1" position="after">
+                    <group>
+                        <field name="ref" placeholder="Code"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="vendor_code_purchase" model="ir.ui.view">
+            <field name="name">purchase.order.supplier.reference</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="vendor_code"/>
+                </field>
+
+            </field>
+        </record>
+
+        <record id="sale_order_customer_code" model="ir.ui.view">
+            <field name="name">sale.order.customer.code</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="customer_code"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_account_move_partner_code_form" model="ir.ui.view">
+            <field name="name">account.move.partner.code</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <field name="partner_id" position="after">
+                    <field name="partner_code" string="Customer Code"
+                           attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"
+                           force_save="1"/>
+                    <field name="partner_code" string="Vendor Code"
+                           attrs="{'invisible': [('move_type', 'in', ('out_invoice', 'out_refund', 'out_receipt'))]}"
+                           force_save="1"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

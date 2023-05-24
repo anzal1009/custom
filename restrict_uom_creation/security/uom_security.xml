@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<data>
+    <record id="group_hide_uom_creation" model="res.groups">
+        <field name="name">Hide UoM Creation/ Updation</field>
+    </record>
+
+</data>
+</odoo>

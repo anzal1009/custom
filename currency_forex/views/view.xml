@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+    <record id="sale_currency_field" model="ir.ui.view">
+        <field name="name">sale.order.inh</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="usd_rate"/>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <record id="invoice_currency_field" model="ir.ui.view">
+        <field name="name">account.move.inh</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='invoice_date']" position="after">
+
+                    <field name="usd_rates" attrs="{'invisible': [('move_type', '!=', 'out_invoice')]}"/>
+
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <record id="payment_currency_field" model="ir.ui.view">
+        <field name="name">account.payment.inh</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='date']" position="after">
+
+                    <field name="usds_rates" />
+
+            </xpath>
+
+        </field>
+    </record>
+
+
+
+
+
+</odoo>

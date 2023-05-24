@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+
+        <record id="qc_kanban_demo_overview" model="quality.overview">
+            <field name="id_name">001</field>
+            <field name="name">GRN QC</field>
+        </record>
+        <record id="qc_kanban_demo_overview1" model="quality.overview">
+            <field name="id_name">002</field>
+            <field name="name">MOQC</field>
+
+        </record>
+
+        <record id="qc_kanban_demo_overview2" model="quality.overview">
+            <field name="id_name">003</field>
+            <field name="name">Online Sales</field>
+
+        </record>
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+
+       <record id="inherit_location_online" model="ir.ui.view">
+        <field name="name">stock.location.online</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='usage']" position="after">
+                <field name="is_online" />
+                <field name="qc_representative" />
+            </xpath>
+        </field>
+    </record>
+
+          <record id="view_qc_search" model="ir.ui.view">
+            <field name="name">cu.quality.check.search</field>
+            <field name="model">custom.quality.check</field>
+            <field name="arch" type="xml">
+                <search string="Search Checks">
+                   <field name="name" filter_domain="['|',('name','ilike',self),('poid','ilike',self),('tid','ilike',self)]"/>
+                    <field name="name_seq"/>
+                    <field name="poid"/>
+                    <field name="tid"/>
+
+                    <filter string="User" name="user" domain="[('resp_user','=', uid)]"/>
+
+                    <group expand="1" string="Group By">
+                        <filter string="Source Location" name="source" context="{'group_by':'source_loc_id'}"/>
+                        <filter string="Destination Location" name="destination" context="{'group_by':'dest_loc_id'}"/>
+                        <filter string="Operation Type" name="operation" context="{'group_by':'op_type'}"/>
+                    </group>
+<!--                   <separator/>-->
+<!--                   <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>-->
+               </search>
+            </field>
+        </record>
+
+
+        <record id="view_quality_tree" model="ir.ui.view">
+            <field name="name">custom.quality.check.tree</field>
+            <field name="model">custom.quality.check</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree>
+
+                    <field name="name_seq"/>
+                    <field name="name"/>
+                    <field name="state" widget="badge" decoration-success="state == 'c'"
+                        decoration-warning="state == 'o'" decoration-info="state == 'd'"/>
+                    <field name="user" widget="many2one_avatar_user"/>
+<!--                    <field name="tag" attrs="{'invisible': [('state', '!=', 'c')]}"/>-->
+                    <field name="tags" attrs="{'invisible': [('state', '!=', 'c')]}" widget="badge" decoration-success="tags == 'pa'"
+                        decoration-danger="tags == 'fai'" decoration-info="tags == 'pds'"/>
+<!--                       />-->
+
+
+                </tree>
+            </field>
+        </record>
+        <record id="view_quality_form" model="ir.ui.view">
+            <field name="name">custom.quality.check.form</field>
+            <field name="model">custom.quality.check</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Quality Check">
+
+                        <header>
+
+                            <button id="button_ongoing" name="action_ongoing"  class="btn-primary" string="Pending" type="object"
+                                   states="d"/>
+                            <button id="button_done" name="action_done"  class="btn-primary" string="Completed" type="object"
+                                    states="o"/>
+
+                            <field name="state" widget="statusbar" />
+                        </header>
+
+                    <sheet>
+
+
+
+                        <div class="oe_button_box" name="button_box">
+<!--                            <button name="create_trnsfer" class="oe_stat_button" type="object" icon="fa-star"-->
+<!--                                 attrs="{'invisible': [('pdt_fail', '!=', True)]}">-->
+<!--                                <span class="o_stat_text">Transfer</span>-->
+<!--                            </button>-->
+                        </div>
+<!--                         <widget name="web_ribbon" title="QC Failed" bg_color="bg-danger" attrs="{'invisible': [('failures', '!=', True),('state', '!=', 'c')]}"/>-->
+<!--                         <widget name="web_ribbon" title="Product QC Failed" bg_color="bg-danger" attrs="{'invisible': [('pdt_fail', '!=', True)]}"/>-->
+
+
+<!--                        <widget name="web_ribbon" title="Completed"  states ="do"/>-->
+
+                        <h1>
+                            <field name="name_seq"/>
+
+                        </h1>
+
+
+                        <group>
+                            <group col="2">
+                                <field name="name"/>
+                                <field name="tid"/>
+<!--                                <field name="pdt_ctg"/>-->
+                                <field name="pdt_ctg_ids" widget="many2many_tags"/>
+                                <field name="state_hide" invisible="1" />
+
+<!--                                <field name="user"/>-->
+
+
+
+                            </group>
+                            <group col="2">
+                                 <field name="qdate"/>
+                                <field name="poid"/>
+<!--                                <field name="pdt_temp"/>-->
+                                <field name="pdt_temp_ids" widget="many2many_tags"/>
+<!--                                <field name="user" string="Responsible User"/>-->
+                                <field name="resp_user"/>
+                                <field name="failures" invisible="1"/>
+                                <field name="fail_count" invisible="1"/>
+                                <field name="op_fail_count" invisible="1"/>
+<!--                                <field name="count"/>-->
+
+
+
+
+
+
+
+
+                            </group>
+                        </group>
+
+
+                        <notebook colspan="4">
+                            <page name="qc_indos" string="QC info">
+                                <field name="qc_line_idss">
+                                    <tree editable="bottom">
+<!--                                        <field name="snos"/>-->
+                                        <field name="questionss"/>
+<!--                                        <field name="pas" />-->
+                                        <field name="ress" />
+                                        <field name="remarks"/>
+
+                                        <field name="qc_ids" invisible='1'/>
+                                    </tree>
+                                    <form>
+                                        <group>
+<!--                                            <field name="snos"/>-->
+                                            <field name="questionss"/>
+                                            <field name="ress" />
+<!--                                            <field name="pas"/>-->
+                                            <field name="remarks"/>
+
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+
+
+                             <page name="after_qc" string="After info" attrs="{'invisible': [('show_after', '!=', True)]}">
+                                <field name="after_qc_line_ids">
+                                    <tree editable="bottom">
+<!--                                        <field name="no"/>-->
+                                        <field name="qstns"/>
+<!--                                        <field name="pa"/>-->
+                                        <field name="resp" />
+                                        <field name="remrk"/>
+
+                                        <field name="a_qc_ids" invisible='1'/>
+                                    </tree>
+                                    <form>
+                                        <group>
+
+                                        <field name="qstns"/>
+<!--                                        <field name="pa"/>-->
+                                        <field name="resp" />
+                                        <field name="remrk"/>
+
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+
+
+                            <page name="qc_prdt" string="Product Details ">
+                                <field name="qc_prdt_line_ids">
+                                    <tree editable="bottom">
+<!--                                        <field name="snos"/>-->
+                                        <field name="product_id_line"  readonly="1"/>
+                                        <field name="p_qty" />
+<!--                                        <field name="p_line_qs"/>-->
+                                        <field name="p_line_lot" attrs="{'column_invisible': [('parent.state_hide', '=', True)]}"  readonly="1"/>
+                                        <field name="p_line_lot_id"  attrs="{'column_invisible': [('parent.state', '!=', 'c')]}"  readonly="1"/>
+                                        <field name="p_responce"  attrs="{'column_invisible': [('parent.state', '!=', 'c')]}"  readonly="1"/>
+<!--                                        <field name="pas" optional="hide"/>-->
+                                        <field name="p_remarks" attrs="{'required': [('parent.state', '=', 'o')]}"/>
+<!--                                        <field name="hide" invisible="1"/>-->
+
+                                        <field name="qc_p_ids" invisible='1'/>
+                                    </tree>
+                                    <form>
+                                        <group>
+<!--                                            <field name="snos"/>-->
+                                            <field name="product_id_line"  readonly="1"/>
+                                            <field name="p_qty" />
+<!--                                            <field name="p_line_qs"/>-->
+                                            <field name="p_line_lot" attrs="{'column_invisible': [('parent.state_hide', '!=', True)]}"  readonly="1"/>
+                                            <field name="p_line_lot_id" attrs="{'column_invisible': [('parent.state', '!=', 'c')]}"  readonly="1"/>
+                                            <field name="p_responce"/>
+                                            <field name="p_remarks"/>
+<!--                                            <field name="hide"/>-->
+
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+
+                              <page name="cust_info" string="Other Info">
+                                    <group col="4" colspan="4" name="cust_detail">
+                                    <field name="user"/>
+                                     <field name="company_id"/>
+                                     <field name="op_type"/>
+                                     <field name="tag"  attrs="{'invisible': [('state', '!=', 'c')]}"/>
+                                     <field name="show_after" invisible="1"/>
+                                     <field name="pdt_fail" invisible="1"/>
+                                     <field name="is_online_sale"/>
+                                     <field name="source_loc_id"/>
+                                     <field name="dest_loc_id"/>
+
+
+                                    </group>
+                                  <group>
+                                     <field name="notes"/>
+                                  </group>
+                            </page>
+
+
+                        </notebook>
+
+
+
+
+
+                    </sheet>
+
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                        </div>
+
+
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_quality">
+            <field name="name">GRN QC</field>
+            <field name="res_model">custom.quality.check</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_user': 1}</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create new Enquiry</p>
+            </field>
+        </record>
+        <menuitem id="root_quality" name="Quality Check"/>
+        <menuitem id="menu_qc_overview" name="Overview" parent="root_quality" action="action_view_kanban_qc" sequence="-20"/>
+        <menuitem id="menu_quality" name="Quality Checks" parent="root_quality" action="action_view_quality"
+                  sequence="-10"/>
+         <menuitem id="menu_quality_sub" name="GRN Checks" parent="menu_quality" action="action_view_quality"
+                  sequence="10"/>
+         <menuitem id="menu_quality_params" name="Parameter" parent="root_quality"
+                  sequence="10"/>
+
+<!--         <menuitem id="menu_quality_rm" name="Quality Check RM" parent="menu_quality" action="action_view_quality_rm"-->
+<!--                  sequence="10"/>-->
+
+
+    </data>
+</odoo>

@@ -1,0 +1,370 @@
+<odoo>
+    <data>
+        <template id="inherit_external_layout_boxed_delivery_slip"
+                  inherit_id="inv_sequence_wh.inherit_external_layout_boxed">
+            <!--            <xpath expr="//div[@name='company_address']" position="replace">-->
+            <!--                <div name="company_address" class="float-right mb4">-->
+            <!--                    <t t-if="o and o._name== 'account.move' and o.move_type in ('out_invoice')">-->
+            <!--                        <span t-if="o.warehouse_id" t-field="o.warehouse_id.partner_id"-->
+            <!--                              t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'></span>-->
+            <!--                        <t t-if="o.warehouse_id.partner_id.vat">-->
+            <!--                            <t t-out="o.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>:-->
+            <!--                            <span t-field="o.warehouse_id.partner_id.vat"/>-->
+            <!--                        </t>-->
+            <!--                    </t>-->
+            <!--                    -->
+            <!--                </div>-->
+
+            <!--            </xpath>-->
+            <xpath expr="//div[@name='company_address']/t[@t-else='']" position="replace">
+                <t t-elif="o and o._name== 'stock.picking' and o.picking_type_id.code == 'internal'">
+                    <span t-if="o.location_id" t-field="o.location_id.partner_id"
+                          t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'></span>
+                    <t t-if="o.location_id.partner_id.vat">
+                        <t t-out="o.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>:
+                        <span t-field="o.location_id.partner_id.vat"/>
+                    </t>
+                </t>
+                <t t-else="">
+                    <span t-if="company.company_details" t-field="company.company_details"></span>
+                </t>
+            </xpath>
+
+        </template>
+
+        <template id="inherit_external_layout_boxed_header" inherit_id="web.external_layout_boxed">
+            <xpath expr="//div/div[@class='o_boxed_header']" position="inside">
+                <t t-if="env.context.get('sti_report', False) or is_sti_report">
+                    <t t-if="o and o._name== 'stock.picking' and o.picking_type_id.code in ('internal', 'outgoing')">
+                        <div class="col-12 text-center" style="font-size:20px;">
+                            <strong>Stock Transfer Invoice</strong>
+                        </div>
+                    </t>
+                </t>
+                <t t-else="not (env.context.get('sti_report', False) or is_sti_report)">
+                    <t t-if="o and o._name== 'stock.picking' and o.picking_type_id.code in ('internal', 'outgoing')">
+                        <div class="col-12 text-center" style="font-size:20px;">
+                            <strong>Delivery Challan</strong>
+                            <span t-esc="env.context.get('sti_report')"/>
+                        </div>
+                    </t>
+                </t>
+
+
+            </xpath>
+        </template>
+
+        <template id="inherited_report_delivery_document"
+                  inherit_id="stock.report_delivery_document">
+            <xpath expr="//div[@class='page']/div[@class='row mt32 mb32']" position="before">
+                <t t-if="o.picking_type_id.code == 'internal'">
+                    <br/>
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            To:
+                            <span t-if="o.location_dest_id" t-field="o.location_dest_id.partner_id"
+                                  t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'></span>
+                            <t t-if="o.location_dest_id.partner_id.vat">
+                                <t t-out="o.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>:
+                                <span t-field="o.location_dest_id.partner_id.vat"/>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </xpath>
+
+            <xpath expr="//table[@name='stock_move_table']/thead/tr/th[@name='th_sm_ordered']" position="replace">
+                <t t-if="o.picking_type_id.code in ('internal', 'outgoing')">
+                    <th name="th_sm_hsn">
+                        <strong>HSN</strong>
+                    </th>
+                </t>
+                <t t-if="o.picking_type_id.code not in ('internal', 'outgoing')">
+                    <th name="th_sm_ordered">
+                        <strong>Ordered</strong>
+                    </th>
+                </t>
+            </xpath>
+            <xpath expr="//table[@name='stock_move_table']/thead/tr/th[@name='th_sm_quantity']" position="replace">
+                <t t-if="o.picking_type_id.code in ('internal', 'outgoing')">
+                    <th name="th_sm_quantity">
+                        <strong>Qty</strong>
+                    </th>
+                </t>
+                <t t-if="o.picking_type_id.code not in ('internal', 'outgoing')">
+                    <th name="th_sm_quantity">
+                        <strong>Delivered</strong>
+                    </th>
+                </t>
+            </xpath>
+            <xpath expr="//table[@name='stock_move_table']/thead/tr" position="inside">
+                <t t-if="o.picking_type_id.code in ('internal', 'outgoing')">
+                    <th name="th_sm_uom">
+                        <strong>UoM</strong>
+                    </th>
+                    <th name="th_sm_rate">
+                        <strong>Rate</strong>
+                    </th>
+
+                    <th name="th_sm_amount">
+                        <strong>Amount</strong>
+                    </th>
+                </t>
+            </xpath>
+            <xpath expr="//table[@name='stock_move_table']/tbody/tr" position="replace">
+                <t t-set="total_amount" t-value="0"/>
+                <tr t-foreach="lines" t-as="move">
+                    <t t-if="o.picking_type_id.code not in ('internal', 'outgoing')">
+                        <td>
+                            <span t-field="move.product_id"/>
+                            <p t-if="move.description_picking != move.product_id.name and move.description_picking != move.product_id.display_name">
+                                <span t-field="move.description_picking"/>
+                            </p>
+                        </td>
+                        <td>
+                            <span t-field="move.product_uom_qty"/>
+                            <span t-field="move.product_uom"/>
+                        </td>
+                        <td>
+                            <span t-field="move.quantity_done"/>
+                            <span t-field="move.product_uom"/>
+                        </td>
+                    </t>
+
+                    <t t-if="o.picking_type_id.code in ('internal', 'outgoing')">
+                        <t t-if="o.picking_type_id.code == 'internal'" t-set="total_amount"
+                           t-value="total_amount+(move.quantity_done*move.product_id.standard_price)"/>
+                        <t t-if="o.picking_type_id.code == 'outgoing'" t-set="total_amount"
+                           t-value="total_amount+(move.quantity_done*move.sale_line_id.price_unit)"/>
+                        <td>
+                            <span t-field="move.product_id"/>
+                            <p t-if="move.description_picking != move.product_id.name and move.description_picking != move.product_id.display_name">
+                                <span t-field="move.description_picking"/>
+                            </p>
+                        </td>
+                        <td>
+                            <span t-field="move.product_id.l10n_in_hsn_code"/>
+                        </td>
+                        <td>
+                            <span t-field="move.quantity_done"/>
+                        </td>
+                        <td>
+                            <span t-field="move.product_uom"/>
+                        </td>
+                        <td>
+                            <span t-if="o.picking_type_id.code == 'internal'" t-field="move.product_id.standard_price"/>
+                            <span t-if="o.picking_type_id.code == 'outgoing'" t-field="move.sale_line_id.price_unit"/>
+                        </td>
+
+                        <td>
+                            <span t-if="o.picking_type_id.code == 'internal'"
+                                  t-esc="'{:,.3f}'.format(move.quantity_done*move.product_id.standard_price)"/>
+                            <span t-if="o.picking_type_id.code == 'outgoing'"
+                                  t-esc="'{:,.3f}'.format(move.quantity_done*move.sale_line_id.price_unit)"/>
+                        </td>
+                    </t>
+                </tr>
+
+            </xpath>
+
+            <!--          *** Stock Move Line ***-->
+            <xpath expr="//table[@name='stock_move_line_table']/thead/tr/th[@name='th_sml_qty_ordered']"
+                   position="replace">
+                <t t-if="o.picking_type_id.code in ('internal', 'outgoing')">
+                    <!--                    <t name="lot_serial" t-if="has_serial_number">-->
+                    <!--                        <th>-->
+                    <!--                            Lot/Serial Number-->
+                    <!--                        </th>-->
+                    <!--                    </t>-->
+                    <th name="th_sml_hsn">
+                        <strong>HSN</strong>
+                    </th>
+                </t>
+                <t t-if="o.picking_type_id.code not in ('internal', 'outgoing')">
+                    <!--                    <t name="lot_serial" t-if="has_serial_number">-->
+                    <!--                        <th>-->
+                    <!--                            Lot/Serial Number-->
+                    <!--                        </th>-->
+                    <!--                    </t>-->
+                    <th name="th_sml_qty_ordered" class="text-center" t-if="not has_serial_number">
+                        <strong>Ordered</strong>
+                    </th>
+                </t>
+            </xpath>
+            <xpath expr="//table[@name='stock_move_line_table']/thead/tr/th[@name='th_sml_quantity']"
+                   position="replace">
+                <t t-if="o.picking_type_id.code in ('internal', 'outgoing')">
+                    <th name="th_sml_quantity">
+                        <strong>Qty</strong>
+                    </th>
+                </t>
+                <t t-if="o.picking_type_id.code not in ('internal', 'outgoing')">
+                    <th name="th_sml_quantity" class="text-center">
+                        <strong>Delivered</strong>
+                    </th>
+                </t>
+            </xpath>
+            <xpath expr="//table[@name='stock_move_line_table']/thead/tr" position="inside">
+                <t t-if="o.picking_type_id.code in ('internal', 'outgoing')">
+                    <th name="th_sml_rate">
+                        <strong>Rate</strong>
+                    </th>
+                    <th name="th_sml_uom">
+                        <strong>UoM</strong>
+                    </th>
+                    <th name="th_sml_amount">
+                        <strong>Amount</strong>
+                    </th>
+                </t>
+            </xpath>
+
+            <xpath expr="//table[@name='stock_move_line_table']/tbody" position="replace">
+                <t t-if="o.picking_type_id.code in ('internal', 'outgoing')">
+                    <t t-set="total_amount" t-value="0"/>
+
+                    <tbody>
+                        <tr t-foreach="o.move_line_ids" t-as="move_line">
+                            <t t-if="o.picking_type_id.code == 'internal'" t-set="total_amount"
+                               t-value="total_amount+(move_line.qty_done*move_line.product_id.standard_price)"/>
+                            <t t-if="o.picking_type_id.code == 'outgoing'" t-set="total_amount"
+                               t-value="total_amount+(move_line.qty_done*move_line.move_id.sale_line_id.price_unit)"/>
+
+                            <td>
+                                <span t-field="move_line.product_id"/>
+                                <t t-if="not description and description != ''">
+                                    <t t-set="description" t-value="move_line.move_id.description_picking"/>
+                                </t>
+                                <p t-if="description !='' and description != move_line.product_id.name">
+                                    <span t-esc="description"/>
+                                </p>
+                            </td>
+                            <t t-if="has_serial_number" name="move_line_lot">
+                                <td>
+                                    <span t-field="move_line.lot_id.name"/>
+                                </td>
+                            </t>
+                            <td>
+                                <span t-field="move_line.product_id.l10n_in_hsn_code"/>
+                            </td>
+                            <td>
+                                <span t-field="move_line.qty_done"/>
+                            </td>
+                            <td>
+                                <span t-if="o.picking_type_id.code == 'internal'"
+                                      t-field="move_line.product_id.standard_price"/>
+                                <span t-if="o.picking_type_id.code == 'outgoing'"
+                                      t-field="move_line.move_id.sale_line_id.price_unit"/>
+                            </td>
+                            <td>
+                                <span t-field="move_line.product_uom_id"/>
+                            </td>
+                            <td>
+                                <span t-if="o.picking_type_id.code == 'internal'"
+                                      t-esc="'{:,.3f}'.format(move_line.qty_done*move_line.product_id.standard_price)"/>
+                                <span t-if="o.picking_type_id.code == 'outgoing'"
+                                      t-esc="'{:,.3f}'.format(move_line.qty_done*move_line.move_id.sale_line_id.price_unit)"/>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </t>
+                <t t-if="o.picking_type_id.code not in ('internal', 'outgoing')">
+                    <tbody>
+                        <!-- This part gets complicated with different use cases (additional use cases in extensions of this report):
+                                1. If serial numbers are used and set to print on delivery slip => print lines as is, otherwise group them by overlapping
+                                    product + description + uom combinations
+                                2. If any packages are assigned => split products up by package (or non-package) and then apply use case 1 -->
+                        <!-- If has destination packages => create sections of corresponding products -->
+                        <t t-if="o.has_packages" name="has_packages">
+                            <t t-set="packages" t-value="o.move_line_ids.mapped('result_package_id')"/>
+                            <t t-foreach="packages" t-as="package">
+                                <t t-call="stock.stock_report_delivery_package_section_line"/>
+                                <t t-set="package_move_lines"
+                                   t-value="o.move_line_ids.filtered(lambda l: l.result_package_id == package)"/>
+                                <!-- If printing lots/serial numbers => keep products in original lines -->
+                                <t t-if="has_serial_number">
+                                    <tr t-foreach="package_move_lines" t-as="move_line">
+                                        <t t-call="stock.stock_report_delivery_has_serial_move_line"/>
+                                    </tr>
+                                </t>
+                                <!-- If not printing lots/serial numbers => merge lines with same product+description+uom -->
+                                <t t-else="">
+                                    <t t-set="aggregated_lines"
+                                       t-value="package_move_lines._get_aggregated_product_quantities(strict=True)"/>
+                                    <t t-call="stock.stock_report_delivery_aggregated_move_lines"/>
+                                </t>
+                            </t>
+                            <!-- Make sure we do another section for package-less products if they exist -->
+                            <t t-set="move_lines"
+                               t-value="o.move_line_ids.filtered(lambda l: not l.result_package_id)"/>
+                            <t t-if="move_lines" name="no_package_move_lines">
+                                <t t-call="stock.stock_report_delivery_no_package_section_line"
+                                   name="no_package_section"/>
+                                <t t-if="has_serial_number">
+                                    <tr t-foreach="move_lines" t-as="move_line">
+                                        <t t-call="stock.stock_report_delivery_has_serial_move_line"/>
+                                    </tr>
+                                </t>
+                                <t t-else="">
+                                    <t t-set="aggregated_lines"
+                                       t-value="move_lines._get_aggregated_product_quantities()"/>
+                                    <t t-if="aggregated_lines">
+                                        <t t-call="stock.stock_report_delivery_aggregated_move_lines"/>
+                                    </t>
+                                </t>
+                            </t>
+                        </t>
+                        <!-- No destination packages -->
+                        <t t-else="">
+                            <!-- If printing lots/serial numbers => keep products in original lines -->
+                            <t t-if="has_serial_number">
+                                <tr t-foreach="o.move_line_ids" t-as="move_line">
+                                    <t t-call="stock.stock_report_delivery_has_serial_move_line"/>
+                                </tr>
+                            </t>
+                            <!-- If not printing lots/serial numbers => merge lines with same product -->
+                            <t t-else="" name="aggregated_move_lines">
+                                <t t-set="aggregated_lines"
+                                   t-value="o.move_line_ids._get_aggregated_product_quantities()"/>
+                                <t t-call="stock.stock_report_delivery_aggregated_move_lines"/>
+                            </t>
+                        </t>
+                    </tbody>
+                </t>
+            </xpath>
+        </template>
+
+        <template id="de_document_quantity_total_inherit_delivery_slip"
+                  inherit_id="de_document_quantity_total.report_stock_report_delivery_document_inherit">
+            <xpath expr="//div/div/div/table" position="inside">
+                <t t-if="o.picking_type_id.code in ('internal', 'outgoing')">
+                    <tr class="border-black o_subtotal">
+                        <td>
+                            <strong>Total Amount</strong>
+                        </td>
+                        <td>
+                            <span class="text-right" t-esc="'{:,.3f}'.format(total_amount)"/>
+                        </td>
+                    </tr>
+                </t>
+            </xpath>
+            <xpath expr="//div/div[@name='total']/div" position="before">
+                <div class="col-8">
+                    <span>
+                        <b>
+                            For
+                            <t t-if="o.company_id" t-esc="o.company_id.company_in_print"/>
+                        </b>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        Authorised Signatory
+                    </span>
+
+                </div>
+
+            </xpath>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<odoo>
+        <record id="view_date_validate_form" model="ir.ui.view">
+            <field name="name">date_validation_wizard.form</field>
+            <field name="model">date.validation.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Date Confirmation">
+                    <group>
+                        <field name="sale_id" invisible="1"/>
+                        <field name="confirmation_date"/>
+                    </group>
+                    <footer>
+                        <button type="object" name="action_confirm"
+                                string="Confirm" class="btn-primary"/>
+                        <button special="cancel" string="Cancel" class="btn-default"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_date_validate" model="ir.actions.act_window">
+            <field name="name">Date Confirmation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">date.validation.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_date_validate_form"/>
+            <field name="target">new</field>
+        </record>
+
+
+
+
+        <record id="view_transfer_date_confirm" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+
+
+
+                    <xpath expr="/form/sheet/group/group/field[@name='date_done']" position="attributes">
+                    <attribute name="groups"></attribute>
+                    <attribute name="nolabel">0</attribute>
+
+                </xpath>
+
+                <xpath expr="//header/button[@name='button_validate']" type="object" states="draft"
+                       position="attributes">
+                    <attribute name="name">date_confirm_button</attribute>
+                </xpath>
+                <xpath expr="//header/button[@name='button_validate']" type="object" states="assigned" position="attributes">
+                    <attribute name="name">date_confirm_button</attribute>
+                </xpath>
+            </field>
+        </record>
+<!--        <menuitem id="date_validate_menu"-->
+<!--                  name="Date Validate"-->
+<!--                  parent="stock.menu_stock_root"-->
+<!--                  action="action_date_validate"/>-->
+
+</odoo>

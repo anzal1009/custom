@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+      <record id="mrp_bom_creation_restriction_form_view" model="ir.ui.view">
+                 <field name="name">mrp.bom.kanban</field>
+                 <field name="model">mrp.bom</field>
+                  <field name="inherit_id" ref="mrp.mrp_bom_kanban_view"/>
+                 <field name="groups_id" eval="[(6, 0, [ref('restrict_bom_creation.group_bom_creation')])]"/>
+                 <field name="arch" type="xml">
+                   <xpath expr="//kanban" position="attributes">
+                     <attribute name="create">false</attribute>
+                       <attribute name="edit">false</attribute>
+                   </xpath>
+                 </field>
+               </record>
+
+      <record id="mrp_bom_restriction_kanban_view" model="ir.ui.view">
+                 <field name="name">mrp.bom.form</field>
+                 <field name="model">mrp.bom</field>
+                  <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+                 <field name="groups_id" eval="[(6, 0, [ref('restrict_bom_creation.group_bom_creation')])]"/>
+                 <field name="arch" type="xml">
+                   <xpath expr="//form" position="attributes">
+                     <attribute name="create">false</attribute>
+                       <attribute name="edit">false</attribute>
+                   </xpath>
+                 </field>
+               </record>
+
+             <record id="mrp_bom_restriction_tree_view" model="ir.ui.view">
+                 <field name="name">mrp.bom.tree</field>
+                 <field name="model">mrp.bom</field>
+                  <field name="inherit_id" ref="mrp.mrp_bom_tree_view"/>
+                 <field name="groups_id" eval="[(6, 0, [ref('restrict_bom_creation.group_bom_creation')])]"/>
+                 <field name="arch" type="xml">
+                   <xpath expr="//tree" position="attributes">
+                     <attribute name="create">false</attribute>
+                       <attribute name="edit">false</attribute>
+                   </xpath>
+                 </field>
+               </record>
+  </data>
+</odoo>

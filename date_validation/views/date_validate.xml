@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+
+     <record id="view_transfer_date_confirm" model="ir.ui.view">
+                <field name="name">stock.picking.form</field>
+                <field name="model">stock.picking</field>
+                <field name="inherit_id" ref="stock.view_picking_form"/>
+                <field name="arch" type="xml">
+
+                    <xpath expr="//header/button[@name='action_cancel']" position="before">
+                        <button name="action_date" string="Confirm Date" type="object" class="btn-danger"/>
+                    </xpath>
+                </field>
+            </record>
+
+
+</odoo>

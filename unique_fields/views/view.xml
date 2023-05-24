@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+
+
+         <record id="view_aa_acc_form" model="ir.ui.view">
+            <field name="name">res.aa.code.form</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='code']" position="before">
+                    <field name="status"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_coa_code_form" model="ir.ui.view">
+            <field name="name">res.coa.code.form</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='tag_ids']" position="before">
+                    <field name="refe"/>
+                </xpath>
+            </field>
+        </record>
+
+
+<!--        <record id="acc_form_dip_inherit" model="ir.ui.view">-->
+<!--            <field name="name">coa.inherit.field</field>-->
+<!--            <field name="model">account.account</field>-->
+<!--            <field name="inherit_id" ref="account.view_account_form"/>-->
+<!--            &lt;!&ndash;            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_sale_delete'))]"/>&ndash;&gt;-->
+<!--            <field name="arch" type="xml">-->
+
+<!--                <xpath expr="//form" position="attributes">-->
+<!--                    <attribute name="copy">false</attribute>-->
+<!--                </xpath>-->
+
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="acc_tree_inherit" model="ir.ui.view">-->
+<!--            <field name="name">coa.inherited_tree.field</field>-->
+<!--            <field name="model">account.account</field>-->
+<!--            <field name="inherit_id" ref="account.view_account_list"/>-->
+<!--            &lt;!&ndash;            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_sale_delete'))]"/>&ndash;&gt;-->
+<!--            <field name="arch" type="xml">-->
+
+<!--                <xpath expr="//tree" position="attributes">-->
+<!--                    <attribute name="copy">false</attribute>-->
+<!--                </xpath>-->
+
+<!--            </field>-->
+<!--        </record>-->
+
+
+    </data>
+</odoo>

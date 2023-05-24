@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+
+
+
+    <report
+            id="moqc_report"
+            string="MOQC Record"
+            model="moqc.check"
+            report_type="qweb-pdf"
+            name="quality_check.moqc_report_temp"
+            file="quality_check.moqc_report_temp"
+            print_report_name="('MOQC - %s' % (object.name))"/>
+
+
+
+
+    <report
+        id="poqc_report"
+        string="POQC Record"
+        model="custom.quality.check"
+        report_type="qweb-pdf"
+        name="quality_check.poqc_report_temp"
+        file="quality_check.poqc_report_temp"
+        print_report_name="('MOQC - %s' % (object.name))"/>
+
+</odoo>

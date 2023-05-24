@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_calculate_qty" model="ir.ui.view">
+            <field name="name">stock.picking.cal_qty</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='button_scrap']" position="before">
+                    <button name="action_calculate_qty" string="Calculate Quantity" type="object" class="oe_highlight"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="carton_qty_custom" model="ir.ui.view">
+            <field name="name">custom.carton.qty.inherit</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_stock_move_line_detailed_operation_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='product_uom_id']" position="before">
+                    <field name="carton_nos" force_save="1"  />
+                    <field name="carton_weight" force_save="1" />
+                </xpath>
+                
+            </field>
+        </record> 
+        
+       
+    </data>
+</odoo>
+

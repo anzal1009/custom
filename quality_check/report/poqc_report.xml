@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<odoo>
+
+
+    <template id="poqc_report_temp">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+
+                <t t-foreach="docs" t-as="o">
+
+
+                    <h3 style="text-align: center">
+                        QUALITY CHECK REPORT
+                    </h3>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+
+                    <div class="page">
+                        <h2>
+                            GRNQC NO:
+                            <span t-field="o.name_seq"/>
+                        </h2>
+
+                        <br/>
+                        <br/>
+
+                        <div class="row mt32 mb32">
+                             <div t-if="o.name" class="col-auto" name="div_name">
+                                <strong>Name:</strong>
+                                <p t-field="o.name"/>
+                            </div>
+                            <div t-if="o.tid" class="col-auto" name="div_tr">
+                                <strong>Transfer No:</strong>
+                                <p t-field="o.tid"/>
+                            </div>
+                            <div t-if="o.poid" class="col-auto" name="div_po">
+                                <strong>PO No:</strong>
+                                <p t-field="o.poid"/>
+                            </div>
+                            <div t-if="o.qdate" class="col-auto" name="div_date">
+                                <strong>Dated:</strong>
+                                <p t-field="o.qdate"/>
+                            </div>
+                            <div t-if="o.pdt_temp" class="col-auto" name="div_tempt">
+                                <strong>QC Template</strong>
+                                <p t-field="o.pdt_temp"/>
+                            </div>
+                             <div t-if="o.tags" class="col-auto" name="div_tags">
+                                <strong>Status</strong>
+                                <p t-field="o.tags"/>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <h3>Transactional QC </h3>
+
+                    <table align="center" style="width:100%; border: 1px solid black;" cellpadding="10">
+                        <thead>
+                            <tr style="border: 1px solid black;" >
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;" >
+                                    <strong>Questions</strong>
+                                </td>
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <strong>Response</strong>
+                                </td>
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <strong>Remark</strong>
+                                </td>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <t t-set="lines"
+                               t-value="o.qc_line_idss"/>
+                            <tr t-foreach="lines" t-as="move">
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <span t-field="move.questionss"/>
+                                </td>
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <span t-field="move.ress"/>
+                                </td>
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <span t-field="move.remarks"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                     <br/>
+                    <br/>
+
+                    <div t-if="o.after_qc_line_ids" class="after">
+                        <h3>Sub Contracting Product Arrival</h3>
+
+                        <table align="center" style="width:100%; border: 1px solid black;" cellpadding="10"  t-if="o.after_qc_line_ids">
+
+                            <thead>
+                                <tr style="border: 1px solid black;" >
+                                    <td colspan="10" style="padding: 5px; border: 1px solid black;" >
+                                        <strong>Questions</strong>
+                                    </td>
+                                    <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                        <strong>Response</strong>
+                                    </td>
+                                    <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                        <strong>Remark</strong>
+                                    </td>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <t t-set="lines"
+                                   t-value="o.after_qc_line_ids"/>
+                                <tr t-foreach="lines" t-as="moves">
+                                    <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                        <span t-field="moves.qstns"/>
+                                    </td>
+                                    <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                        <span t-field="moves.resp"/>
+                                    </td>
+                                    <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                        <span t-field="moves.remrk"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+<!--                            </t>-->
+                        </table>
+                    </div>
+
+
+                     <br/>
+                    <br/>
+                    <h3>Product QC </h3>
+
+                     <table align="center" style="width:100%; border: 1px solid black;" cellpadding="10">
+                        <thead>
+                            <tr style="border: 1px solid black;" >
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;" >
+                                    <strong>Products</strong>
+                                </td>
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <strong>Lot No</strong>
+                                </td>
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <strong>Responce</strong>
+                                </td>
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <strong>Remark</strong>
+                                </td>
+
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <t t-set="lines"
+                               t-value="o.qc_prdt_line_ids"/>
+                            <tr t-foreach="lines" t-as="movess">
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <span t-field="movess.product_id_line"/>
+                                </td>
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <span t-field="movess.p_line_lot"/>
+                                </td>
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <span t-field="movess.p_responce"/>
+                                </td>
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <span t-field="movess.p_remarks"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                     <br/>
+                    <br/>
+
+                    <div class="row mt32 mb32">
+                            <div t-if="o.user" class="col-auto" name="div_usr">
+                                <strong>User Incharge:</strong>
+                                <p t-field="o.user"/>
+                            </div>
+
+                            <div  class="col-5 text-right" name="div_aut">
+                                <strong>Authorised:</strong>
+<!--                                <p t-field="o.tid"/>-->
+                            </div>
+                    </div>
+
+
+
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

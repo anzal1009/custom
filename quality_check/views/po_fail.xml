@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.actions.act_window" id="action_view_po_failure">
+        <field name="name">POQC Failures</field>
+        <field name="res_model">custom.quality.check</field>
+        <!--            <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('failures','=',True)]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">No Record Found</p>
+        </field>
+    </record>
+    <menuitem id="failure_poqc" name="POQC" parent="root_quality_failure" action="action_view_po_failure" sequence="30"/>
+</odoo>

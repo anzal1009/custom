@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+         <record id="wh_analysis_rep_inh" model="ir.ui.view">
+            <field name="name">wh.analysis.report.inherit.search</field>
+            <field name="model">stock.report</field>
+            <field name="inherit_id" ref="stock_enterprise.stock_report_search_view"/>
+            <field name="arch" type="xml">
+
+                 <xpath expr="//search" position="inside">
+                    <separator/>
+                    <filter name="status" string="Status is Done" domain="[('status','!=','done')]"/>
+                 </xpath>
+
+            </field>
+        </record>
+
+
+
+
+<!--         <record id="account_financial_report_current_assets01" model="account.financial.html.report.line">-->
+<!--            <field name="name">Current Assets</field>-->
+<!--            <field name="code">CAS</field>-->
+<!--            <field name="parent_id" ref='account_financial_report_current_assets_view0'/>-->
+<!--            <field name="domain" eval="['|', ('account_id.user_type_id', '=', ref('account.data_account_type_current_assets')), '&amp;', ('account_id.user_type_id.type', '=', 'receivable'), ('account_id.exclude_from_aged_reports', '=', True)]" />-->
+<!--            <field name="groupby">account_id</field>-->
+<!--            <field name="formulas">sum</field>-->
+<!--            <field name="sequence" eval="3"/>-->
+<!--            <field name="level" eval="2" />-->
+<!--        </record>-->
+
+
+
+
+
+
+
+    </data>
+</odoo>

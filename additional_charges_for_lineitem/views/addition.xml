@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+         <record id="addon_so_button_inherit" model="ir.ui.view">
+            <field name="name">sale.order.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                 <xpath expr="//group[@name='sale_reporting']" position="after">
+                      <group name="my_info" string="Additional Charges">
+                          <group>
+                              <field name="value" />
+                          </group>
+                          <group>
+                              <group>
+                                    <button name="action_change" string="Apply" type="object" class="oe_highlight"
+                                     confirm="Are you Sure,You want to add Additional Charges"/>
+
+                              </group>
+                          </group>
+                      </group>
+                 </xpath>
+
+            </field>
+        </record>
+
+         <record id="addon_po_button_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[@name='invoice_info']" position="after">
+                     <group name="my_info1" string="Additional Charges">
+                          <group>
+                              <field name="values" />
+                          </group>
+                          <group>
+                              <group>
+                                    <button name="action_addition" string="Apply" type="object" class="oe_highlight"
+                                     confirm="Are you Sure,You want to add Additional Charges"/>
+
+                              </group>
+                          </group>
+                      </group>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

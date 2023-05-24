@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+         <record id="acc_button_inherit" model="ir.ui.view">
+            <field name="name">account.move.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='sale_info_group']" position="after">
+                    <group name="depo" string="Warehouse Details">
+                              <field name="warehouse_id" />
+                      </group>
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+        <record id="warehouse_sale_inherit" model="ir.ui.view">
+            <field name="name">sale.order.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                              <field name="wareh" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='warehouse_id']"  position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+
+
+
+
+    </data>
+</odoo>

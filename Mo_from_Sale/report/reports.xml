@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+
+    <report
+            id="sample_sale_report"
+            string="Sample Sale Report"
+            model="sale.order"
+            report_type="qweb-pdf"
+            name="Mo_from_Sale.sample_report"
+            file="Mo_from_Sale.sample_report"/>
+<!--            paperformat="sca_delivery_slip.sca_transfer_report_qweb_paperform"-->
+<!--            menu="True"/>-->
+
+</odoo>

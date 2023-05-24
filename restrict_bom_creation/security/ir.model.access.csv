@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_restrict_bom_creation_restrict_bom_creation,restrict_bom_creation.restrict_bom_creation,model_restrict_bom_creation_restrict_bom_creation,base.group_user,1,1,1,1

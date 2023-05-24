@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+<!--        <record id="analytic_inherit" model="ir.ui.view">-->
+<!--            <field name="name">aaa.aa.inherit.field</field>-->
+<!--            <field name="model">account.analytic.account</field>-->
+<!--            <field name="inherit_id" ref="analytic.view_account_analytic_account_list"/>-->
+<!--&lt;!&ndash;            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_aa_creation'))]"/>&ndash;&gt;-->
+<!--            <field name="arch" type="xml">-->
+
+<!--                <xpath expr="//field[@name='order_line']" position="attributes">-->
+<!--                    <attribute name="attrs">{'readonly': [('state', '=', 'draft')]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='order_line']" position="attributes">-->
+<!--                    <attribute name="attrs">{'required': [('state', '=', 'draft')]}</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='order_line']" position="attributes">-->
+<!--                    <attribute name="attrs">{'required': [('state', '=', 'draft')]}</attribute>-->
+<!--                </xpath>-->
+
+
+<!--            </field>-->
+<!--        </record>-->
+
+
+        <record id="analytic_kanban_inherit" model="ir.ui.view">
+            <field name="name">aaa.kb.inherit.field</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="account.view_account_account_kanban"/>
+<!--            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_aa_creation'))]"/>-->
+            <field name="arch" type="xml">
+
+<!--                <xpath expr="//form" position="attributes">-->
+<!--                    <attribute name="edit">false</attribute>-->
+<!--                </xpath>-->
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+
+
+
+        <record id="analytic_inherit" model="ir.ui.view">
+            <field name="name">aaa.aa.inherit.field</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_list"/>
+            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_aa_creation'))]"/>
+            <field name="arch" type="xml">
+
+<!--                <xpath expr="//form" position="attributes">-->
+<!--                    <attribute name="edit">false</attribute>-->
+<!--                </xpath>-->
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+
+
+
+         <record id="analytic_form_inherit" model="ir.ui.view">
+            <field name="name">aaa..inherit.field</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_aa_creation'))]"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//form" position="attributes">
+                    <attribute name="edit">false</attribute>
+                </xpath>
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+          <record id="coa_tree_inherit" model="ir.ui.view">
+            <field name="name">coa.inherit.field</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_list"/>
+            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_coa_creation'))]"/>
+            <field name="arch" type="xml">
+
+<!--                <xpath expr="//form" position="attributes">-->
+<!--                    <attribute name="edit">false</attribute>-->
+<!--                </xpath>-->
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+         <record id="c0aac_form_inherit" model="ir.ui.view">
+            <field name="name">a.form.field</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="groups_id" eval="[(4, ref('hide_product_creation.group_coa_creation'))]"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//form" position="attributes">
+                    <attribute name="edit">false</attribute>
+                </xpath>
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

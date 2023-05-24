@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="seq_quality_check" model="ir.sequence">
+            <field name="name">Quality Check Sequence</field>
+            <field name="code">custom.quality.check</field>
+            <field name="prefix">QCPM</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_quality_check_params" model="ir.sequence">
+            <field name="name">Quality Parameter Sequences</field>
+            <field name="code">quality.params</field>
+            <field name="prefix">QCPMs</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+         <record id="seq_moqc_params" model="ir.sequence">
+            <field name="name">MOQC Parameter Sequences</field>
+            <field name="code">params.moqc</field>
+            <field name="prefix">MOQCPs</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_moqc_check" model="ir.sequence">
+            <field name="name">MOQC Check Sequence</field>
+            <field name="code">moqc.check</field>
+            <field name="prefix">MOQC</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+
+        <!--           <record id="seq_quality_rm" model="ir.sequence">-->
+        <!--            <field name="name">Quality Sequences For RM</field>-->
+        <!--            <field name="code">quality.rm</field>-->
+        <!--            <field name="prefix">QCRM</field>-->
+        <!--            <field name="padding">4</field>-->
+        <!--            <field name="company_id" eval="False"/>-->
+        <!--        </record>-->
+    </data>
+</odoo>

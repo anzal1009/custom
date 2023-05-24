@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.actions.act_window" id="action_view_mo_failure">
+        <field name="name">MOQC Failures</field>
+        <field name="res_model">moqc.check</field>
+        <!--            <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="domain">[('failure','=',True)]</field>
+
+<!--        <field name="create">False</field>-->
+
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">No Record Found</p>
+        </field>
+    </record>
+    <menuitem id="failure_moqcs" name="MOQC" parent="root_quality_failure" action="action_view_mo_failure" sequence="20"/>
+</odoo>

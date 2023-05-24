@@ -1,0 +1,1 @@
+from.import sale_lot_no

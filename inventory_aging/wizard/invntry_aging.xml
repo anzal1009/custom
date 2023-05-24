@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_inventory_wizard_form" model="ir.ui.view">
+            <field name="name">inventory.wizard.form</field>
+            <field name="model">inventory.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Inventory Aging">
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+
+                    </group>
+
+
+                    <footer>
+<!--                        <button name="view_record" string="View"-->
+<!--                                colspan="1" type="object" class="btn-primary"/>-->
+                        <button special="cancel"
+                                string="Cancel"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="inventory_wizard" model="ir.actions.act_window">
+            <field name="name">Inventory Aging Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">inventory.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_inventory_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="inventory_aging"
+                  name="Inventory Aging Report"
+                  parent="stock.menu_warehouse_report"
+                  action="inventory_wizard"/>
+
+
+    </data>
+</odoo>

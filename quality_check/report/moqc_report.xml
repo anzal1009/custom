@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<odoo>
+    <template id="moqc_report_temp">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+
+                <t t-foreach="docs" t-as="o">
+
+
+                    <h3 style="text-align: center">
+                        MO QUALITY CHECK REPORT
+                    </h3>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+
+                    <div class="pages">
+                        <h2>
+                            MOQC NO:
+                            <span t-field="o.name_seq"/>
+                        </h2>
+
+                        <br/>
+                        <br/>
+
+                        <div class="row mt32 mb32">
+                            <div t-if="o.name" class="col-auto" name="div_name">
+                                <strong>Name:</strong>
+                                <p t-field="o.name"/>
+                            </div>
+                            <div t-if="o.poid" class="col-auto" name="div_po">
+                                <strong>MO No:</strong>
+                                <p t-field="o.poid"/>
+                            </div>
+                            <div t-if="o.product_id" class="col-auto" name="div_port">
+                                <strong>Product:</strong>
+                                <p t-field="o.product_id"/>
+                            </div>
+                            <div t-if="o.qdate" class="col-auto" name="div_date">
+                                <strong>Dated:</strong>
+                                <p t-field="o.qdate"/>
+                            </div>
+                            <div t-if="o.pdt_temp" class="col-auto" name="div_tempt">
+                                <strong>QC Template</strong>
+                                <p t-field="o.pdt_temp"/>
+                            </div>
+                            <div t-if="o.tags" class="col-auto" name="div_tags">
+                                <strong>Status</strong>
+                                <p t-field="o.tags"/>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <h3>Transactional QC</h3>
+
+                    <table align="center" style="width:100%; border: 1px solid black;" cellpadding="10">
+                        <thead>
+                            <tr style="border: 1px solid black;">
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <strong>Questions</strong>
+                                </td>
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <strong>Response</strong>
+                                </td>
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <strong>Remark</strong>
+                                </td>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <t t-set="lines"
+                               t-value="o.moqc_line_idss"/>
+                            <tr t-foreach="lines" t-as="move">
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <span t-field="move.questionss"/>
+                                </td>
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <span t-field="move.ress"/>
+                                </td>
+                                <td colspan="10" style="padding: 5px; border: 1px solid black;">
+                                    <span t-field="move.remarks"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br/>
+                    <br/>
+
+                    <div class="row mt32 mb32">
+                        <div t-if="o.user" class="col-auto" name="div_usr">
+                            <strong>User Incharge:</strong>
+                            <p t-field="o.user"/>
+                        </div>
+
+                        <div class="col-5 text-right" name="div_aut">
+                            <strong>Authorised:</strong>
+                            <!--                                <p t-field="o.tid"/>-->
+                        </div>
+                    </div>
+
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

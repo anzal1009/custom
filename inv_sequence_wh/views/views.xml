@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+
+        <record id="view_account_move_form_inherit" model="ir.ui.view">
+            <field name="name">account.move.inherit.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="default_invoice_print.isr_invoice_print_template_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vehicle_no']" position="after">
+                    <field name="warehouse_id"
+                           attrs="{'required': [('move_type', '=', 'out_invoice')],'invisible': [('move_type', '!=', 'out_invoice')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_stock_warehouse_form_inherit" model="ir.ui.view">
+            <field name="name">stock.warehouse.inherit.form</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='code']" position="after">
+                    <field name="sequence_id" context="{'default_company_id':company_id}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

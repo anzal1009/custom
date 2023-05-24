@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+
+
+        <report
+        id="report_sale_order_xls"
+        string="Sale Order Excel"
+        model="sale.order"
+        report_type="xlsx"
+        name="excel_report.report_sale_order_xls"
+        file="excel_report.report_sale_order_xls"
+        print_report_name ="('Sale order - %s' % (object.name))"
+        menu="True"/>
+
+
+
+    </data>
+
+</odoo>

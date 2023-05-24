@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+        <record id="draft_button_inherit" model="ir.ui.view">
+            <field name="name">account.move.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='action_register_payment']" position="after">
+                    <button name="action_reset_draft" string="Reset Draft" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state','!=','posted')]}"/>
+
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

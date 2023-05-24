@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="smart_button_so_inherit" model="ir.ui.view">
+            <field name="name">sale.order.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="sales_mo"
+                            icon="fa-users" >
+                        <span class="o_stat_text">MO</span>
+                    </button>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

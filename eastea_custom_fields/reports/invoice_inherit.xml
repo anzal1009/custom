@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_document_default_print_inherit" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@id='informations']" position="before">
+                <div class="row">
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.EwbNo" name="EwbNo">
+                        <strong style="color:#ae9461">E-Way Bill No:</strong>
+                        <p class="m-0" t-field="o.EwbNo"/>
+                    </div>
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.EwbDt" name="EwbDt">
+                        <strong style="color:#ae9461">E-Way Bill Date:</strong>
+                        <p class="m-0" t-field="o.EwbDt"/>
+                    </div>
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.EwbValidTill" name="EwbValidTill">
+                        <strong style="color:#ae9461">E-Way Exp Date:</strong>
+                        <p class="m-0" t-field="o.EwbValidTill"/>
+                    </div>
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.AckNo" name="AckNo">
+                        <strong style="color:#ae9461"> IRN Ack No:</strong>
+                        <p class="m-0" t-field="o.AckNo"/>
+                    </div>
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.AckDt" name="AckDt">
+                        <strong style="color:#ae9461">IRN Ack Date:</strong>
+                        <p class="m-0" t-field="o.AckDt"/>
+                    </div>
+                </div>
+            </xpath>
+            <xpath expr="//div[@id='informations']//div[@name='reference']" position="after">
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.vehicle_no" name="vehicle_no">
+                    <strong style="color:#ae9461">Vehicle No:</strong>
+                    <p class="m-0" t-field="o.vehicle_no"/>
+                </div>
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.dispatch_through" name="vehicle_no">
+                    <strong style="color:#ae9461">Dispatch Through:</strong>
+                    <p class="m-0" t-field="o.dispatch_through"/>
+                </div>
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.destination" name="vehicle_no">
+                    <strong style="color:#ae9461">Destination:</strong>
+                    <p class="m-0" t-field="o.destination"/>
+                </div>
+            </xpath>
+        </template>
+
+
+        <template id="report_invoice" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@class='page']" position="before">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" style="font-size: 15px !important;">
+                        <img t-att-src="'data:image/png;base64,%s' % to_text(docs.qr_code)"
+                             height="100" width="100"/>
+                    </div>
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.Irn" name="Irn">
+                        <strong style="color:#ae9461">IRN No.:</strong>
+                        <p class="m-0" t-field="o.Irn"/>
+                    </div>
+                </t>
+            </xpath>
+        </template>
+        
+        <template id="report_invoice_delivery_addrs_inherit" inherit_id="account.report_invoice_document">
+            <xpath expr="//div [@class ='page']" position="before">
+                <t t-foreach="docs" t-as="doc">
+
+                    <t t-if="doc.partner_shipping_id == doc.partner_id">
+                        <strong>Shipping Address:</strong>
+                        <div t-field="doc.partner_shipping_id"
+                             t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                    </t>
+                </t>
+
+
+            </xpath>
+        </template>
+
+        <template id="report_invoice_ack_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@class='page']/div[@id='qrcode']" position="after">
+                <div class="row" id="declaration_authorised">
+                    <div class="col-12">
+                        <table style="page-break-inside: avoid;">
+                            <colgroup>
+                                <col width="50%"/>
+                                <col width="50%"/>
+                            </colgroup>
+                            <tr>
+                                <td>
+                                    <b>Declaration</b>
+                                    <br/>
+                                    We declare that this invoice shows the actual price of the goods described and
+                                    that all particulars are true and correct.
+                                </td>
+                                <td style="text-align:right;">
+                                    <b>For
+                                        <t t-if="o.company_id" t-esc="o.company_id.company_in_print"/>
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td  style="text-align:right; bgcolor= red ">
+                                    Authorised Signatory
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

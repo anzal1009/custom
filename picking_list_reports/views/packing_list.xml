@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+        <record id="packing_inherit" model="ir.ui.view">
+            <field name="name">sale order fields</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <notebook position="inside">
+                    <page name="Export_field" string="Export Info">
+                        <h5>Export Details</h5>
+                        <group col="4" colspan="4" name="other_detail">
+                            <field name="vessal"/>
+                            <field name="loading"/>
+                            <field name="discharge"/>
+                            <field name="destination"/>
+                            <field name="mode"/>
+                            <field name="package"/>
+                            <field name="terms"/>
+                            <field name="cariage"/>
+                            <field name="container"/>
+                            <field name="eseal"/>
+<!--                            <field name="mo_date"/>-->
+                        </group>
+<!--                         <h5>Weight Info</h5> -->
+
+<!--                         <group col="4" colspan="4" name="detail"> -->
+
+<!--                             <field name="gross"/> -->
+<!--                             <field name="net"/> -->
+<!--                             <field name="cubic"/> -->
+
+
+<!--                         </group> -->
+                    </page>
+
+                </notebook>
+            </field>
+        </record>
+        
+        <record id="sale_cubic_inherit" model="ir.ui.view">
+            <field name="name">sale.cubic.order.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='note']" position="after">
+                    <group>
+                        <field name="cubic"/>                      
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

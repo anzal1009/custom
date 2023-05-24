@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        
+         <record id="exp_date_button_inherit" model="ir.ui.view">
+            <field name="name">stock.exp.date.inherit</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='ref']" position="after">
+                     <field name="dated" />
+                </xpath>
+            </field>
+        </record>
+
+          <record id="item_master_inherit" model="ir.ui.view">
+            <field name="name">product.line.inherit.field</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='l10n_in_hsn_code']" position="after">
+                        <field name="pkt_ctn"/>
+                        <field name="net_ctn"/>
+                        <field name="gross_ctn"/>
+<!--                         <field name="batch"/> -->
+                </xpath>
+
+            </field>
+          </record>
+
+
+
+        <record id="sale_line_inherit" model="ir.ui.view">
+            <field name="name">sale.line.inherit.field</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+            <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+
+<!--                  <field name="pack" optional="show"/> -->
+                 <field name="qtyp" optional="show"/>
+<!--                  <field name="pkts" optional="hide"/>
+                 <field name="net" optional="hide"/>
+                 <field name="total_net" optional="hide"/>
+                 <field name="grs" optional="hide"/>
+                 <field name="total_grs" optional="hide"/> -->
+                 <field name="batch" optional="show"/>
+                
+                 <field name="vol" optional="hide"/>
+                 <field name="line_cbm" optional="hide"/>
+
+                 <field name="mo_date" optional="hide"/>
+                 <field name="exp" optional="hide"/>
+
+            </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_params_tree" model="ir.ui.view">
+            <field name="name">quality.params.tree</field>
+            <field name="model">quality.params</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree>
+
+                    <field name="name_seq"/>
+                    <field name="name"/>
+
+
+                </tree>
+            </field>
+        </record>
+        <record id="view_quality_params_form" model="ir.ui.view">
+            <field name="name">quality.params.form</field>
+            <field name="model">quality.params</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Quality Check Parameters">
+
+                        <header>
+
+<!--                            <button id="button_ongoing" name="action_ongoing"  class="btn-primary" string="Pending" type="object"-->
+<!--                                   states="d"/>-->
+<!--                            <button id="button_done" name="action_done"  class="btn-primary" string="Completed" type="object"-->
+<!--                                    states="o"/>-->
+
+<!--                            <field name="state" widget="statusbar" />-->
+                        </header>
+
+                    <sheet>
+
+<!--                        <widget name="web_ribbon" title="Completed"  states ="do"/>-->
+
+                        <h1>
+                            <field name="name_seq"/>
+
+                        </h1>
+
+
+                        <group>
+                            <group col="2">
+                                <field name="name"/>
+                                <field name="pdt_ctgs"/>
+
+
+
+                            </group>
+                            <group col="2">
+                                 <field name="cid"/>
+                                 <field name="operation_type" />
+                                 <field name="is_sub" />
+
+
+
+
+
+
+
+
+
+                            </group>
+                        </group>
+
+
+                        <notebook colspan="4">
+                            <page name="qcp_indos" string="QCP info">
+                                <field name="qc_params_line_ids">
+                                    <tree editable="bottom">
+<!--                                        <field name="sno"/>-->
+                                        <field name="questions"/>
+<!--                                        <field name="res"/>-->
+                                        <field name="remark"/>
+
+                                        <field name="params_id" invisible='1'/>
+                                    </tree>
+                                    <form>
+                                        <group>
+<!--                                            <field name="sno"/>-->
+                                            <field name="questions"/>
+<!--                                            <field name="res"/>-->
+                                            <field name="remark"/>
+
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+
+                            <page name="qcp_after_indos" string="QC After info" attrs="{'invisible': [('is_sub', '!=', True)]}">
+                                <field name="qc_after_params_ids">
+                                    <tree editable="bottom">
+<!--                                        <field name="sno"/>-->
+                                        <field name="af_qs"/>
+<!--                                        <field name="res"/>-->
+                                        <field name="af_remark"/>
+
+                                        <field name="after_params_id" invisible='1'/>
+                                    </tree>
+                                    <form>
+                                        <group>
+<!--                                            <field name="sno"/>-->
+                                            <field name="af_qs"/>
+<!--                                            <field name="res"/>-->
+                                            <field name="af_remark"/>
+
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+
+
+
+
+
+                    </sheet>
+
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                        </div>
+
+
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_quality_params">
+            <field name="name">GRN Parameters</field>
+            <field name="res_model">quality.params</field>
+            <!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create new Check</p>
+            </field>
+        </record>
+         <menuitem id="menu_quality_params_sub" name="GRN Parameters" parent="menu_quality_params" action="action_view_quality_params"
+                  sequence="20"/>
+
+
+
+    </data>
+</odoo>

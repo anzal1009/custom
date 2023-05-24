@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_account_account_tds_form" model="ir.ui.view">
+            <field name="name">account.account.discount.form.view</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form" />
+            <field name="arch" type="xml">
+                <field name="user_type_id" position="after">
+                    <field name="tds_account" />
+                   
+                </field>
+            </field>
+        </record>
+        
+        
+        <record id="view_account_invoice_tds_form" model="ir.ui.view">
+            <field name="name">account.move.discount.form.view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="arch" type="xml">
+                <field name="invoice_date" position="after">
+                    <field name="apply_tds" attrs ="{'invisible': [('move_type' ,'!=', 'in_invoice')]}"/>
+                </field>
+                <field name="tax_totals_json" position="before">
+                	<field name="tds_account" domain="[('tds_account', '=', True)]" options="{'no_create': True}" attrs ="{'invisible': [('apply_tds','=', False)],'readonly':[('state','=','posted')]}"/>
+                	<field name="tds_value" attrs ="{'invisible': [('apply_tds' ,'=', False)],'readonly':[('state','=','posted')]}"/>
+                	<field name="amount_after_tds" invisible='1'/>
+                	<field name="tds_amount" attrs ="{'invisible': [('apply_tds','=', False)]}" force_save="1"/>
+                </field> 
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
+    

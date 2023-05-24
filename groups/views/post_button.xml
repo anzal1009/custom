@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="inherit_accounts_op_fields" model="ir.ui.view">
+        <field name="name">account.move.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_post'][1]" position="attributes">
+                    <attribute name="groups">groups.group_acc_post</attribute>
+                </xpath>
+             <xpath expr="//button[@name='button_cancel']" position="attributes">
+                    <attribute name="groups">groups.group_acc_cancel</attribute>
+                </xpath>
+             <xpath expr="//button[@name='button_draft']" position="attributes">
+                    <attribute name="groups">groups.group_acc_reset</attribute>
+                </xpath>
+            <xpath expr="//button[@name='211']" position="attributes">
+                    <attribute name="groups">groups.group_acc_reset</attribute>
+                </xpath>
+        </field>
+    </record>
+    </data>
+</odoo>

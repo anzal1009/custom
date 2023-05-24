@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+          <record id="irn_inherit" model="ir.ui.view">
+            <field name="name">account move fields</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                    <notebook position="inside">
+                    <page name="Export_field" string="Export Info"
+                          attrs="{'invisible': [('move_type','!=','out_invoice')]}">
+                                    <h5 style="color:black;">Export Details</h5>
+                        <group col="4" colspan="4" name="other_detail">
+<!--                            <field name="vessal"/>-->
+                            <field name="loading"/>
+                            <field name="discharge"/>
+                            <field name="destination"/>
+                            <field name="mode"/>
+                            <field name="package"/>
+                            <field name="terms"/>
+                            <field name="cariage"/>
+                            <field name="container"/>
+                              <field name="eseal"/>
+                              <field name="text_amount_ar"/>
+                        </group>
+<!--                        <h3>Weight Info</h3>-->
+
+                         <group col="4" colspan="4" name="detail">
+
+                            <field name="gross"/>
+                            <field name="net"/>
+                            <field name="cubic"/>
+
+
+                        </group>
+                    </page>
+<!--                         <page name="Export_field" string="Weight Info"-->
+<!--                          attrs="{'invisible': [('move_type','!=','out_invoice')]}">-->
+<!--                                    <h5 style="color:black;">Weight Details</h5>-->
+<!--                             <group col="4" colspan="4" name="detail">-->
+
+<!--                            <field name="gross"/>-->
+<!--                            <field name="net"/>-->
+<!--                            <field name="cubic"/>-->
+
+
+<!--                        </group>-->
+<!--                    </page>-->
+                </notebook>
+            </field>
+          </record>
+
+           <record id="checkt_button_inherit" model="ir.ui.view">
+            <field name="name">account.move.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='action_register_payment']" position="before">
+                    <button name="action_check_adrs" string="Check" type="object" class="oe_highlight"/>
+                </xpath>
+            </field>
+        </record>
+
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<odoo>
+
+
+    <data noupdate="1">
+        <record id="cst_complaints_email_template" model="mail.template">
+            <field name="name">Customer Complaints:</field>
+            <field name="model_id" ref="Customer_complaints.model_cst_complaints"/>
+            <field name="email_from"> {{ (object.responsible.login) }}</field>
+            <field name="email_to">{{ (object.mail) }}</field>
+            <field name="subject">Customer Complaint (Ref {{object.name_seq}} )</field>
+            <field name="scheduled_date"> {{object.cdate}} </field>
+            <field name="email_cc">  </field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear  <t t-out = "object.name"  ></t>
+                        <br /><br />
+                        Your complaint for our product <t t-out = "object.product.name"  ></t> is registered in the complaint id:
+                        <t t-out = "object.name_seq"  ></t>.
+                        <br /><br />
+                        For further queries contact our representative <t t-out = "object.responsible.name"  ></t> in
+                        <t t-out = "object.responsible.phone"  ></t>
+                        <br /><br />
+                       Thankyou ,<br></br>
+                        Team Eastea.
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="report_complaint_receipt"/>
+            <field name="report_name">Complaint_{{ (object.name_seq) }}</field>
+        </record>
+    </data>
+</odoo>
